@@ -1,0 +1,98 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-14 11:47:01
+ * @LastEditTime: 2021-01-14 17:21:17
+ * @LastEditors: Please set LastEditors
+ * @Description: 计算属性的使用
+ * @FilePath: \Notesd:\Study_Notes\Vue\computed.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- 可以手动将其处理 -->
+      <div class="myname">{{firstname+ ' ' +lastname}}</div>
+
+      <!-- 使用methods -->
+      <h1>使用methods</h1>
+      <div class="getname">methods:{{getFullname()}}</div>
+      <div class="getname">methods:{{getFullname()}}</div>
+      <div class="getname">methods:{{getFullname()}}</div>
+      <div class="getname">methods:{{getFullname()}}</div>
+
+      <!-- 使用计算属性 -->
+      <h1>使用计算属性computed</h1>
+      <div class="comname">somputed:{{fullname}}</div>
+      <div class="comname">somputed:{{fullname}}</div>
+      <div class="comname">somputed:{{fullname}}</div>
+      <div class="comname">somputed:{{fullname}}</div>
+
+      <hr>
+      <!-- 显示书籍总金额 -->
+      <!-- <div class="total">总金额：{{totalPrice}}</div>
+      <div class="books">
+        <ul>
+          <li v-for="i in books">{{i.name}} {{i.price}}</li>
+        </ul>
+      </div> -->
+      
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            firstname:'Mia',
+            lastname:'Lee',
+            books:[
+              {name:'Javascript高级程序设计', price:119},
+              {name:'Python核心编程', price:89},
+              {name:'css世界', price:40},
+              {name:'PHP与MySQL程序设计', price:68},
+              {name:'深入浅出node.js', price:72}
+            ]
+          },
+          methods:{
+            getFullname(){
+              console.log('使用methods==')
+              return this.firstname + this.lastname
+            }
+          },
+          computed:{
+            fullname(){
+              console.log('使用计算属性computed==')
+              return this.firstname + this.lastname
+            },
+
+            // fullname: {
+            //   // setter和getter
+            //   set: function(newval) {
+            //     console.log('调用set，显示新值：', newval)
+            //   },
+            //   get: function(){
+            //     console.log('调用get')
+            //     return this.firstname + this.lastname
+                
+            //   }
+            // },
+            totalPrice(){
+              let total = 0
+              for (let i = 0; i < this.books.length; i++){
+                total += this.books[i].price
+              }
+              return total
+            }
+          }
+        });
+    </script>
+</body>
+
+</html>
