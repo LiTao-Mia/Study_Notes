@@ -1,0 +1,104 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-14 21:16:27
+ * @LastEditTime: 2021-01-15 23:01:59
+ * @LastEditors: Please set LastEditors
+ * @Description: ES6部分内容测试代码
+ * @FilePath: \Notesd:\Study_Notes\ES6\ES6.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>第1个</button>
+  <button>第2个</button>
+  <button>第3个</button>
+  <button>第4个</button>
+  <button>第5个</button>
+</body>
+<script>
+  // let_var
+
+  // // 变量作用域
+  // {
+  //   var name = 'Mia';
+  //   console.log('块状作用域内name:', name);
+  // }
+  // console.log('块状作用域外name:', name);
+  
+  // // if块级
+  // var func
+  // if(true){
+  //   var name = 'Timo';
+  //   console.log('if块内name:', name);
+  //   func = function(){
+  //     console.log('func函数块内name:', name);
+  //   }
+  //   func()
+    
+  // }
+  // console.log('if块外name:', name)
+  // name = 'Mia'
+  // func()
+
+  // // for块级
+  // var btns = document.getElementsByTagName('button');
+  // for(var i=0; i< btns.length; i++){
+  //   // btns[i].addEventListener('click', function(){
+  //   //   console.log('第' + i + '个按钮被点击了哦！')
+  //   // })
+    
+  //   // 闭包
+  //   (function (i) {
+  //     btns[i].addEventListener('click', function(){
+  //       console.log('第' + (i+1) + '个按钮被点击了哦！')
+  //     })
+  //   })(i)
+  // }
+
+  // const使用
+  // 注意点1：必须赋值，否则报错
+  // const i;
+
+  // 注意点2：const不能修改
+  // const y = 'mia';
+  // y = 'Tao';
+
+  // 注意点3：const可以修改其属性值
+  // const info = {
+  //   name: 'Mia',
+  //   age: 24,
+  //   hobby: 'reading'
+  // }
+  // console.log(info)
+
+  // info.name = 'Tao'
+  // info.age = 28
+  // info.hobby = 'movie'
+  // console.log(info)
+
+  // 对象增强写法
+  // 1.属性简写
+  let name = 'Tao'
+  let age = 24
+  
+  // ES6之前
+  let obj1 = {
+    name: name,
+    age: age
+  }
+  console.log(obj1)
+
+  // ES6之后
+  let obj2 = {
+    name,
+    age
+  }
+  console.log(obj2)
+  
+</script>
+</html>
