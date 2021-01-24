@@ -75,7 +75,259 @@ MVC模式将应用程序划分为了三部分，实现了各部分的职责分�
 
 * 
 
-## 模板语法
+## 操作语法
+
+### 插值操作
+
+可通过`Mustache`语法将数据`data`插入到HTML中去，实现绑定
+
+`mustache`语法也就是双大括号语法
+
+```html
+<body>
+    <div id="app">
+      <h1>Hello {{name}}</h1>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            name: 'LiTao'
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![Hello](D:\Study_Notes\imgs\Hello.png)
+
+#### `v-html`
+
+当所需填入的数据是HTML代码，并且需要**解析出HTML代码来展示**
+
+`v-html`接受一个`string`类型值，会将该`string`类型值解析出来并且进行渲染
+
+```html
+<body>
+    <div id="app">
+      <h1>Hello {{name}}</h1>
+      <h2>{{link}}</h2>
+      <h2 v-html="link"></h2>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            name: 'LiTao',
+            link:'<a href="http://www.baidu.com">百度</a>'
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![v-html](D:\Study_Notes\imgs\v-html.png)
+
+#### `v-text`
+
+`v-text`的作用与`mustache效果一致`，接受一个`string`类型值
+
+```html
+<body>
+    <div id="app">
+      <h1>Hello {{name}}</h1>
+      <h2>{{link}}</h2>
+      <h2 v-html="link"></h2>
+      <h2 v-text="name"></h2>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            name: 'LiTao',
+            link:'<a href="http://www.baidu.com">百度</a>'
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![v-text](D:\Study_Notes\imgs\v-text.png)
+
+#### `v-pre`
+
+需要跳过元素的编译过程，用于只显示原本的`Mustache`语法
+
+```html
+<h1 v-pre>Hello {{name}}</h1>
+```
+
+![v-pre](D:\Study_Notes\imgs\v-pre.png)
+
+#### `v-cloak`
+
+在某些情况中，浏览器会直接显示出未编译的`mustache`模板，此时就可以通过`v-cloak`来解决
+
+```html
+<style>
+  [v-cloak]{
+    display: none;
+  }
+</style>
+
+<body>
+    <div id="app">
+      <h1 v-cloak>Hello {{name}}</h1>
+    </div>
+</body>  
+```
+
+### 绑定操作
+
+#### `v-bind`
+
+当部分属性内容是**动态获取**的，会动态的变化，也就希望能够**动态绑定**，此时也就用到了`v-bind`
+
+* 作用：**动态绑定属性**，用于绑定一个或多个属性值，或者向另一个组件传递`props`值
+* 语法糖（简写）：`:`
+* 例如：图片的链接`src`、`href`，动态绑定类、样式等
+
+![v-bind_a_img](D:\Study_Notes\imgs\v-bind_a_img.png)
+
+```html
+<body>
+    <div id="app">
+      <a v-bind:href="href">Vue</a>
+      <img v-bind:src="src">
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            href:'https://cn.vuejs.org/',
+            src:'https://cn.vuejs.org/images/logo.png'
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+语法糖使用：
+
+```html
+<a :href="href">Vue</a>
+<img :src="src">
+```
+
+##### `v-bind`绑定`class`
+
+共有两种方式绑定：
+
+* 对象语法
+* 数组语法
+
+###### 对象语法
+
+* 用法：在`:class`后紧跟一个对象
+
+* 通过判断，传入多个值
+
+```html
+<div :class="{'green':isGreen, 'bold':isBlod}">绿色的世界</div>
+```
+
+![v-bind_class](D:\Study_Notes\imgs\v-bind_class.png)
+
+* 与其他普通类同时存在，并不会冲突
+
+```html
+<div class="red" :class="{'bold':isBlod}">小花花</div>
+```
+
+![v-bind_classes](D:\Study_Notes\imgs\v-bind_classes.png)
+
+###### 数组语法
+
+* 用法：在`:class`后紧跟一个数组
+* 与使用对象来绑定用法类似，数组当中可包含多个值，与普通类名也并不冲突
+
+```html
+<h1 :class="[isGreen, isBlod]">绿色的世界</h1>
+<div class="red" :class="[isBlod]">小花花</div>
+```
+
+![v-bind_class_arrary](D:\Study_Notes\imgs\v-bind_class_arrary.png)
+
+##### `v-bind`绑定`style`
+
+绑定的方式共有两种：
+
+* 对象语法
+* 数组语法
+
+###### 对象语法
+
+* 用法：在`:style`后面紧跟一个对象：
+  * 对象中的`key`是CSS属性名称
+  * 对象中的`value`是具体赋值，值可以来自`data`中的属性
+
+```html
+<body>
+    <div id="app">
+      <div :style="getStyles()">神秘的风格</div>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            size: 200,
+            color: 'lightcoral'
+          },
+          methods:{
+            getStyles:function(){
+              return {fontSize:this.size + 'px',backgroundColor:this.color}
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+![v-bind-styles](D:\Study_Notes\imgs\v-bind-styles.png)
+
+* CSS属性名
+  * 可以使用驼峰式写法（camelCase），例如：`font-size`可以写作`fontSize`
+  * 短横线分隔（kebab-case），特别需要注意的是，需要用单引号括起来，例如：`font-size`可以写作`font-size`
+
+###### 数组语法
+
+```html
+<body>
+    <div id="app">
+      <div :style="[fontsizestyle, colorstyle]">神秘的风格</div>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            fontsizestyle: {fontSize:'160px'},
+            colorstyle:{backgroundColor:'lightseagreen'}
+          },
+          methods:{
+      
+          }
+        });
+    </script>
+</body>
+```
+
+
+
+![v_bind-styles-array](D:\Study_Notes\imgs\v_bind-styles-array.png)
 
 ### 计算属性
 
@@ -250,3 +502,14 @@ computed:{
 需要多次使用的时候，`methods`中的方法被发调用多次，但计算属性`computed`只被调用了一次
 
 原因：计算属性具有缓存机制
+
+### 事件监听
+
+在前端开发过程中，经常会用到交互，此时就需要监听用户操作发生的时间，比如：点击、拖拽、键盘事件等
+
+#### `v-on`
+
+* 作用：绑定监听事件
+* 语法糖（简写）：@
+* 参数：`event`
+
