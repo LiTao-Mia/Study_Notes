@@ -1,0 +1,39 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-24 18:23:53
+ * @LastEditTime: 2021-01-24 19:50:17
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue代码示例：v-on命令，事件监听
+ * @FilePath: \Study_Notes\Vue\v-on.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <button @click='num++'>+</button>
+      <button @click='num--'>-</button>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{}
+        });
+    </script>
+</body>
+
+</html>
