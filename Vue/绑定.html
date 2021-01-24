@@ -1,0 +1,75 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-23 18:36:37
+ * @LastEditTime: 2021-01-24 15:56:21
+ * @LastEditors: Please set LastEditors
+ * @Description: 数据绑定
+ * @FilePath: \Study_Notes\Vue\绑定.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<style>
+  .green{
+    color:limegreen
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .red{
+    color:lightcoral;
+  }
+</style>
+<body>
+    <div id="app">
+      <!-- <a v-bind:href="href">Vue</a>
+      <img v-bind:src="src"> -->
+
+      <!-- <a :href="href">Vue</a>
+      <img :src="src"> -->
+
+      <!-- <h1 :class="{'green':isGreen, 'bold':isBlod}">绿色的世界</h1>
+      <div class="red" :class="{'bold':isBlod}">小花花</div> -->
+
+      <!-- <h1 :class="[isGreen, isBlod]">绿色的世界</h1> -->
+      <!-- <div class="red" :class="[isBlod]">小花花</div> -->
+
+      <!-- <div :style="getStyles()">神秘的风格</div> -->
+      <div :style="[fontsizestyle, colorstyle]">神秘的风格</div>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            // isGreen:true,
+            // isBlod: true,
+            isGreen:'green',
+            isBlod: 'bold',
+
+            href:'https://cn.vuejs.org/',
+            src:'https://cn.vuejs.org/images/logo.png',
+
+            size: 200,
+            color: 'lightcoral',
+
+            fontsizestyle: {fontSize:'160px'},
+            colorstyle:{backgroundColor:'lightseagreen'}
+          },
+          methods:{
+            getStyles:function(){
+              return {fontSize:this.size + 'px',backgroundColor:this.color}
+            }
+          }
+        });
+    </script>
+</body>
+
+</html>
