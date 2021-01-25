@@ -329,7 +329,7 @@ MVC模式将应用程序划分为了三部分，实现了各部分的职责分�
 
 ![v_bind-styles-array](D:\Study_Notes\imgs\v_bind-styles-array.png)
 
-### 计算属性
+### 计算属性`computed`
 
 #### 应用场景
 
@@ -503,13 +503,329 @@ computed:{
 
 原因：计算属性具有缓存机制
 
-### 事件监听
+### 事件监听`v-on`
 
 在前端开发过程中，经常会用到交互，此时就需要监听用户操作发生的时间，比如：点击、拖拽、键盘事件等
 
-#### `v-on`
+**`v-on`命令：**
 
 * 作用：绑定监听事件
 * 语法糖（简写）：@
 * 参数：`event`
+
+```html
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <button @click='num++'>+</button>
+      <button @click='num--'>-</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![v-on_example](D:\Study_Notes\imgs\v-on_example.png)
+
+也可以将事件指向一个`methods`中的方法，例如：
+
+```html
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <button @click='increment()'>+</button>
+      <button @click='descrement()'>-</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{
+            increment(){
+              return ++this.num
+            },
+            descrement(){
+              return --this.num
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+#### `v-on`参数
+
+* 正常传入所需参数时：
+
+```html
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <!-- v-on参数 -->
+      <!-- 正常赋予参数 -->
+      <button @click="increment('add')">+</button>
+      <button @click="descrement('reduce')">-</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{
+            increment(opname){
+              console.log('++++++++', opname)
+              return ++this.num
+            },
+            descrement(opname){
+              console.log('--------', opname)
+              return --this.num
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+
+
+![v-on_par](D:\Study_Notes\imgs\v-on_par.png)
+
+* 所需参数缺失时：
+
+如果需要的参数没有传入，就会是`undefined`
+
+```html
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <!-- v-on参数 -->
+      <!-- 正常赋予参数 -->
+      <!-- <button @click="increment('add')">+</button> -->
+      <!-- <button @click="descrement('reduce')">-</button> -->
+      <!-- 缺失参数 -->
+      <button @click="increment()">+</button>
+      <button @click="descrement()">-</button>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{
+            increment(opname){
+              console.log('++++++++', opname)
+              return ++this.num
+            },
+            descrement(opname){
+              console.log('--------', opname)
+              return --this.num
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+
+
+![v-on_undefined](D:\Study_Notes\imgs\v-on_undefined.png)
+
+* 后值写入调用函数名称，省略括号：
+
+```html
+<button @click="increment">+</button>
+<button @click="descrement">-</button>
+```
+
+![v-on_event](D:\Study_Notes\imgs\v-on_event.png)
+
+**可发现其隐藏了一个参数`event`，会默认将原生事件event参数传递进去**
+
+**需要特别注意的是：当其本身不涉及传参时，也可以省略`()`，效果是相同的**
+
+当传入参数时，仍需用到参数`event`时，可用`$enent`：
+
+```html
+<body>
+    <div id="app">
+      {{num}}
+      <br>
+      <!-- v-on参数 -->
+      <!-- $event -->
+      <button @click="increment('add', $event)">+</button>
+      <button @click="descrement('reduce', $event)">-</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            num:0
+          },
+          methods:{
+            increment(opname, event){
+              console.log('++++++++', opname, event)
+              return ++this.num
+            },
+            descrement(opname, event){
+              console.log('--------', opname, event)
+              return --this.num
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+![v-on_$event](D:\Study_Notes\imgs\v-on_$event.png)
+
+#### `v-on`修饰符
+
+`v-on`修饰符可帮助我们更加方便的去处理一些事情
+
+##### `.stop`
+
+* 作用：停止冒泡，作用效果相当于：调用 event.stopPropagation()
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- v-on修饰符 -->
+        <div class="outer" @click="divclick">
+          <button class="btn" @click="btnclick">点击</button>
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+            
+            },
+            methods:{
+              divclick(){
+                console.log('点击了div')
+              },
+              btnclick(){
+                console.log('点击了按钮btn')
+              }
+            }
+          });
+      </script>
+  </body>
+  ```
+
+  
+
+  ![v-on_stop_pre](D:\Study_Notes\imgs\v-on_stop_pre.png)
+
+  
+
+为了阻止冒泡行为使用修饰符`.stop`:
+
+```html
+<div class="outer" @click="divclick">
+  <button class="btn" @click.stop="btnclick">点击</button>
+</div>
+```
+
+![v-on_stop](D:\Study_Notes\imgs\v-on_stop.png)
+
+##### `.prevent`
+
+* 作用：阻止默认行为，作用效果：调用`event.preventDefault`
+
+* 示例：`a`链接标签阻止其点击后跳转的行为
+
+  ```html
+  <a href="https://cn.vuejs.org/" @click.prevent="">Vue</a>
+  ```
+
+  不需要表单中提交按钮的默认操作，有自己的处理逻辑
+
+  ```html
+  <form action="wenwen" method="post">
+    <input type="submit" value="提交" @click.prevent='getclick'>
+  </form>
+  ```
+
+##### `.once`
+
+* 作用：在第一次操作时有用，后面的操作是没有作用的
+* 示例：
+
+```html
+<body>
+    <div id="app">
+      <!-- .once -->
+      <button @click.once="firstclick">点我呀</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+
+          },
+          methods:{
+            firstclick(){
+              alert('你确定要点击我吗？')
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+##### 键修饰符
+
+* 作用：修饰按键操作，即指定某个特定案件的操作后的逻辑
+* 示例：
+
+```html
+<body>
+    <div id="app">
+      <!-- 键修饰符 -->
+      <input type="text" name="info" id="info" @keyup.enter="isSubmit">
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+
+          },
+          methods:{
+            isSubmit(){
+              alert('您确定要提交吗？')
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+![@keyup_enter](D:\Study_Notes\imgs\@keyup_enter.png)
+
+等效于：
+
+```html
+<input type="text" name="info" id="info" @keyup.13="isSubmit">
+```
+
+
 
