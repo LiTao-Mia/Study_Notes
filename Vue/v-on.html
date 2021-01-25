@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-24 18:23:53
- * @LastEditTime: 2021-01-24 19:50:17
+ * @LastEditTime: 2021-01-25 16:51:40
  * @LastEditors: Please set LastEditors
  * @Description: Vue代码示例：v-on命令，事件监听
  * @FilePath: \Study_Notes\Vue\v-on.html
@@ -16,13 +16,57 @@
     <title>Document</title>
     <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
+<style>
+  .outer{
+    height:100px;
+    width: 100px;
+    background: lightseagreen;
+  }
+</style>
 
 <body>
     <div id="app">
-      {{num}}
-      <br>
-      <button @click='num++'>+</button>
-      <button @click='num--'>-</button>
+      <!-- {{num}}
+      <br> -->
+
+      <!-- <button @click='num++'>+</button>
+      <button @click='num--'>-</button> -->
+
+      <!-- <button @click='increment()'>+</button>
+      <button @click='descrement()'>-</button> -->
+
+      <!-- v-on参数 -->
+      <!-- 正常赋予参数 -->
+      <!-- <button @click="increment('add')">+</button>
+      <button @click="descrement('reduce')">-</button> -->
+      <!-- 缺失参数 -->
+      <!-- <button @click="increment()">+</button>
+      <button @click="descrement()">-</button> -->
+      <!-- 只写入调用函数名称 -->
+      <!-- <button @click="increment">+</button>
+      <button @click="descrement">-</button> -->
+      <!-- $event -->
+      <!-- <button @click="increment('add', $event)">+</button>
+      <button @click="descrement('reduce', $event)">-</button> -->
+
+      <!-- v-on修饰符 -->
+      <!-- .stop -->
+      <!-- <div class="outer" @click="divclick">
+        <button class="btn" @click.stop="btnclick">点击</button>
+      </div>-->
+
+      <!-- .prevent -->
+      <!-- <a href="https://cn.vuejs.org/" @click.prevent="getclick">Vue</a>
+      <form action="wenwen" method="post">
+        <input type="submit" value="提交" @click.prevent='getclick'>
+      </form> -->
+      
+      <!-- .once -->
+      <!-- <button @click.once="firstclick">点我呀</button> -->
+
+      <!-- 键修饰符 -->
+      <!-- <input type="text" name="info" id="info" @keyup.enter="isSubmit"> -->
+      <input type="text" name="info" id="info" @keyup.13="isSubmit">
 
     </div>
     <script>
@@ -31,7 +75,32 @@
           data:{
             num:0
           },
-          methods:{}
+          methods:{
+            // increment(opname, event){
+            //   console.log('++++++++', opname, event)
+            //   return ++this.num
+            // },
+            // descrement(opname, event){
+            //   console.log('--------', opname, event)
+            //   return --this.num
+            // }
+
+            divclick(){
+              console.log('点击了div')
+            },
+            btnclick(){
+              console.log('点击了按钮btn')
+            },
+            getclick(){
+              console.log('点击了....')
+            },
+            firstclick(){
+              alert('你确定要点击我吗？')
+            },
+            isSubmit(){
+              alert('您确定要提交吗？')
+            }
+          }
         });
     </script>
 </body>
