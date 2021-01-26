@@ -8,6 +8,10 @@ Vue是一个渐进式前端框架
 
 ### 渐进式
 
+The Progressive Framework
+
+渐进式框架就是把框架分层：
+
 - **小型项目：**使用Vue就够了
 - **随着页面的复杂程度提高：**需要vue-router来管理更多的页面
 - **随着项目的数据越来越多：**需要使用vuex来管理数据
@@ -792,7 +796,7 @@ computed:{
 </body>
 ```
 
-##### 键修饰符
+##### 按键修饰符
 
 * 作用：修饰按键操作，即指定某个特定案件的操作后的逻辑
 * 示例：
@@ -827,5 +831,70 @@ computed:{
 <input type="text" name="info" id="info" @keyup.13="isSubmit">
 ```
 
+### 条件判断
 
+#### `v-if`
+
+* 作用：根据表达式的值在DOM中渲染或销毁元素或组件
+* 示例：
+
+```html
+<body>
+    <div id="app">
+      <h1 v-if="isShow">我可以显示吗？</h1>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            isShow:true   // 为true时，显示；为false时，不显示
+          },
+          methods:{}
+        });
+    </script>
+</body>
+
+```
+
+* 原理：
+
+  * 当表达式值为`true`时，正常显示元素
+
+    ![v-if_true](D:\Study_Notes\imgs\v-if_true.png)
+
+  * 当表达式值为`false`时，元素将被注释，也就是压根不会有相应的标签元素会出现在DOM中
+
+    ![v-if_false](D:\Study_Notes\imgs\v-if_false.png)
+
+  
+
+  #### `v-else-if`与`v-else`
+
+  条件判断渲染
+
+  ```html
+  <body>
+      <div id="app">
+        <h1 v-if="isShow">我可以显示吗？</h1>
+        <!-- 条件判断渲染 -->
+        <div v-if="result>90">我很优秀哦</div>
+        <div v-else-if="result>80">我良好</div>
+        <div v-else-if="result>60">我及格了</div>
+        <div v-else="60>result">呃...我需要努力了</div>
+  
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              isShow:false,
+              result:100
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+  ![v-else-if](D:\Study_Notes\imgs\v-else-if.png)
 
