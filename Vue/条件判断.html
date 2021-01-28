@@ -1,0 +1,62 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-26 09:43:44
+ * @LastEditTime: 2021-01-28 10:43:04
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue：条件判断
+ * @FilePath: \Study_Notes\Vue\条件判断.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- <h1 v-if="isShow">我可以显示吗？</h1> -->
+      <!-- 条件判断渲染 -->
+      <!-- <div v-if="result>90">我很优秀哦</div>
+      <div v-else-if="result>80">我良好</div>
+      <div v-else-if="result>60">我及格了</div>
+      <div v-else="60>result">呃...我需要努力了</div> -->
+
+      <div class="intype">
+        <span v-if="intype==='username'">
+          <label for="username">用户名：</label>
+          <input type="text" name="username" id="username" placeholder="请填写用户名" key="username">
+        </span>
+        <span v-else>
+          <label for="usermail">用户邮箱：</label>
+          <input type="text" name="usermail" id="usermail" placeholder="请填写用户邮箱" key="usermail">
+        </span>
+        <button @click="handleToggle">切换类型</button>
+      </div>
+
+      <!-- v-show -->
+      <!-- <h1 v-show="isShow">我会显示吗？</h1> -->
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            isShow:false,
+            result:100,
+            intype:"username"
+          },
+          methods:{
+            handleToggle(){
+              this.intype = this.intype==='username'?'usermail':'username';
+            }
+          }
+        });
+    </script>
+</body>
+
+</html>
