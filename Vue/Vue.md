@@ -856,45 +856,158 @@ computed:{
 
 ```
 
-* 原理：
+原理：
 
-  * 当表达式值为`true`时，正常显示元素
+* 当表达式值为`true`时，正常显示元素
 
-    ![v-if_true](D:\Study_Notes\imgs\v-if_true.png)
+  ![v-if_true](D:\Study_Notes\imgs\v-if_true.png)
 
-  * 当表达式值为`false`时，元素将被注释，也就是压根不会有相应的标签元素会出现在DOM中
+* 当表达式值为`false`时，元素将被注释，也就是压根不会有相应的标签元素会出现在DOM中
 
-    ![v-if_false](D:\Study_Notes\imgs\v-if_false.png)
+  ![v-if_false](D:\Study_Notes\imgs\v-if_false.png)
 
-  
+#### `v-else-if`与`v-else`
 
-  #### `v-else-if`与`v-else`
+条件判断渲染
 
-  条件判断渲染
+```html
+<body>
+    <div id="app">
+      <h1 v-if="isShow">我可以显示吗？</h1>
+      <!-- 条件判断渲染 -->
+      <div v-if="result>90">我很优秀哦</div>
+      <div v-else-if="result>80">我良好</div>
+      <div v-else-if="result>60">我及格了</div>
+      <div v-else="60>result">呃...我需要努力了</div>
 
-  ```html
-  <body>
-      <div id="app">
-        <h1 v-if="isShow">我可以显示吗？</h1>
-        <!-- 条件判断渲染 -->
-        <div v-if="result>90">我很优秀哦</div>
-        <div v-else-if="result>80">我良好</div>
-        <div v-else-if="result>60">我及格了</div>
-        <div v-else="60>result">呃...我需要努力了</div>
-  
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            isShow:false,
+            result:100
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![v-else-if](D:\Study_Notes\imgs\v-else-if.png)
+
+条件渲染小案例：用户登录时，可以切换使用用户账号登录还是邮箱地址登录
+
+![条件渲染小案例](D:\Study_Notes\imgs\条件渲染小案例.png)
+
+```html
+<body>
+    <div id="app">
+      <h1 v-if="isShow">我可以显示吗？</h1>
+      <div class="intype">
+        <span v-if="intype==='username'">
+          <label for="username">用户名：</label>
+          <input type="text" name="username" id="username" placeholder="请填写用户名">
+        </span>
+        <span v-else>
+          <label for="usermail">用户邮箱：</label>
+          <input type="text" name="usermail" id="usermail" placeholder="请填写用户邮箱">
+        </span>
+        <button @click="handleToggle">切换类型</button>
       </div>
-      <script>
-          var vm=new Vue({
-            el:'#app',
-            data:{
-              isShow:false,
-              result:100
-            },
-            methods:{}
-          });
-      </script>
-  </body>
-  ```
 
-  ![v-else-if](D:\Study_Notes\imgs\v-else-if.png)
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            isShow:false,
+            // result:100,
+            intype:"username"
+          },
+          methods:{
+            handleToggle(){
+              this.intype = this.intype==='username'?'usermail':'username';
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+此处的小案例有一个小问题：
+
+当我们在`input`框内填入内容后，又想切换登录类型并点击了切换按钮后，发现`input`框内所填写的内容并未清空：
+
+![条件渲染小问题](D:\Study_Notes\imgs\条件渲染小问题.png)
+
+出现该情况的原因：
+
+在`Vue`进行DOM渲染时，处于性能考虑，会尽可能的复用已经存在的元素，而不是重新去创建新的元素
+
+解决方法：
+
+不希望`Vue`出现类似重复利用的问题时，可以给对应的`input`添加`key`：
+
+```html
+      <div class="intype">
+        <span v-if="intype==='username'">
+          <label for="username">用户名：</label>
+          <input type="text" name="username" id="username" placeholder="请填写用户名" key="username">
+        </span>
+        <span v-else>
+          <label for="usermail">用户邮箱：</label>
+          <input type="text" name="usermail" id="usermail" placeholder="请填写用户邮箱" key="usermail">
+        </span>
+        <button @click="handleToggle">切换类型</button>
+      </div>
+```
+
+添加了`key`以后会发现点击切换类型按钮时，框内填写的信息将被清空
+
+#### `v-show`
+
+* 作用：与`v-if`的作用相似，用于决定一个元素是否渲染
+
+* 示例：
+
+  ![v-show_true](D:\Study_Notes\imgs\v-show_true.png)
+
+当使其不显示时：
+
+```html
+<body>
+    <div id="app">
+      <h1 v-if="isShow">我可以显示吗？</h1>
+      <!-- v-show -->
+      <h1 v-show="isShow">我会显示吗？</h1>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            isShow:false,
+          },
+          methods:{
+
+          }
+        });
+    </script>
+</body>
+```
+
+![v-show_false](D:\Study_Notes\imgs\v-show_false.png)
+
+**`v-if`与`v-show`的区别：**
+
+* 当`v-if`的判断条件为`false`时，并不会有对应的元素在DOM中
+* 当`v-show`的判断条件为`false`时，仅仅是将元素的`display`属性设置为`none`
+
+**`v-if`与`v-show`的选择：**
+
+* 当需要在显示与隐藏之间切换很频繁时，可使用`v-show`
+* 当只有一次切换时，应使用`v-if`
+
+
 
