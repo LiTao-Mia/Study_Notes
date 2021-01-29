@@ -1009,5 +1009,249 @@ computed:{
 * 当需要在显示与隐藏之间切换很频繁时，可使用`v-show`
 * 当只有一次切换时，应使用`v-if`
 
+### 循环遍历
 
+#### `v-for`
+
+* 作用：语法类似于`for`循环的使用
+
+* 语法格式：
+
+  * 对于数组的遍历：
+
+    ```html
+    <body>
+        <div id="app">
+          <ul>
+            <!-- 只使用值 -->
+            <li v-for="item in namelist">{{item}}</li>
+          </ul>
+        </div>
+        <script>
+            var vm=new Vue({
+              el:'#app',
+              data:{
+                namelist:['毛毛', '胡迪', '白雪', '尼克', '史努比']
+              },
+              methods:{}
+            });
+        </script>
+    </body>
+    ```
+
+    ![v-for_item](D:\Study_Notes\imgs\v-for_item.png)
+
+    ```html
+    <!-- 使用值和下标 -->
+    <li v-for="(item, index) in namelist">{{index}}==>{{item}}</li>
+    ```
+
+    ![v-for_item_key](D:\Study_Notes\imgs\v-for_item_key.png)
+
+  * 对于对象的遍历：
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- 对象遍历 -->
+        <ul>
+          <li v-for="(value, key) in info">{{key}}:{{value}}</li>
+        </ul>  
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              info:{
+                name:"LiTao",
+                age:28,
+                message:"我喜欢使用Vue...."
+              }
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+  ![v-for_value_key](D:\Study_Notes\imgs\v-for_value_key.png)
+
+  ```html
+  <!-- 使用对象的键、值和下标 -->
+  <li v-for="(value, key, index) in info">{{key}}:{{value}}=={{index}}</li>
+  ```
+
+  ![v-for_key_value_index](D:\Study_Notes\imgs\v-for_key_value_index.png)
+
+#### `key`属性
+
+问题引出：点击添加按钮，会相应的添加元素
+
+```html
+<body>
+    <div id="app">
+      <!-- key -->
+      <ul>
+        <li v-for="(ele, index) in letters">
+          {{index}}==>>{{ele}}
+          <input type="text" name="info" id="info">
+        </li>
+      </ul>
+      <button @click="addEle">添加一个元素</button>  
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            letters:['a', 'b', 'c', 'd']
+          },
+          methods:{
+            addEle(){
+              this.letters.splice(1, 0, 'LiTao');
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+![v-for-key_example1](D:\Study_Notes\imgs\v-for-key_example1.png)
+
+点击按钮后会发生：
+
+![v-for-key_example2](D:\Study_Notes\imgs\v-for-key_example2.png)
+
+原属于`b`后的框内内容在增加元素后，变成了新元素的框内内容，此时就需要使用`key`属性了：
+
+```html
+<ul>
+  <li v-for="(ele, index) in letters" :key="ele">
+    {{index}}==>>{{ele}}
+    <input type="text" name="info" id="info">
+  </li>
+</ul>
+```
+
+**`key`的工作原理：**
+
+`key`属性与`Vue`虚拟`DOM`的`Diff`算法有关：
+
+![key_diff1](D:\Study_Notes\imgs\key_diff1.png)
+
+我们想在`B`与`C`之间插入一个`F`，`Diff`算法默认会将`C`更新成`F`，`D`更新成`C`，`E`更新成`D`，最后再将`E`插入其中，如此一来就会十分没有效率
+
+![key_diff2](D:\Study_Notes\imgs\key_diff2.png)
+
+所以需要使用`key`属性来给每个节点做一个唯一标识，使其找到正确的位置插入新的节点;
+
+![key_diff3](D:\Study_Notes\imgs\key_diff3.png)
+
+**总结：`key`属性的主要作用就是搞笑的更新虚拟`DOM `**
+
+### 响应式数组操作
+
+`Vue`是响应式的，也就是说当数发生改变时，`Vue`会自动监测器改变，并发生相应的视图改变，但并不是所有的数组改变操作都能使其有所反应：
+
+```html
+<body>
+    <div id="app">
+      <!-- 数组遍历循环 -->
+      <ul>
+        <li v-for="item in personList">{{item}}</li>
+      </ul>
+      <button @click="amendLastitem">直接修改最后一项</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            personList:['史努比', '皮卡丘', '白雪', '小黄人']
+          },
+          methods:{
+            amendLastitem(){
+              this.personList[this.personList.length-1] = 'LiTao';
+            }
+          }
+        });
+    </script>
+</body>
+```
+
+![响应式数据操作_不响应](D:\Study_Notes\imgs\响应式数据操作_不响应.png)
+
+响应式数组操作主要包含：
+
+* `push`：在数组的末尾位置进行添加元素
+* `unshift`：在数组开始的位置进行添加元素
+* `pop`：删除数组末尾位置的元素
+* `shift`：删除数组开始位置的元素
+* `reverse`：将数组元素反向逆转
+* `splice`：数组元素的删除、替换、添加操作
+
+示例：
+
+```html
+<body>
+    <div id="app">
+      <!-- 数组遍历循环 -->
+      <ul>
+        <li v-for="item in personList">{{item}}</li>
+      </ul>
+      <button @click="amendLastitem">直接修改最后一项</button>
+      <button @click="push_addEle">push</button>
+      <button @click="unshift_addEle">unshift</button>
+      <button @click="pop_delEle">pop</button>
+      <button @click="shift_delEle">shift</button>
+      <button @click="reverse_Ele">reverse</button>
+      <button @click="splice_Ele">splice</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            personList:['史努比', '皮卡丘', '白雪', '小黄人']
+          },
+          methods:{
+            amendLastitem(){
+              this.personList[this.personList.length-1] = 'LiTao';
+            },
+            // 响应式数组操作
+            // 1-push:在数组最后的位置进行添加元素
+            push_addEle(){
+              this.personList.push('Mia', 'LiTao');
+            },
+            // 2-unshift:在数组开始的位置进行添加元素
+            unshift_addEle(){
+              this.personList.unshift('Mia', 'LiTao');
+            },
+            // 3-pop:删除数组最后位置的元素
+            pop_delEle(){
+              this.personList.pop();
+            },
+            // 4-shift:删除数组开头位置的元素
+            shift_delEle(){
+              this.personList.shift();
+            },
+            // 5-reverse:将数组元素反向逆转
+            reverse_Ele(){
+              this.personList.reverse();
+            },
+            // 6-splice:删除，替换
+            splice_Ele(){
+              // 在数组1位置上进行添加元素
+              // this.personList.splice(1, 0, 'LiTao', 'Mia');
+
+              // 删除数组位置1至3上所有的元素
+              // this.personList.splice(1,3);
+
+              // 修改数组元素
+              this.personList.splice(1, 3, 'LiTao');
+            }
+            
+            
+          }
+        });
+    </script>
+</body>
+```
 
