@@ -1,0 +1,71 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-28 11:02:09
+ * @LastEditTime: 2021-01-28 13:31:07
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue示例代码：v-for，循环遍历
+ * @FilePath: \Study_Notes\Vue\循环遍历.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- 数组遍历 -->
+      <!-- <ul> -->
+        <!-- 只使用值 -->
+        <!-- <li v-for="item in namelist">{{item}}</li> -->
+        <!-- 使用值和下标 -->
+        <!-- <li v-for="(item, index) in namelist">{{index}}==>{{item}}</li> -->
+      <!-- </ul>   -->
+
+      <!-- 对象遍历 -->
+      <!-- <ul> -->
+        <!-- 使用对象的键和值 -->
+        <!-- <li v-for="(value, key) in info">{{key}}:{{value}}</li> -->
+        <!-- 使用对象的键、值和下标 -->
+        <!-- <li v-for="(value, key, index) in info">{{key}}:{{value}}=={{index}}</li> -->
+
+      <!-- </ul> -->
+
+      <!-- key -->
+      <ul>
+        <li v-for="(ele, index) in letters" :key="ele">
+          {{index}}==>>{{ele}}
+          <input type="text" name="info" id="info">
+        </li>
+      </ul>
+      <button @click="addEle">添加一个元素</button>
+
+      
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            // namelist:['毛毛', '胡迪', '白雪', '尼克', '史努比'],
+            // info:{
+            //   name:"LiTao",
+            //   age:28,
+            //   message:"我喜欢使用Vue...."
+            // },
+            letters:['a', 'b', 'c', 'd']
+          },
+          methods:{
+            addEle(){
+              this.letters.splice(1, 0, 'LiTao');
+            }
+          }
+        });
+    </script>
+</body>
+
+</html>
