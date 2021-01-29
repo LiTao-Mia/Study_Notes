@@ -1,0 +1,83 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-28 15:03:04
+ * @LastEditTime: 2021-01-29 11:04:16
+ * @LastEditors: Please set LastEditors
+ * @Description: 响应式数组操作
+ * @FilePath: \Study_Notes\Vue\响应式数组操作.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- 数组遍历循环 -->
+      <ul>
+        <li v-for="item in personList">{{item}}</li>
+      </ul>
+      <button @click="amendLastitem">直接修改最后一项</button>
+      <button @click="push_addEle">push</button>
+      <button @click="unshift_addEle">unshift</button>
+      <button @click="pop_delEle">pop</button>
+      <button @click="shift_delEle">shift</button>
+      <button @click="reverse_Ele">reverse</button>
+      <button @click="splice_Ele">splice</button>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            personList:['史努比', '皮卡丘', '白雪', '小黄人']
+          },
+          methods:{
+            amendLastitem(){
+              this.personList[this.personList.length-1] = 'LiTao';
+            },
+            // 响应式数组操作
+            // 1-push:在数组最后的位置进行添加元素
+            push_addEle(){
+              this.personList.push('Mia', 'LiTao');
+            },
+            // 2-unshift:在数组开始的位置进行添加元素
+            unshift_addEle(){
+              this.personList.unshift('Mia', 'LiTao');
+            },
+            // 3-pop:删除数组最后位置的元素
+            pop_delEle(){
+              this.personList.pop();
+            },
+            // 4-shift:删除数组开头位置的元素
+            shift_delEle(){
+              this.personList.shift();
+            },
+            // 5-reverse:将数组元素反向逆转
+            reverse_Ele(){
+              this.personList.reverse();
+            },
+            // 6-splice:删除，替换
+            splice_Ele(){
+              // 在数组1位置上进行添加元素
+              // this.personList.splice(1, 0, 'LiTao', 'Mia');
+
+              // 删除数组位置1至3上所有的元素
+              // this.personList.splice(1,3);
+
+              // 修改数组元素
+              this.personList.splice(1, 3, 'LiTao');
+            }
+            
+            
+          }
+        });
+    </script>
+</body>
+
+</html>
