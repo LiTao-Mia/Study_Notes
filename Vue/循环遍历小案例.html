@@ -1,0 +1,50 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-29 11:45:24
+ * @LastEditTime: 2021-01-29 15:30:05
+ * @LastEditors: Please set LastEditors
+ * @Description: 循环遍历小案例：鼠标在那一项,那一项变颜色
+ * @FilePath: \Study_Notes\Vue\循环遍历小案例.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<style>
+  .active{
+    color: lightcoral;
+    background-color: lightseagreen;
+  }
+</style>
+
+<body>
+    <div id="app">
+      <ul>
+        <li v-for="(book, index) in booklist" @click="changeColor(index)" :class="{active: currentIndex==index}">{{book}}</li>
+      </ul>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            currentIndex: 0,
+            booklist:['JavaScript高级程序设计', '你不知道的JavaScript', '深入浅出node', 'CSS世界']
+          },
+          methods:{
+            changeColor(index){
+              this.currentIndex = index
+
+            }
+          }
+        });
+    </script>
+</body>
+
+</html>
