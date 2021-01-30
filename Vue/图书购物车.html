@@ -1,0 +1,112 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-29 15:48:42
+ * @LastEditTime: 2021-01-30 15:21:11
+ * @LastEditors: Please set LastEditors
+ * @Description: 图书购物车示例
+ * @FilePath: \Study_Notes\Vue\图书购物车.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <div class="container-md">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">图书名</th>
+              <th scope="col">单价</th>
+              <th scope="col">数量</th>
+              <th scope="col">合计</th>
+              <th scope="col">其他操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in booksitems">
+              <th scope="row">{{index + 1}}</th>
+              <td>{{item.name}}</td>
+              <td>{{item.price}}</td>
+              <td>
+                <button type="button" class="btn btn-info" @click="item.number=increNumber(item.number)">+</button>
+                <span>{{item.number}}</span>
+                <button type="button" class="btn btn-info" @click="item.number=decreNumber(item.number)">-</button>
+              </td>
+              <td>{{getPrice(item.number, item.price)}}</td>
+              <td @click="delBookitem(index)">删除</td>
+              
+            </tr>
+            <tr>
+              <th colspan="5">总共合计</th>
+              <td>{{getTotalPrice}}</td>
+            </tr>
+          </tbody>
+          
+        </table>
+  
+      </div>
+
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            booksitems:[
+              {name:'JavaScript高级程序设计', price: 99, number: 0},
+              {name:'你不知道的JavaScript', price: 257, number: 0},
+              {name:'深入浅出node', price: 70, number: 0},
+              {name:'CSS世界', price: 69, number: 0},
+              {name:'Web性能权威指南', price: 84, number: 0},
+            ]
+          },
+          computed:{
+            getTotalPrice(){
+              // 计算获得总金额数
+              let totalprice = 0
+              for(let i=0; i<this.booksitems.length; i++){
+                totalprice += this.booksitems[i].price * this.booksitems[i].number
+              }
+              return totalprice
+            }
+
+          },
+          methods:{
+            getPrice(number, price){
+              // 计算单本总价
+              return number*price
+            },
+            increNumber(number){
+              // 增加数量
+              return ++number
+            },
+            decreNumber(number){
+              // --number
+              // // 判断数量是否已经减少到负数
+              // if(number<0){
+              //   number = 0
+              // }
+              // return number
+              
+              return --number>0?number:0
+            },
+            delBookitem(index){
+              // 删除该项
+              this.booksitems.splice(index, index)
+            }
+            
+          }
+        });
+    </script>
+</body>
+
+</html>
