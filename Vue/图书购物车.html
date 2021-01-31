@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 15:48:42
- * @LastEditTime: 2021-01-31 11:21:36
+ * @LastEditTime: 2021-01-31 15:35:43
  * @LastEditors: Please set LastEditors
  * @Description: 图书购物车示例
  * @FilePath: \Study_Notes\Vue\图书购物车.html
@@ -40,7 +40,7 @@
               <td>
                 <button type="button" class="btn btn-info" @click="increNumber(index)">+</button>
                 <span>{{item.number}}</span>
-                <button type="button" class="btn btn-info" @click="decreNumber(index)">-</button>
+                <button type="button" class="btn btn-info" @click="decreNumber(index)" :disabled="item.number<1">-</button>
               </td>
               <td>{{getPrice(item.number, item.price) | showPrice}}</td>
               <td>
@@ -51,6 +51,8 @@
             <tr>
               <th colspan="5">总共合计</th>
               <td>{{TotalPrice | showPrice}}</td>
+              <!-- <td>{{TotalPrice}}</td> -->
+
             </tr>
           </tbody>
           
@@ -75,11 +77,18 @@
           computed:{
             TotalPrice(){
               // 计算获得总金额数
-              let totalprice = 0
-              for(let i=0; i<this.booksitems.length; i++){
-                totalprice += this.booksitems[i].price * this.booksitems[i].number
-              }
+              // let totalprice = 0
+              // for(let i=0; i<this.booksitems.length; i++){
+              //   totalprice += this.booksitems[i].price * this.booksitems[i].number
+              // }
+
+              // 高阶函数：reduce应用
+              let totalprice = this.booksitems.reduce((prevalue, item)=>{
+                return prevalue + item.price * item.number
+              },0)
+
               return totalprice
+
             }
 
           },
