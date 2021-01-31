@@ -333,6 +333,237 @@ MVC模式将应用程序划分为了三部分，实现了各部分的职责分�
 
 ![v_bind-styles-array](D:\Study_Notes\imgs\v_bind-styles-array.png)
 
+#### `v-model`
+
+* 作用：用于实现表单元素和数据的双向绑定
+
+* 示例：在文本框内输入或修改内容，下方显示所存储的数据内容：
+
+  ![v-model_Hello](D:\Study_Notes\imgs\v-model_Hello.png)
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- v-model简单示例 -->
+        <input type="text" name="content" id="content" v-model="content">
+        <div>{{content}}</div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              content:'Hello,v-model'
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+* 原理：`v-model`命令的实质就相当于包含了两个操作：
+
+  * `v-bind`：绑定数据
+
+  * `v-on`：给当前元素绑定`input`事件
+
+  * 示例：等效于`v-model`命令的效果
+
+    ```html
+    <body>
+        <div id="app">
+          <!-- v-model原理示例 -->
+          <input type="text" name="content" id="content" :value="content" @input="content=$event.target.value">
+          <div>{{content}}</div>
+        </div>
+        <script>
+            var vm=new Vue({
+              el:'#app',
+              data:{
+                content:'Hello,v-model'
+              },
+              methods:{}
+            });
+        </script>
+    </body>
+    ```
+
+##### `v-model:radio`
+
+在使用单选框时，并使用`v-model`命令进行数据绑定时，示例：
+
+```html
+<body>
+    <div id="app">
+      <!-- v-model:radio -->
+      <div>
+        <label for="male">
+          <input type="radio" value="男" name="gender" id="male" v-model="gender">男
+        </label>
+        <label for="female">
+          <input type="radio" value="女" name="gender" id="female" v-model="gender">女
+        </label>
+        <div>
+          您的信息内容: {{gender}}
+        </div>
+      </div>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            gender:''
+          },
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+##### `v-model:checkbox`
+
+* 复选框有两种类型：
+  * 单选框
+  * 复选框
+
+* **单选框使用：此时`v-model`为布尔值**，而其中`input`中的`value`值并不会影响`v-model`
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- v-model:checkbox -->
+        <div>
+          <label for="check">
+            <input type="checkbox" name="check" id="check" v-model="isAgree">同意协议
+          </label>
+          <div>
+            您是否同意协议信息：{{isAgree}}
+          </div>
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              isAgree:false
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+* **复选框使用：此时`v-model`为数组**
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- v-model:checkbox -->
+        <!-- 单选框 -->
+        <div>
+          <label for="check">
+            <input type="checkbox" name="check" id="check" v-model="isAgree">同意协议
+          </label>
+          <div>
+            您是否同意协议信息：{{isAgree}}
+          </div>
+        </div>
+        <!-- 复选框 -->
+        <div>
+          您的爱好：
+          <input type="checkbox" name="hobbies" v-model='hobbies' value="看电影" id="movies">电影
+          <input type="checkbox" name="hobbies" v-model='hobbies' value="听音乐" id="music">音乐
+          <input type="checkbox" name="hobbies" v-model='hobbies' value="跳舞" id="dance">跳舞
+          <input type="checkbox" name="hobbies" v-model='hobbies' value="阅读" id="book">阅读
+          <input type="checkbox" name="hobbies" v-model='hobbies' value="烹饪" id="cook">烹饪
+          <div>
+            您所选的爱好有：{{hobbies}}
+          </div>
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              content:'Hello,v-model',
+              gender:'',
+              isAgree:false,  // 单选框
+              hobbies:[],   // 多选框
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+##### `v-model:select`
+
+* `select`有两种情况：
+
+  * 单选
+  * 多选
+
+* 单选：此时，选中的`option`值会保存在`v-model`中，也就是说`v-model`绑定的是一个值
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- select -->
+        <!-- 单选 -->
+        <div>
+          单选水果：
+          <select name="fruit" id="fruit" v-model="fruit">
+            <option value="苹果">苹果</option>
+            <option value="草莓">草莓</option>
+            <option value="芒果">芒果</option>
+            <option value="西瓜">西瓜</option>
+            <option value="柚子">柚子</option>
+          </select>
+          您选中的水果是：{{fruit}}
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              fruit:''
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  
+  ```
+
+* 多选：当多选时，被选择的`option`会被保存在一个数组中，绑定在`v-model`中
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- 多选 -->
+        <div>
+          多选水果：
+          <select name="fruits" id="fruits" multiple v-model="fruits">
+            <option value="苹果">苹果</option>
+            <option value="草莓">草莓</option>
+            <option value="芒果">芒果</option>
+            <option value="西瓜">西瓜</option>
+            <option value="柚子">柚子</option>
+          </select>
+          您选中的水果有这些哦：{{fruits}}
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              fruits:[]
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
 ### 计算属性`computed`
 
 #### 应用场景

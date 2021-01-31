@@ -1,0 +1,107 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-31 15:48:10
+ * @LastEditTime: 2021-01-31 23:27:42
+ * @LastEditors: Please set LastEditors
+ * @Description: 绑定操作:表单绑定:v-model
+ * @FilePath: \Study_Notes\Vue\v-model.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- v-model简单示例 -->
+      <!-- <input type="text" name="content" id="content" v-model="content">
+      <div>{{content}}</div>
+      <hr> -->
+      <!-- v-model原理示例 -->
+      <!-- <input type="text" name="content" id="content" :value="content" @input="content=$event.target.value">
+      <div>{{content}}</div> -->
+
+      <!-- v-model:radio -->
+      <div>
+        <label for="male">
+          <input type="radio" value="男" name="gender" id="male" v-model="gender">男
+        </label>
+        <label for="female">
+          <input type="radio" value="女" name="gender" id="female" v-model="gender">女
+        </label>
+        <div>
+          您的信息内容: {{gender}}
+        </div>
+      </div>
+
+      <!-- v-model:checkbox -->
+      <!-- 单选框 -->
+      <div>
+        <label for="check">
+          <input type="checkbox" name="check" id="check" v-model="isAgree">同意协议
+        </label>
+        <div>
+          您是否同意协议信息：{{isAgree}}
+        </div>
+      </div>
+      <!-- 复选框 -->
+      <div>
+        您的爱好：
+        <input type="checkbox" name="hobbies" v-model='hobbies' value="看电影" id="movies">电影
+        <input type="checkbox" name="hobbies" v-model='hobbies' value="听音乐" id="music">音乐
+        <input type="checkbox" name="hobbies" v-model='hobbies' value="跳舞" id="dance">跳舞
+        <input type="checkbox" name="hobbies" v-model='hobbies' value="阅读" id="book">阅读
+        <input type="checkbox" name="hobbies" v-model='hobbies' value="烹饪" id="cook">烹饪
+        <div>
+          您所选的爱好有：{{hobbies}}
+        </div>
+      </div>
+      <!-- select -->
+      <!-- 单选 -->
+      <div>
+        单选水果：
+        <select name="fruit" id="fruit" v-model="fruit">
+          <option value="苹果">苹果</option>
+          <option value="草莓">草莓</option>
+          <option value="芒果">芒果</option>
+          <option value="西瓜">西瓜</option>
+          <option value="柚子">柚子</option>
+        </select>
+        您选中的水果是：{{fruit}}
+      </div>
+      <!-- 多选 -->
+      <div>
+        多选水果：
+        <select name="fruits" id="fruits" multiple v-model="fruits">
+          <option value="苹果">苹果</option>
+          <option value="草莓">草莓</option>
+          <option value="芒果">芒果</option>
+          <option value="西瓜">西瓜</option>
+          <option value="柚子">柚子</option>
+        </select>
+        您选中的水果有这些哦：{{fruits}}
+      </div>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            content:'Hello,v-model',
+            gender:'',
+            isAgree:false,  // 单选框
+            hobbies:[],   // 多选框
+            fruit:'',
+            fruits:[]
+          },
+          methods:{}
+        });
+    </script>
+</body>
+
+</html>
