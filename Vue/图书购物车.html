@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 15:48:42
- * @LastEditTime: 2021-01-30 15:21:11
+ * @LastEditTime: 2021-01-31 11:21:36
  * @LastEditors: Please set LastEditors
  * @Description: 图书购物车示例
  * @FilePath: \Study_Notes\Vue\图书购物车.html
@@ -20,7 +20,7 @@
 
 <body>
     <div id="app">
-      <div class="container-md">
+      <div class="container-md" v-if="booksitems.length>0">
         <table class="table">
           <thead class="thead-dark">
             <tr>
@@ -36,25 +36,28 @@
             <tr v-for="(item, index) in booksitems">
               <th scope="row">{{index + 1}}</th>
               <td>{{item.name}}</td>
-              <td>{{item.price}}</td>
+              <td>{{item.price | showPrice}}</td>
               <td>
-                <button type="button" class="btn btn-info" @click="item.number=increNumber(item.number)">+</button>
+                <button type="button" class="btn btn-info" @click="increNumber(index)">+</button>
                 <span>{{item.number}}</span>
-                <button type="button" class="btn btn-info" @click="item.number=decreNumber(item.number)">-</button>
+                <button type="button" class="btn btn-info" @click="decreNumber(index)">-</button>
               </td>
-              <td>{{getPrice(item.number, item.price)}}</td>
-              <td @click="delBookitem(index)">删除</td>
+              <td>{{getPrice(item.number, item.price) | showPrice}}</td>
+              <td>
+                <button  type="button" class="btn btn-danger"  @click="delBookitem(index)">删除</button>
+              </td>
               
             </tr>
             <tr>
               <th colspan="5">总共合计</th>
-              <td>{{getTotalPrice}}</td>
+              <td>{{TotalPrice | showPrice}}</td>
             </tr>
           </tbody>
           
         </table>
   
       </div>
+      <h2 v-else>购物车为空...</h2>
 
     </div>
     <script>
@@ -70,7 +73,7 @@
             ]
           },
           computed:{
-            getTotalPrice(){
+            TotalPrice(){
               // 计算获得总金额数
               let totalprice = 0
               for(let i=0; i<this.booksitems.length; i++){
@@ -85,25 +88,24 @@
               // 计算单本总价
               return number*price
             },
-            increNumber(number){
+            increNumber(index){
               // 增加数量
-              return ++number
+              ++this.booksitems[index].number
             },
-            decreNumber(number){
-              // --number
-              // // 判断数量是否已经减少到负数
-              // if(number<0){
-              //   number = 0
-              // }
-              // return number
-              
-              return --number>0?number:0
+            decreNumber(index){
+              // 判断数量是否已经减少到负数              
+              this.booksitems[index].number = --this.booksitems[index].number>0?this.booksitems[index].number:0
             },
             delBookitem(index){
               // 删除该项
-              this.booksitems.splice(index, index)
+              this.booksitems.splice(index, 1)
             }
             
+          },
+          filters:{
+            showPrice(price){
+              return '￥' + price.toFixed(2)
+            }
           }
         });
     </script>
