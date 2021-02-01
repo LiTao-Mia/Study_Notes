@@ -564,6 +564,132 @@ MVC模式将应用程序划分为了三部分，实现了各部分的职责分�
   </body>
   ```
 
+##### 值绑定
+
+在实际开发的过程中，`input`中的值是从网络中获取的或者定义在`data`中，所以会需要值绑定概念
+
+```html
+<body>
+    <div id="app">
+      <!-- 值绑定 -->
+      <div>
+        <label :for="item" v-for="item in ProLanguage">
+          <input type="checkbox" name="ProLanguage" :id="item">{{item}}
+        </label>
+      </div>
+    </div>
+    <script>
+        var vm=new Vue({
+          el:'#app',
+          data:{
+            ProLanguage:['Python', 'PHP', 'JavaScript', 'Java', 'C++']
+          },
+          methods:{}
+        });
+    </script>
+</body>
+
+```
+
+##### 修饰符
+
+###### `lazy`修饰符
+
+* 作用：`v-model`默认操作是在`input`事件中同步输入框的数据，也就是说数据一旦发生变化的时候，其中对应绑定的数据也会自动发生改变，该修饰符的作用是数据改变时，使其在失去焦点或者回车再让其更新
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- 修饰符 -->
+        <!-- lazy修饰符 -->
+        <div>
+          <input type="text" name="infor1" id="infor1" v-model="infor">
+          <h2>{{infor}}</h2>
+          <input type="text" name="infor2" id="infor2" v-model.lazy="infor">
+          <h2>{{infor}}</h2>
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              infor:"学习使我快乐..."
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+###### `number`修饰符
+
+* 作用：在默认的情况下，在输入框`input`内无论我们输入的是字符串还是数字，都会被转换为字符串类型进行处理，但实际开发需求中，我们需要将输入的内容直接用作数字处理，该修饰符就可以将输入框中输入的内容自动转换为数字的类型
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- number修饰符 -->
+        <div>
+          <input type="text" name="num1" id="num1" v-model="num">
+          <h3>{{typeof num}} {{num}}</h3>
+          
+          <input type="text" name="num2" id="num2" v-model.number="num">
+          <h3>{{typeof num}} {{num}}</h3>
+        </div>
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              num:0
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+###### `trim`修饰符
+
+* 作用：将输入内容中的首尾所有空格去除
+
+* 示例：
+
+  ![v-model_trim](D:\Study_Notes\imgs\v-model_trim.png)
+
+  ```html
+  <body>
+      <div id="app">
+        <!-- trim修饰符 -->
+        <div>
+          <input type="text" name="str1" id="str1" v-model="str">
+          <h4>{{str}}</h4>
+          
+          <input type="text" name="str2" id="str2" v-model.trim="str">
+          <h4>{{str}}</h4>
+        </div>
+  
+      </div>
+      <script>
+          var vm=new Vue({
+            el:'#app',
+            data:{
+              str:''
+            },
+            methods:{}
+          });
+      </script>
+  </body>
+  ```
+
+  ![v-model_trim修饰符](D:\Study_Notes\imgs\v-model_trim修饰符.png)
+
+
+
 ### 计算属性`computed`
 
 #### 应用场景
@@ -635,7 +761,6 @@ MVC模式将应用程序划分为了三部分，实现了各部分的职责分�
         });
     </script>
 </body>
-
 ```
 
 #### `setter`和`getter`

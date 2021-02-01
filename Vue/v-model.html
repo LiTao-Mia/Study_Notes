@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-31 15:48:10
- * @LastEditTime: 2021-01-31 23:27:42
+ * @LastEditTime: 2021-02-01 12:24:12
  * @LastEditors: Please set LastEditors
  * @Description: 绑定操作:表单绑定:v-model
  * @FilePath: \Study_Notes\Vue\v-model.html
@@ -39,6 +39,7 @@
           您的信息内容: {{gender}}
         </div>
       </div>
+      <hr>
 
       <!-- v-model:checkbox -->
       <!-- 单选框 -->
@@ -50,6 +51,7 @@
           您是否同意协议信息：{{isAgree}}
         </div>
       </div>
+      <hr>
       <!-- 复选框 -->
       <div>
         您的爱好：
@@ -62,6 +64,7 @@
           您所选的爱好有：{{hobbies}}
         </div>
       </div>
+      <hr>
       <!-- select -->
       <!-- 单选 -->
       <div>
@@ -87,6 +90,40 @@
         </select>
         您选中的水果有这些哦：{{fruits}}
       </div>
+      <hr>
+      <!-- 值绑定 -->
+      <div>
+        <label :for="item" v-for="item in ProLanguage">
+          <input type="checkbox" name="ProLanguage" :id="item">{{item}}
+        </label>
+      </div>
+      <hr>
+      <!-- 修饰符 -->
+      <!-- lazy修饰符 -->
+      <div>
+        <input type="text" name="infor1" id="infor1" v-model="infor">
+        <h2>{{infor}}</h2>
+        <input type="text" name="infor2" id="infor2" v-model.lazy="infor">
+        <h2>{{infor}}</h2>
+      </div>
+      <hr>
+      <!-- number修饰符 -->
+      <div>
+        <input type="text" name="num1" id="num1" v-model="num">
+        <h3>{{typeof num}} {{num}}</h3>
+        
+        <input type="text" name="num2" id="num2" v-model.number="num">
+        <h3>{{typeof num}} {{num}}</h3>
+      </div>
+      <hr>
+      <!-- trim修饰符 -->
+      <div>
+        <input type="text" name="str1" id="str1" v-model="str">
+        <h4>{{str}}</h4>
+        
+        <input type="text" name="str2" id="str2" v-model.trim="str">
+        <h4>{{str}}</h4>
+      </div>
     </div>
     <script>
         var vm=new Vue({
@@ -97,7 +134,11 @@
             isAgree:false,  // 单选框
             hobbies:[],   // 多选框
             fruit:'',
-            fruits:[]
+            fruits:[],
+            ProLanguage:['Python', 'PHP', 'JavaScript', 'Java', 'C++'],
+            infor:"学习使我快乐...",
+            num:0,
+            str:''
           },
           methods:{}
         });
