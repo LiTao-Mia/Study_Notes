@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-02 16:38:15
+ * @LastEditTime: 2021-02-02 17:45:32
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue组件：模板分离写法
+ * @FilePath: \Study_Notes\Vue\模板分离写法.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <navbar></navbar>
+      <card></card>
+    </div>
+    <!-- 1-script标签使用 -->
+    <script type='text/x-template' id='card_template'>
+      <div class="card" style="width: 18rem;">
+        <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </script>
+    <!-- 2-template标签使用 -->
+    <template id='navbar_template'>
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+    </template>
+    <script>
+      Vue.component('card',{
+        template:'#card_template'
+      })
+
+      var vm=new Vue({
+        el:'#app',
+        data:{},
+        methods:{},
+        components:{
+          navbar:{template:'#navbar_template'}
+        }
+      });
+    </script>
+</body>
+
+</html>

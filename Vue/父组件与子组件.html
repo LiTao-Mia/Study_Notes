@@ -1,0 +1,65 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-02 12:50:06
+ * @LastEditTime: 2021-02-02 15:32:43
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue组件：父组件与子组件
+ * @FilePath: \Study_Notes\Vue\父组件与子组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <card></card>
+      <btns></btns>
+    </div>
+    <script>
+      // 1-创建组件构造器
+      // 子组件
+      const cpnC1 = Vue.extend({
+        template:`
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary">Left</button>
+          <button type="button" class="btn btn-secondary">Middle</button>
+          <button type="button" class="btn btn-secondary">Right</button>
+        </div>
+        `
+      })
+      // 父组件
+      const cpnC2 = Vue.extend({
+        template:`
+        <div class="card" style="width: 18rem;">
+          <img src="../imgs/pexels-coffee-374757.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <btns></btns>
+            </div>
+        </div>
+        `,
+        components:{
+          btns:cpnC1
+        }
+      })
+      // 2-注册组件
+      Vue.component('card', cpnC2)
+
+      var vm=new Vue({
+        el:'#app',
+        data:{},
+        methods:{}
+      });
+    </script>
+</body>
+
+</html>

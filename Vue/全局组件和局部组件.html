@@ -1,0 +1,62 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-01 22:35:23
+ * @LastEditTime: 2021-02-02 10:45:11
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue组件：全局组件和局部组件
+ * @FilePath: \Study_Notes\Vue\全局组件和局部组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1">
+      <card></card>
+    </div>
+    <div id="app2">
+      <card></card>
+    </div>
+    <script>
+      // 1-创建组件构造器
+      const cpnC = Vue.extend({
+        template:`
+        <div class="card" style="width: 18rem;">
+          <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+        `
+      })
+      // 2-注册组件 ====>>>全局组件注册
+      // Vue.component('card', cpnC)
+
+        var vm1=new Vue({
+          el:'#app1',
+          data:{},
+          methods:{},
+          components: {
+            'card': cpnC
+          }
+        });
+        var vm2=new Vue({
+          el:'#app2',
+          data:{},
+          methods:{}
+        });
+
+    </script>
+</body>
+
+</html>

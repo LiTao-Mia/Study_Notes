@@ -1,0 +1,51 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-01 16:39:10
+ * @LastEditTime: 2021-02-02 10:08:30
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue:组件化思想
+ * @FilePath: \Study_Notes\Vue\组件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- 3-使用组件 -->
+      <navbar></navbar>
+    </div>
+    <navbar></navbar>
+    <script>
+      // 1-创建组件构造器对象
+      const cpnC = Vue.extend({
+        template:`
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">Navbar</a>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
+        `
+      })
+      // 2-注册组件
+      Vue.component('navbar', cpnC)
+
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{}
+        });
+    </script>
+</body>
+
+</html>

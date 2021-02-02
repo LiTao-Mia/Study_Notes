@@ -1,0 +1,425 @@
+# 组件化
+
+## 什么是组件化
+
+将一个页面拆分成为一个个小的功能块，而每个功能块完成属于自己这部分独立的功能，整个页面的所有逻辑就可以根据功能独立开来，有利于后续的管理以及扩展，之后针对整个页面的维护就十分方便了
+
+![组件化思想](D:\Study_Notes\imgs\组件化思想.png)
+
+组件化是`Vue.js`中十分重要的思想：
+
+* 开发出一个个独立且可复用的小组件来构造所需开发的应用
+
+* 整体开发的应用会被抽象成一棵组件树
+
+  ![组件树](D:\Study_Notes\imgs\组件树.png)
+
+* 组件思想的应用：将页面拆分成尽可能小的且可复用的组件，方便组织和管理，并且具有更强的扩展性
+
+## 组件的使用
+
+组件的使用分为三个步骤：
+
+* 创建组件的构造器
+* 注册组件
+* 使用组件
+
+![注册组件](D:\Study_Notes\imgs\注册组件.png)
+
+### 注册组件
+
+#### `Vue.extend()`
+
+* 作用：调用`Vue.extend()`创建的是一个组建的构造器
+
+* 在创建构造器的时候，传入`template`代表自定义组件的模板，其中，模板是指使用的到组件的地方
+
+* 示例：
+
+  ```html
+  <script>
+    // 1-创建组件构造器对象
+    const cpnC = Vue.extend({
+      template:`
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+      `
+    })
+  </script>
+  ```
+
+* `Vue.extend()`现已很少使用，多用注册组件语法糖
+
+#### `Vue.component()`
+
+* 作用：将所创建的组件构造器注册为一个组件，并且给它起一个组件的标签名称
+* 参数：涉及到两个参数：
+  * 注册组件的标签名称
+  * 组件构造器
+
+* 示例：
+
+  ```html
+  <script>
+    // 1-创建组件构造器对象
+    const cpnC = Vue.extend({
+      template:`
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+      `
+    })
+    // 2-注册组件
+    Vue.component('navbar', cpnC)
+      var vm=new Vue({
+        el:'#app',
+        data:{},
+        methods:{}
+      });
+  </script>
+  ```
+
+* 语法糖：简化了整个过程，主要是省去了调用`Vue.extend()`的步骤，而是用一个对象来代替
+
+  ```html
+  <body>
+      <div id="app">
+        <navbar></navbar>
+        <card></card>
+      </div>
+      <script>
+        Vue.component('navbar',{
+          template:`
+          <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand">Navbar</a>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </nav>
+          `
+        })
+          var vm=new Vue({
+            el:'#app',
+            data:{},
+            methods:{},
+            components:{
+              card:{
+                template: `
+                <div class="card" style="width: 18rem;">
+                  <img src="../imgs/pexels-coffee-374757.jpeg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>              
+                `
+              }
+            }
+          });
+      </script>
+  </body>
+  ```
+
+  ![组件注册语法糖使用](D:\Study_Notes\imgs\组件注册语法糖使用.png)
+
+### 使用组件
+
+在需要使用组建的地方写入组件，需要注意的是需要在`Vue`的实例范围内才能使用组件
+
+```html
+<body>
+    <div id="app">
+      <!-- 3-使用组件 -->
+      <navbar></navbar>
+    </div>
+    <navbar></navbar>
+    <script>
+      // 1-创建组件构造器对象
+      const cpnC = Vue.extend({
+        template:`
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">Navbar</a>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
+        `
+      })
+      // 2-注册组件
+      Vue.component('navbar', cpnC)
+
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{}
+        });
+    </script>
+</body>
+```
+
+![组件使用_范围](D:\Study_Notes\imgs\组件使用_范围.png)
+
+### 模板的分离写法
+
+共有两种写法：
+
+* `<script>`标签写法
+
+  * 需要注意的是需要写明：`type='text/x-template'`
+  * 需要写清`id`，以便后续使用
+
+  ```html
+  <body>
+      <div id="app">
+        <card></card>
+      </div>
+      <!-- 1-script标签使用 -->
+      <script type='text/x-template' id='card_template'>
+        <div class="card" style="width: 18rem;">
+          <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </script>
+      <script>
+        Vue.component('card',{
+          template:'#card_template'
+        })
+  
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{},
+        });
+      </script>
+  </body>
+  
+  ```
+
+* `<template>`标签写法
+
+  ```html
+  <body>
+      <div id="app">
+        <navbar></navbar>
+        <card></card>
+      </div>
+      <!-- 1-script标签使用 -->
+      <script type='text/x-template' id='card_template'>
+        <div class="card" style="width: 18rem;">
+          <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </script>
+      <!-- 2-template标签使用 -->
+      <template id='navbar_template'>
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">Navbar</a>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
+      </template>
+      <script>
+        Vue.component('card',{
+          template:'#card_template'
+        })
+  
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{},
+          components:{
+            navbar:{template:'#navbar_template'}
+          }
+        });
+      </script>
+  </body>
+  ```
+
+* 示例：
+
+  ![模板分离写法](D:\Study_Notes\imgs\模板分离写法.png)
+
+### 全局组件和局部组件
+
+#### 全局组件
+
+* 当调用`Vue.component()`注册组件时，组件的注册就是全局的
+
+* 全局组件在任意的`Vue`示例下都可以使用
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app1">
+        <card></card>
+      </div>
+      <div id="app2">
+        <card></card>
+      </div>
+      <script>
+        // 1-创建组件构造器
+        const cpnC = Vue.extend({
+          template:`
+          <div class="card" style="width: 18rem;">
+            <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          `
+        })
+        // 2-注册组件
+        Vue.component('card', cpnC)
+  
+          var vm1=new Vue({
+            el:'#app1',
+            data:{},
+            methods:{}
+          });
+          var vm2=new Vue({
+            el:'#app2',
+            data:{},
+            methods:{}
+          });
+  
+      </script>
+  </body>
+  ```
+
+  ![全局组件](D:\Study_Notes\imgs\全局组件.png)
+  
+  ![全局组件使用](D:\Study_Notes\imgs\全局组件使用.png)
+
+#### 局部组件
+
+* 一旦我们将所注册的组件挂载在某个实例中去，则该组件就会成为局部组件
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app1">
+        <card></card>
+      </div>
+      <div id="app2">
+        <card></card>
+      </div>
+      <script>
+        // 1-创建组件构造器
+        const cpnC = Vue.extend({
+          template:`
+          <div class="card" style="width: 18rem;">
+            <img src="../imgs/pexels-coffee-374885.jpeg" class="card-img-top" alt="coffee">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          `
+        })
+          var vm1=new Vue({
+            el:'#app1',
+            data:{},
+            methods:{},
+            components: {
+              'card': cpnC
+            }
+          });
+          var vm2=new Vue({
+            el:'#app2',
+            data:{},
+            methods:{}
+          });
+  
+      </script>
+  </body>
+  ```
+
+  ![局部组件使用](D:\Study_Notes\imgs\局部组件使用.png)
+
+### 父组件与子组件
+
+很多时候，组件与组件之间存在层级关系，而其中一种关系就是父子关系
+
+* 示例：
+
+  ```html
+  <body>
+      <div id="app">
+        <card></card>
+      </div>
+      <script>
+        // 1-创建组件构造器
+        // 子组件
+        const cpnC1 = Vue.extend({
+          template:`
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Left</button>
+            <button type="button" class="btn btn-secondary">Middle</button>
+            <button type="button" class="btn btn-secondary">Right</button>
+          </div>
+          `
+        })
+        // 父组件
+        const cpnC2 = Vue.extend({
+          template:`
+          <div class="card" style="width: 18rem;">
+            <img src="../imgs/pexels-coffee-374757.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <btns></btns>
+              </div>
+          </div>
+          `,
+          components:{
+            btns:cpnC1
+          }
+        })
+        // 2-注册组件
+        Vue.component('card', cpnC2)
+  
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{}
+        });
+      </script>
+  </body>
+  ```
+
+* 需要注意的是：当子组件注册到父组件后，Vue会编译好父组件，此时父组件中已经包含了子组件的内容，但无法直接单独使用子组件：
+
+  ```html
+  <div id="app">
+    <card></card>
+    <btns></btns>
+  </div>
+  ```
+
+  ![子组件的错误使用](D:\Study_Notes\imgs\子组件的错误使用.png)
