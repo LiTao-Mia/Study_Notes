@@ -423,3 +423,169 @@
   ```
 
   ![子组件的错误使用](D:\Study_Notes\imgs\子组件的错误使用.png)
+
+### 组件中数据存储
+
+组件可以访问`Vue`实例中`data`中的数据吗：
+
+```html
+<body>
+    <div id="app">
+      <card></card>
+    </div>
+    <template id="card-template">
+      <div class="card" style="width: 18rem;">
+        <img :src="imgpath" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{card_title}}</h5>
+          <p class="card-text">{{card_text}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </template>
+    <script>
+      Vue.component('card',{
+        template:"#card-template"
+      })
+
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          imgpath:'../imgs/pexels-coffee-374757.jpeg',
+          card_text:'Have good time',
+          card_title:'Coffee'
+        },
+        methods:{}
+      });
+    </script>
+</body>
+```
+
+![组件访问数据出错](D:\Study_Notes\imgs\组件访问数据出错.png)
+
+组件是一个单独功能模块的封装，所以它也可以有自己的数据`data`，倘若所有组件的数据都存放在了`Vue`实例的`data`中，那`Vue`就会变得十分的臃肿
+
+组件中的数据存放在了哪里呢？
+
+#### 数据存储`data`属性
+
+**存放在了组件的`data`属性之中**
+
+```html
+<body>
+    <div id="app">
+      <card></card>
+    </div>
+    <template id="card-template">
+      <div class="card" style="width: 18rem;">
+        <img :src="imgpath" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{card_title}}</h5>
+          <p class="card-text">{{card_text}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </template>
+    <script>
+      Vue.component('card',{
+        template:"#card-template",
+        data(){
+          return {
+            imgpath:'../imgs/pexels-coffee-374757.jpeg',
+            card_text:'Have good time',
+            card_title:'Coffee'
+          }
+        }
+      })
+
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          // imgpath:'../imgs/pexels-coffee-374757.jpeg',
+          // card_text:'Have good time',
+          // card_title:'Coffee'
+        },
+        methods:{}
+      });
+    </script>
+</body>
+```
+
+![组件数据属性访问有效](D:\Study_Notes\imgs\组件数据属性访问有效.png)
+
+**需要强调的是：**
+
+* 组件数据存放在`data`属性中
+* 组件中的`data`属性必须是一个函数
+* `data`属性中的而函数返回的必须是一个对象，对象内部保存着数据
+
+#### `data`属性函数原因
+
+* 当组件中`data`属性如果不是函数，那么就会报错：
+
+  ```javascript
+  Vue.component('card',{
+    data:{
+      imgpath:'../imgs/pexels-coffee-374757.jpeg',
+      card_text:'Have good time',
+      card_title:'Coffee'
+    }
+  })
+  ```
+
+  ![组件中data属性报错](D:\Study_Notes\imgs\组件中data属性报错.png)
+
+* 处于组件复用的考虑，应该让每个组件都返回一个新的对象，以免组件复用时后续操作的互相影响：
+
+  ```html
+  <body>
+      <div id="app">
+        <cal></cal>
+        <cal></cal>
+        <cal></cal>
+        <cal></cal>
+      </div>
+      <template id="calculator_template">
+        <div id="cal">
+          <p class="font-italic">{{num}}</p>
+          <button type="button" class="btn btn-light" @click="++num">+</button>
+          <button type="button" class="btn btn-dark"@click="--num">-</button>  
+        </div>
+      </template>
+      <script>
+        Vue.component('cal', {
+          template:"#calculator_template",
+          data(){
+            return {
+              num:0
+            }
+          }
+        })
+  
+        var vm=new Vue({
+          el:'#app',
+          data:{},
+          methods:{}
+        });
+      </script>
+  </body>
+  ```
+
+  ![calculator_Vue组件](D:\Study_Notes\imgs\calculator_Vue组件.png)
+
+已上会发现，操作时相互是不会有影响的
+
+若`data`属性函数返回的是已有的对象，则：
+
+```javascript
+let number ={num:0} 
+Vue.component('cal', {
+  template:"#calculator_template",
+  data(){
+    return number
+  }
+```
+
+![calculator_数据同时影响改变](D:\Study_Notes\imgs\calculator_数据同时影响改变.png)
+
+会发现此时任何一个操作会影响其他组件中的数据，原因是`data`属性中使用的是同一个对象

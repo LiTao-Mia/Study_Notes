@@ -1,0 +1,90 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-02 18:26:40
+ * @LastEditTime: 2021-02-02 22:59:28
+ * @LastEditors: Please set LastEditors
+ * @Description: Vue组件：组件中的数据存储
+ * @FilePath: \Study_Notes\Vue\组件数据存储.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+      <!-- <card></card> -->
+      <cal></cal>
+      <cal></cal>
+      <cal></cal>
+      <cal></cal>
+
+    </div>
+    <template id="card-template">
+      <div class="card" style="width: 18rem;">
+        <img :src="imgpath" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{card_title}}</h5>
+          <p class="card-text">{{card_text}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </template>
+
+    <template id="calculator_template">
+      <div id="cal">
+        <p class="font-italic">{{num}}</p>
+        <button type="button" class="btn btn-light" @click="++num">+</button>
+        <button type="button" class="btn btn-dark"@click="--num">-</button>  
+      </div>
+    </template>
+    <script>
+      Vue.component('card',{
+        template:"#card-template",
+        data(){
+          return {
+            imgpath:'../imgs/pexels-coffee-374757.jpeg',
+            card_text:'Have good time',
+            card_title:'Coffee'
+          }
+        }
+        // data:{
+        //   imgpath:'../imgs/pexels-coffee-374757.jpeg',
+        //   card_text:'Have good time',
+        //   card_title:'Coffee'
+        // }
+
+      })
+      let number ={num:0} 
+      Vue.component('cal', {
+        template:"#calculator_template",
+        // data(){
+        //   return {
+        //     num:0
+        //   }
+        // }
+        data(){
+          return number
+        }
+      })
+
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          // imgpath:'../imgs/pexels-coffee-374757.jpeg',
+          // card_text:'Have good time',
+          // card_title:'Coffee'
+        },
+        methods:{}
+      });
+    </script>
+</body>
+
+</html>
