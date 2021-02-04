@@ -604,3 +604,45 @@ Vue.component('cal', {
 
   ![父子组件通信](D:\Study_Notes\imgs\父子组件通信.png)
 
+#### 通过`props`向子组件传递数据
+
+```html
+<body>
+    <div id="app">
+      <card :cardtitle="title" :cardtext="text" :cardimg="imgPath"></card>
+    </div>
+    <!-- 子组件模板:卡片 -->
+    <template id="card-template">
+      <div class="card" style="width: 18rem;">
+        <img :src="cardimg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{cardtitle}}</h5>
+          <p class="card-text">{{cardtext}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </template>
+    <script>
+
+      var vm=new Vue({
+        el:'#app',
+        data:{
+          imgPath:'../imgs/pexels-coffee.jpeg',
+          title:'coffee',
+          text:'Have good time...',
+          alist:['Home', 'Features', 'Pricing', 'Other']
+        },
+        methods:{},
+        components:{
+          'card':{
+            template:'#card-template',
+            props:['cardtitle', 'cardtext', 'cardimg'],
+            
+          }
+        }
+      });
+    </script>
+</body>
+```
+
+![父子组件通信_整个页面](D:\Study_Notes\imgs\父子组件通信_整个页面.png)
