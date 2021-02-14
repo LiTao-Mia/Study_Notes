@@ -154,7 +154,27 @@ HTML的语言骨架格式：
 
 #### 文档类型`<!DOCTYPE>`
 
-文档声明，用于告诉浏览器该HTML文件使用的是HTML中的哪一个版本
+文档声明
+
+* 作用：用于告诉浏览器该HTML文件使用的是HTML中的哪一个版本
+
+* 位置：文档最开始的位置
+
+* 规范：
+
+  * **html5**：html:5
+
+    ```html
+    <!DOCTYPE html>
+    ```
+
+  * **html**
+
+    ```html
+    
+    ```
+
+    
 
 #### `<meta>`标签
 
@@ -192,11 +212,34 @@ HTML的语言骨架格式：
 
   用于告诉浏览器使用哪一种字符集来解析文件，即使用`utf-8`字符集来解析文件
 
+#### 字符集
+
+类似于字典
+
+常见字符集：
+
+* `UTF-8`：
+
 ### 标签
+
+#### `SEO`
+
+`SEO`：Search Engine Optimization，搜索引擎优化
+
+* 作用：用来优化网站使得网站在搜索引擎上的排名靠前，进而有更多的用户可以访问到该网站
+* 如何提高网站的SEO：
+  * 花钱，效果最快速直接
+  * 将页面做成静态页面（后缀名为`.html`）
+  * 外链，作用类似于广告
+  * 标签语义化（语义化规范）
 
 #### 标签语义化
 
-标签的含义，可以理解为，文件中去除样式表现、行为等内容后，仍能够较为清晰的理解各个部分的作用，使用它的优势：
+标签语义化，在合适的位置使用合适的标签，可以理解为，文件中去除样式表现、行为等内容后，仍能够较为清晰的理解各个部分的作用。
+
+每个标签都有属于自己的语义
+
+使用它的优势：
 
 * 利于代码的阅读与理解
 * 便于代码维护
@@ -264,6 +307,8 @@ HTML的语言骨架格式：
 * 标签名与属性名之间必须以空格隔开
 * 属性与属性之间没有任何顺序关系
 * 属性一般是以“名称/值”对的形式出现：`属性名="属性值"`
+* 每种标签的属性并不是完全一样的，有一些属性对于某种标签是存在可用的，但对于其他的标签是没有作用的
+* 尽量不要使用样式属性
 * 部分属性是任意值，部分是指定值
   * 需要特殊说明：当属性值为`boolean`值时，可以省去属性值的`true`或`false`，当属性值为`true`时，直接写入属性名称即可，当为`false`时，不写属性名称即可
 
@@ -310,8 +355,21 @@ HTML的语言骨架格式：
   * 所有HTML标签中的一个根节点、根标签，也就是最大的标签
 * 用法：
   * 一个页面中`<html>`标签只能有一个
+  
   * 网页中的所有内容都需要编写在`<html>`标签之中
+  
   * `<html>`标签中包含两个子标签`<head>`和`<body>`
+  
+  * `lang`属性：用于设置当前页面的语言
+  
+    ```html
+    <html lang="en">
+    
+    </html>
+    ```
+  
+    * `en`：表示告诉浏览器页面使用的主要是英文
+    * `zh`：表示告诉浏览器页面所使用的主要是中文
 
 ##### `<head>`标签
 
@@ -452,7 +510,7 @@ HTML的语言骨架格式：
 
 ##### `<div>`、`<span>`与`<p>`三者标签的区别
 
-![div_p_span标签三者区别](D:\Study_Notes\imgs\div_p_span标签三者区别.png)
+![div_p_span标签三者区别](..\imgs\div_p_span标签三者区别.png)
 
 * `<span>`标签不会导致换行
 * `<div>`标签会导致换行
@@ -493,6 +551,8 @@ HTML的语言骨架格式：
 #### 文本格式化标签
 
 文本格式化元素能包含文本、图像、超链接、文本格式化元素和表单控件元素等，也可以与`<span>`元素相互包含
+
+**推荐使用：具有语义的标签**
 
 ##### `<b>`标签
 
@@ -614,7 +674,7 @@ HTML的语言骨架格式：
   <p>学习的指导思想：<q>学习使我快乐</q>这是一种态度</p>
   ```
 
-![q标签](D:\Study_Notes\imgs\q标签.png)
+![q标签](..\imgs\q标签.png)
 
 ##### `<blockquote>`标签
 
@@ -637,7 +697,7 @@ HTML的语言骨架格式：
   </blockquote>
   ```
 
-![blockquote标签](D:\Study_Notes\imgs\blockquote标签.png)
+![blockquote标签](..\imgs\blockquote标签.png)
 
 ##### `<pre>`标签
 
@@ -657,7 +717,7 @@ HTML的语言骨架格式：
   </pre>
   ```
 
-![pre标签](D:\Study_Notes\imgs\pre标签.png)
+![pre标签](..\imgs\pre标签.png)
 
 ##### `<cite>`标签
 
@@ -674,7 +734,7 @@ HTML的语言骨架格式：
   </p>
   ```
 
-![cite标签](D:\Study_Notes\imgs\cite标签.png)
+![cite标签](..\imgs\cite标签.png)
 
 ##### `<abbr>`标签
 
@@ -692,7 +752,7 @@ HTML的语言骨架格式：
   <p>一月（元月）：<abbr title="January">Jan</abbr></p>
   ```
 
-![abbr标签](D:\Study_Notes\imgs\abbr标签.png)
+![abbr标签](..\imgs\abbr标签.png)
 
 ##### `<address>`标签
 
@@ -707,7 +767,7 @@ HTML的语言骨架格式：
   <p>福尔摩斯：<address>伦敦贝克街221号</address></p>
   ```
 
-![address标签](D:\Study_Notes\imgs\address标签.png)
+![address标签](..\imgs\address标签.png)
 
 ##### `<code>`标签
 
@@ -724,7 +784,7 @@ HTML的语言骨架格式：
   </code>
   ```
 
-![code标签](D:\Study_Notes\imgs\code标签.png)
+![code标签](..\imgs\code标签.png)
 
 ##### `<dfn>`标签
 
@@ -740,7 +800,7 @@ HTML的语言骨架格式：
   ```
 
 
-![dfn标签](D:\Study_Notes\imgs\dfn标签.png)
+![dfn标签](..\imgs\dfn标签.png)
 
 ##### `<del>`标签
 
@@ -760,7 +820,7 @@ HTML的语言骨架格式：
   <p>哆啦A梦是<del datetime="2021-02-11 10:42:43" cite="https://baike.baidu.com/item/%E5%93%86%E5%95%A6A%E6%A2%A6/185384?fr=aladdin">大熊猫</del></p>
   ```
 
-  ![del标签](D:\Study_Notes\imgs\del标签.png)
+  ![del标签](..\imgs\del标签.png)
 
 ##### `<ins>`标签
 
@@ -780,7 +840,7 @@ HTML的语言骨架格式：
   <p>哆啦A梦是<ins datetime="2021-02-11 10:42:43" cite="https://baike.baidu.com/item/%E5%93%86%E5%95%A6A%E6%A2%A6/185384?fr=aladdin">大熊的猫</ins></p>
   ```
 
-  ![ins标签](D:\Study_Notes\imgs\ins标签.png)
+  ![ins标签](..\imgs\ins标签.png)
 
 ##### `<kbd>`标签
 
@@ -795,7 +855,7 @@ HTML的语言骨架格式：
   <kbd>list -l</kbd>
   ```
 
-![kbd标签](D:\Study_Notes\imgs\kbd标签.png)
+![kbd标签](..\imgs\kbd标签.png)
 
 ##### `<var>`标签
 
@@ -810,11 +870,34 @@ HTML的语言骨架格式：
   <p><var>i</var> 和 <var>j</var> 是两个变量</p>
   ```
 
-  ![var变量标签](D:\Study_Notes\imgs\var变量标签.png)
+  ![var变量标签](..\imgs\var变量标签.png)
 
 #### 外部资源标签
 
 ##### 路径
+
+外部资源标签都会涉及到一个访问外部资源路径的问题
+
+路径又可分为：
+
+* 绝对路径
+* 相对路径
+
+###### 绝对路径
+
+带有盘符的路径，例如
+
+> D:\Notes\codes\images
+
+由于其会导致可移植性较差，所以使用较少
+
+###### 相对路径
+
+其可移植性较好，所以较为常用，有：
+
+* **同级目录**
+* **下级目录**
+* **上级目录**
 
 ##### `<img>`标签
 
@@ -831,6 +914,10 @@ HTML的语言骨架格式：
     <img src="../imgs/pexels-coffee-374757.jpeg">  
     ```
 
+    * 当页面与图片是同一级目录，则可以直接写目标文件的名字即可
+    * 如果图片文件的位置是与页面的同级目录文件夹下，则路径名要包含该目录名称
+    * 如果图片在页面的上一级目录下，则应该先去上级目录（`../`）
+
   * `alt`：该属性的值为图片的描述，具体为当图片在网页中不能正常显示时会作为该图片的提示信息，可用于搜索引擎的优化
 
     ```html
@@ -838,7 +925,7 @@ HTML的语言骨架格式：
     <img src="../imgs/pexels-coffee-3747571.jpeg" alt="coffee">
     ```
 
-    ![img标签_alt](D:\Study_Notes\imgs\img标签_alt.png)
+    ![img标签_alt](..\imgs\img标签_alt.png)
 
   * `title`：设置当鼠标悬停在图片上所显示的文本内容
 
@@ -846,7 +933,7 @@ HTML的语言骨架格式：
     <img src="../imgs/pexels-coffee-374757.jpeg" title="coffee">
     ```
 
-    ![im标签_title](D:\Study_Notes\imgs\im标签_title.png)
+    ![im标签_title](..\imgs\im标签_title.png)
 
   * `width`：指定该图片显示的宽度，属性值可以是百分比，也可以是像素值
 
@@ -854,13 +941,39 @@ HTML的语言骨架格式：
 
 * 相关用法：
 
-  * 在图片上添加链接：
+  * 该元素只能是一个空元素，不可以包含任何内容
 
+  * 可以提交图片的点击坐标：`ismap`属性
+  
+    ```html
+ <a href="#"><img src="../imgs/pexels-coffee-374885.jpeg" alt="coffee" ismap></a>
+    ```
+    
+    ![img_ismap](..\imgs\img_ismap.png)
+  
+  * 创建分区链接图片：
+  
+    * `<map>`元素：用于定义图片映射，该元素可以包含一个或多个`<area>`元素
+    * `<area>`元素：使用图片映射的内部区域，每个`<area>`元素定义一个区域，不同区域可以连接到不同的`URL`，该元素的属性`shape`可以指定该内部区域的形状，该属性默认值为`rect`，即为矩形区域，除此之外还有圆形区域（`circle`）和多边区域（`ploy`）
+  
+    ```html
+    <!-- img标签：创建分区链接图片 -->
+    <img src="../imgs/pexels-coffee-374885.jpeg" alt="coffee" usemap="#test">
+    <!-- 定义图片的映射 -->
+    <map name="test" id="test">
+      <area shape="circle" coords="57,55,25" href="https://www.baidu.com/" alt="circle" title="circle">
+    </map>
+    ```
+  
+    ![img_map](..\imgs\img_map.png)
+  
+  * 在图片上添加链接：
+  
     ```html
     <a href="https://www.baidu.com/"><img src="../imgs/pexels-coffee-374885.jpeg" alt=""></a>
     ```
-
-    ![img_a标签](D:\Study_Notes\imgs\img_a标签.png)
+  
+    ![img_a标签](..\imgs\img_a标签.png)
 
 ##### `<iframe>`标签
 
@@ -883,7 +996,7 @@ HTML的语言骨架格式：
     <iframe src="https://www.baidu.com/" frameborder="8" height="420" width="420"></iframe>
     ```
 
-    ![iframe](D:\Study_Notes\imgs\iframe.png)
+    ![iframe](..\imgs\iframe.png)
 
   * `scrolling`：用于设置该iframe是否显示滚动条，支持三个属性值：
 
@@ -897,7 +1010,7 @@ HTML的语言骨架格式：
       <iframe src="https://www.baidu.com/" frameborder="8" height="420" width="420" scrolling="no"></iframe>
       ```
 
-      ![iframe_no](D:\Study_Notes\imgs\iframe_no.png)
+      ![iframe_no](..\imgs\iframe_no.png)
 
   * `srcdoc`：HTML5新增属性，允许直接使用HTML片段，但如果浏览器不支持该属性(例如：IE浏览器不支持该属性)，那么就会继续显示`src`属性所指定的页面内容
 
@@ -905,7 +1018,7 @@ HTML的语言骨架格式：
     <iframe src="https://www.baidu.com/" frameborder="8" height="420" width="420" srcdoc="<h1>HTML5</h1><div>HTML5是标记语言</div>"></iframe>
     ```
 
-    ![iframe_srcdoc](D:\Study_Notes\imgs\iframe_srcdoc.png)
+    ![iframe_srcdoc](..\imgs\iframe_srcdoc.png)
 
   * `sandbox`：
 
@@ -945,14 +1058,75 @@ HTML的语言骨架格式：
 ##### `<a>`标签
 
 * anchor，锚、铁锚
+
 * 作用：
-  * 通过该标签，可以快速跳转到其他页面
+
+  * 通过该标签，可以快速跳转到其他页面或者跳转到其他指定位置
+
+* 用法：
+
+  * `<a>`标签内必须写入内容，否则在页面中是看不到该元素的
+  * `<a>`标签之间是不能嵌套的
+  * 未点击过的链接默认文本字体显示为蓝色，当连接点击后，默认颜色显示为紫色
+
 * 属性：
-  * `href`：值为一个链接地址
+  * `href`：值为一个链接地址，即`<a>`标签跳转的目标地址
+    * 外部链接，需要添加`https://`
+    * 内部链接直接写入所链接页面的路径即可
   * `target`：值可选择：`_blank`、`_self`、`_top`、`_parent`
+    * `_blank`：保留原始页面，再进行跳转
+    * `_self`：在当前页面进行跳转
   * `download`：用于让用户下载目标链接所指向的资源，而并不是直接打开该目标链接，该属性的属性值指定用户用于保存该下载资源的默认文件名
   * `type`：指定被链接文档的`MIME`文档
-  * `media`：指定目标URL所引用的媒体类型，默认值为`all`，只有在指定了`href`属性才有效
+  * `media`：指定目标`URL`所引用的媒体类型，默认值为`all`，只有在指定了`href`属性才有效
+  
+* 相关标签：`<base>`：
+
+  * 作用：可以为页面中所有的超链接`<a>`标签统一跳转方式
+
+  * 位置：放在`<head>`标签内，`<title>`标签之下
+
+  * 示例：
+
+    ```html
+    <base target="_blank">
+    ```
+
+###### `<a>`标签的其他用法
+
+* **不跳转，直接进行文件下载**
+
+  当路径指向的目标文件是浏览器打不开的文件时，浏览器就会默认做下载处理，不常用也不推荐是用这个用法
+
+  ```html
+  <a href="../bear.zip" download="download_bear.zip">下载文件</a>
+  ```
+
+  ![a标签_download](..\imgs\a标签_download.png)
+
+* **不跳转新页面，只跳转到到本页面的某个位置**
+
+  使用指定位置元素的`id`属性进行定位
+
+  ```html
+  <a href="#daxiong">大雄的猫</a>
+  ```
+
+  需要说明的是：当项目中没有确定的链接目标时，通常将属性`href`的属性值设置为`#`，表示其暂时为一个空链接
+
+  当属性`href`的属性值为空时，点击时会刷新页面
+
+  ```html
+  <a href="">空链接</a>
+  ```
+
+* **跳转到新页面的特定位置**
+
+  将指定的`URL`和需跳转位置元素的`id`属性值结合
+
+  ```html
+  <a href="./超链接本页面.html#daxiong">大熊的猫</a>
+  ```
 
 ##### `<header>`标签
 
@@ -985,13 +1159,212 @@ HTML的语言骨架格式：
   </body>
   ```
 
-  ![hgroup标签](D:\Study_Notes\imgs\hgroup标签.png)
+  ![hgroup标签](..\imgs\hgroup标签.png)
+
+#### 列表元素
+
+##### 无序列表`<ul>`标签
+
+* `ul`：`Unordered List`
+
+* 作用：
+
+  * 用于显示一组没有任何排列顺序的数据
+
+* 用法：
+
+  * 无序列表中的数据没有任何先后顺序之分
+  * `<ul>`标签中只能嵌套`<li>`标签，不能嵌套其他的标签元素或者文字
+  * `<li>`标签中可以嵌套任意标签
+
+* 示例：
+
+  ```html
+  <!-- 无序列表 -->
+  <ul>
+    <li><a href="#">家电</a></li>
+    <li><a href="#">食品</a></li>
+    <li><a href="#">图书</a></li>
+    <li><a href="#">玩具</a></li>
+    <li><a href="#">文具</a></li>
+    <li><a href="#">药品</a></li>
+  </ul>
+  ```
+
+![ul标签](..\imgs\ul标签.png)
+
+##### 有序列表`<ol>`标签
+
+* 作用：
+  * 用于显示一组有顺序的列表
+  
+* 用法：
+
+  * `<ol>`标签中只能嵌套`<li>`标签元素，不能放其他标签或者文字
+  * 而内部的`<li>`标签中可以嵌套任意标签内容
+  * 需要注意的是：该列表中的数据是有先后顺序之分的
+
+* 示例：
+
+  ```html
+  <!-- 有序列表 -->
+  <ol>
+    <li><a href="#">俄罗斯</a></li>
+    <li><a href="#">加拿大</a></li>
+    <li><a href="#">中国</a></li>
+    <li><a href="#">美国</a></li>
+  </ol>
+  ```
+
+  ![ol标签](..\imgs\ol标签.png)
+
+* 参数：HTML5新添的属性
+
+  * `type`：指定使用哪种类型的编号，并不推荐使用，一般使用`CSS`来定义
+    * `1`：代表使用数字
+    * `A`或`a`：代表使用大写数字或者小写数字
+    * `I`或`i`：代表使用大写或者小写罗马数字
+  * `start`：指定列表项的起始数字
+  * `reversed`：指定该属性是否将排序反转
+
+  ```html
+  <!-- 有序列表 -->
+  <ol type="1" start="3" reversed>
+    <li><a href="#">俄罗斯</a></li>
+    <li><a href="#">加拿大</a></li>
+    <li><a href="#">中国</a></li>
+    <li><a href="#">美国</a></li>
+  </ol>
+  ```
+
+  ![ol标签新属性](..\imgs\ol标签新属性.png)
+
+##### 自定义列表`<dl>`标签
+
+* 作用：
+
+  * 一列格式自定义的列表
+
+* 用法：
+
+  * 较常用的场景：
+
+    ![dl标签运用](..\imgs\dl标签运用.png)
+
+  * 该元素中只能包含`<dt>`和`<dd>`两种标签元素：
+
+    * `dt`：定义项标题，该元素只能包含文本、图像、超链接、文本格式化标签和表单控件元素
+    * `dd`：定义项的描述正文，该元素可以包含其他类型元素
+
+  * 每个`<dl>`元素中可以有多个`<dt>`元素
+
+  * 每个`<dt>`元素后面可以紧跟一个或者多个`<dd>元素`
+
+  * 示例：
+
+    ```html
+    <!-- 自定义列表 -->
+    <dl>
+      <dt>购物指南</dt>
+      <dd>购物流程</dd>
+      <dd>会员介绍</dd>
+      <dd>生活旅行</dd>
+      <dd>常见问题</dd>
+      <dd>大家电</dd>
+      <dd>联系客服</dd>
+    </dl>
+    ```
+
+    ![dl标签运用](..\imgs\dl标签.png)
+
+#### 表格元素
+
+##### `<table>`标签
+
+* 作用：
+  * 用于定义表格
+* 属性：
+  * `cellpadding`：指定单元格内容和单元格边框之间的间距
+  * `cellspacing`：指定单元格之间的间距
+  * `width`：指定表格的宽度
+  * `border`：指定表格的边框
+  * `align`：对齐方式（table、tr、td各处设置会有不同的效果）
+
+##### `<caption>`标签
+
+* 作用：用于定义表格的标题，该元素可以包含文本、图片、超链接、文本格式化元素和表单控件元素
+
+##### `<tr>`标签
+
+* 作用：定义表格的行，该元素只能包含`<td>`和`<th>`两种元素
+
+##### `<td>`标签
+
+* 作用：用于定义单元格，该元素中可以包含其他类型的各种元素，属性：
+  * `rowspan`：指定此单元格可横跨的行数
+  * `colspan`：指定此单元格可横跨的列数
+
+##### `<th>`标签
+
+* 作用：用于定义表格的表头单元格，用法和`<td>`元素一样，但是其在浏览器中的显示效果有差异，显示效果是文本加粗居中
+
+##### `<tbody>`标签
+
+* 作用：定义表格的主体，该元素只能包含`<tr>`元素
+
+##### `<thead>`标签
+
+* 作用：定义表格头
+
+##### `<tfoot>`标签
+
+* 作用：定义表格脚
+
+##### 示例;
+
+```html
+<table border="2" cellpadding="10" cellspacing="0" align="center">
+  <caption><h3>购书图书名目</h3></caption>
+  <tr>
+    <th>书名</th>
+    <th>作者</th>
+    <th>价格</th>
+    <th>数量</th>
+    <th>总量</th>
+  </tr>
+  <tr>
+    <td>JavaScript高级程序设计（第4版）</td>
+    <td>[美]马特·弗里斯比（Matt Frisbie）</td>
+    <td>￥129.00</td>
+    <td>2</td>
+    <td rowspan="3">4</td>
+  </tr>
+  <tr>
+    <td>你不知道的JavaScript（共3册）</td>
+    <td>Kyle Simpson</td>
+    <td>￥207.00</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>CSS权威指南（第4版）</td>
+    <td>[美] Eric A.Meyer</td>
+    <td>￥148.5</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td colspan="3">合计</td>
+    <td colspan="2">613.5</td>
+  </tr>  
+</table>
+```
+
+![table示例](D:\Study_Notes\imgs\table示例.png)
 
 #### 表单元素
 
 类比：
 
-![银行申请表](D:\Study_Notes\imgs\银行申请表.jpg)
+![银行申请表](..\imgs\银行申请表.jpg)
 
 目的：搜集用户信息
 

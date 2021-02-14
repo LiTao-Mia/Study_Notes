@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-09 21:48:54
- * @LastEditTime: 2021-02-13 20:27:50
+ * @LastEditTime: 2021-02-14 21:31:03
  * @LastEditors: Please set LastEditors
  * @Description: 常用标签
  * @FilePath: \Study_Notes\HTML\常用标签.html
@@ -98,10 +98,10 @@
   <!-- <p><var>i</var> 和 <var>j</var> 是两个变量</p> -->
 
   <!-- 超链接 -->
-  <a href="./超链接本页面.html#daxiong">大熊的猫</a>
+  <!-- <a href="./超链接本页面.html#daxiong">大熊的猫</a>
   <a href="https://www.baidu.com" target="_self">_self:百度一下</a>
   <a href="https://www.baidu.com" target="_blank">_blank:百度一下</a>
-  <a href="">暂为空链接</a>
+  <a href="">暂为空链接</a> -->
   
 </div>
 
@@ -114,6 +114,16 @@
   <img src="../imgs/pexels-coffee-3747571.jpeg" alt="coffee"> -->
   <!-- img标签常见用法 -->
   <!-- <a href="https://www.baidu.com/"><img src="../imgs/pexels-coffee-374885.jpeg" alt=""></a> -->
+  <!-- img标签：提交图片的点击坐标 -->
+  <!-- <a href="#"><img src="../imgs/pexels-coffee-374885.jpeg" alt="coffee" ismap></a> -->
+  <!-- img标签：创建分区链接图片 -->
+  <!-- <img src="../imgs/pexels-coffee-374885.jpeg" alt="coffee" usemap="#test"> -->
+  <!-- 定义图片的映射 -->
+  <!-- <map name="test" id="test"> -->
+    <!-- <area shape="circle" coords="57,55,25" href="https://www.baidu.com/" alt="circle" title="circle"> -->
+    <!-- <area shape="poly" coords="188,28,185,50,200,74,224,72,24651" href="#" alt="poly"> -->
+  <!-- </map> -->
+  
 
   <!-- iframe元素 -->
   <!-- <iframe src="https://www.baidu.com/" frameborder="8" height="420" width="420"></iframe> -->
@@ -134,6 +144,43 @@
     本课程将从简单介绍函数的极限开始。
     然后，将导数的概念应用到物理和几何中去
   </p> -->
+
+  <!-- 表格元素 -->
+  <div>
+    <table border="2" cellpadding="10" cellspacing="0" align="center">
+      <caption><h3>购书图书名目</h3></caption>
+      <tr>
+        <th>书名</th>
+        <th>作者</th>
+        <th>价格</th>
+        <th>数量</th>
+        <th>总量</th>
+      </tr>
+      <tr>
+        <td>JavaScript高级程序设计（第4版）</td>
+        <td>[美]马特·弗里斯比（Matt Frisbie）</td>
+        <td>￥129.00</td>
+        <td>2</td>
+        <td rowspan="3">4</td>
+      </tr>
+      <tr>
+        <td>你不知道的JavaScript（共3册）</td>
+        <td>Kyle Simpson</td>
+        <td>￥207.00</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>CSS权威指南（第4版）</td>
+        <td>[美] Eric A.Meyer</td>
+        <td>￥148.5</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td colspan="3">合计</td>
+        <td colspan="2">613.5</td>
+      </tr>
+    </table>
+  </div>
 
 </body>
 </html>
