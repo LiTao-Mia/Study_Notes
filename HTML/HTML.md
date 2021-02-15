@@ -1196,6 +1196,7 @@ HTML的语言骨架格式：
 ##### 有序列表`<ol>`标签
 
 * 作用：
+  
   * 用于显示一组有顺序的列表
   
 * 用法：
@@ -1314,13 +1315,13 @@ HTML的语言骨架格式：
 
 ##### `<thead>`标签
 
-* 作用：定义表格头
+* 作用：定义表格头部
 
 ##### `<tfoot>`标签
 
-* 作用：定义表格脚
+* 作用：定义表格脚，也就是表格的底部
 
-##### 示例;
+示例：
 
 ```html
 <table border="2" cellpadding="10" cellspacing="0" align="center">
@@ -1358,7 +1359,144 @@ HTML的语言骨架格式：
 </table>
 ```
 
-![table示例](D:\Study_Notes\imgs\table示例.png)
+![table示例](..\imgs\table示例.png)
+
+##### 表格合并
+
+表格合并指的是合并单元格，即将两个或两个以上的单元格合并成为一个单元格
+
+合并单元格通过设置`<th>`或`<td>`标签的属性来完成：
+
+* 横向合并：`colspan`
+* 纵向合并：`rowspan`
+
+**合并原则：左上原则**
+
+* 确定需要合并哪几个单元格
+* 如何合并，确定是跨行合并还是跨列合并：
+  * 上下合并（跨行合并）：使用`rowspan=所需要合并的行数`，只留着最上面的行，删除其他
+  * 左右合并（跨列合并）：使用`colspan=所需要合并的列数`，只留下最左边的部分，删除其他
+
+示例：
+
+```html
+<!-- 单元格合并 -->
+<div>
+  <table border="2" align="center" cellspacing='0' cellpadding="10">
+    <caption><h3>合并单元格</h3></caption>
+    <tr>
+      <td>普通单元格1</td>
+      <td>普通单元格2</td>
+    </tr>
+    <tr>
+      <td colspan="2">普通单元格3</td>
+      <!-- <td>普通单元格4</td> -->
+    </tr>
+    <tr>
+      <td rowspan="2">普通单元格5</td>
+      <td>普通单元格6</td>
+    </tr>
+    <tr>
+      <!-- <td>普通单元格7</td> -->
+      <td>普通单元格8</td>
+    </tr>
+  </table>
+```
+
+![合并单元格](..\imgs\合并单元格.png)
+
+也可同时为一列或者多列设置属性：
+
+* `<colgroup>`：用于为表格中的一个或多个列指定属性值，位置在`<table>`元素内，作用于多个`<col>`元素，`<colgroup>`上所指定的属性将对它所包含的所有`<col>`标签元素有效
+* `<col>`：其本身并不会产生表格列，只是为指定列整体指定属性值，`<col>`标签元素的数量应该与表格中实际所包含的列数一致，也可以指定`span`属性，用于指定该列需要横跨多少列
+
+```html
+<table border="2" align="center" cellspaci
+  <caption><h3>colgroup</h3></caption>
+  <colgroup style="background-color: lightseagreen;">
+    <col style="width: 200px;">
+    <col style="width: 100px;">
+  </colgroup>
+  <tr>
+    <td>普通单元格1</td>
+    <td>普通单元格2</td>
+  </tr>
+  <tr>
+    <td>普通单元格3</td>
+    <td>普通单元格4</td>
+  </tr>
+  <tr>
+    <td>普通单元格5</td>
+    <td>普通单元格6</td>
+  </tr>
+  <tr>
+    <td>普通单元格7</td>
+    <td>普通单元格8</td>
+  </tr>
+</table>
+```
+
+![colgroup标签](..\imgs\colgroup标签.png)
+
+表格中的结构标签：
+
+* `<thead>`:
+
+  包含表头
+
+* `<tbody>`：
+
+  一个`<table>`中可以包含多个`<tbody>`，一个`<tbody>`就是独立的一部分，一旦使用了该标签，就可以将多行定义为一组
+
+* `<tfoot>`:
+
+  哪怕`<tfoot>`标签处于`<tbody>`之前，浏览器也仍然会将该标签所包含的表格行放在最后
+
+示例：
+
+```html
+<table border="2" cellpadding="10" cellspacing="0" align="center">
+  <caption><h3>购书图书名目</h3></caption>
+  <thead>
+    <tr>
+      <th>书名</th>
+      <th>作者</th>
+      <th>价格</th>
+      <th>数量</th>
+      <th>总量</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td colspan="3">合计</td>
+      <td colspan="2">613.5</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr text-align="center">
+      <td>JavaScript高级程序设计（第4版）</td>
+      <td>[美]马特·弗里斯比（Matt Frisbie）</td>
+      <td>￥129.00</td>
+      <td>2</td>
+      <td rowspan="3">4</td>
+    </tr>
+    <tr>
+      <td>你不知道的JavaScript（共3册）</td>
+      <td>Kyle Simpson</td>
+      <td>￥207.00</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>CSS权威指南（第4版）</td>
+      <td>[美] Eric A.Meyer</td>
+      <td>￥148.5</td>
+      <td>1</td>
+    </tr>        
+  </tbody>
+</table>
+```
+
+![table结构标签](..\imgs\table结构标签.png)
 
 #### 表单元素
 
@@ -1368,13 +1506,13 @@ HTML的语言骨架格式：
 
 目的：搜集用户信息
 
-在网页中，为了与用户完成交互，获取到用户数据信息，也需要表单
+在网页中，为了与用户完成交互，获取到用户数据信息，从而提交数据到服务器，也需要表单
 
 实现表单也就用到了HTML中的表单元素，HTML使用表单向服务器提交请求当用户提交表单时，用户输入的内容将被作为请求参数提交到远程服务器
 
 ##### `form`元素
 
-* 作用：用于生成输入表单，但并不会生成可视化部分，所以需要也必须与其他的表单控件元素结合使用
+* 作用：用于生成输入表单，但并不会生成可视化部分，所以需要也必须与其他的表单控件元素结合使用，一个表单中可以包含多个表单项
 * 属性：
   * `action`：指定当表单提交时，该表单被提交到哪一个地址，该属性既可以指定一个绝对地址，也可以指定一个相对地址，该属性是必须的
   * `method`：指定提交表单时发送何种类型请求，该属性值可设置为`get`或`post`，分别对应用于发送`GET`或`POST`，通常该属性值会被设置为`POST`请求，该属性是必须的
@@ -1382,8 +1520,38 @@ HTML的语言骨架格式：
     * `application/x-www-form-urlencoded`：这是默认的编码方式，其只处理表单控件里的`value`属性值，并将这些值处理成`URL`编码方式
     * `multipart/form-data`：这种编码方式会以二进制流的方式来处理表单数据，这种编码方式会把文件域内文件内容封装到请求参数里，在需要通过将表单上传文件时使用该属性值
     * `text/plain`
-  * `target`：指定使用哪一种方式打开目标`URL`，因为提交请求会打开另一个`URL`资源（与`<a>`标签中的该属性用法一致），属性值可以设置为`_blank`、`_parent`、`_self`、`_top`
+  * `target`：指定使用哪一种方式打开目标`URL`，因为提交请求会打开另一个`URL`资源（与`<a>`标签中的该属性用法一致），属性值可以设置为`_blank`、`_self`
   * `name`：指定表单的唯一名称，推荐将该属性设置与其`id`属性值保持一致
+* 需要特殊注意：
+  * 表单控件的`name`属性指定请求参数名，`value`属性指定请求参数值
+  * 每一个有`name`属性的表单控件对应一个请求参数，而如果多个表单控件有相同的`name`属性，则这些多个表单控件也只会生成一个请求参数，而该参数会有多个值
+  * 没有`name`属性的表单控件不会生成请求参数
+
+###### 请求方式
+
+表单默认的提交请求方式是`GET`方式，但其实请求方式是有多种的：
+
+* `GET`方式：
+
+  `method`属性设置为`GET`或者没有设置时，表单的请求方式就为`GET`方式，除此之外，直接在浏览器地址栏内输入访问地址发送请求也是使用的`GET`方式
+
+  `GET`方式会将请求参数的名和值转换成字符串，并附加在原`URL`之后
+
+  如：`name=Mia&sex=female&hobbies=movie&hobbies=music&hobbies=book`
+
+  示例：
+
+  ![GET请求方式](..\imgs\GET请求方式.png)
+
+  `GET`请求方式所传递的数据量较小，一般不会大于2KB
+
+* `POST`方式
+
+  `POST`请求传输的数据量比`GET`请求方式的数据量大，而且所提交的数据信息并不会反映在地址`URL`之后，而是只会将其放在报头中进行传输，而不会在地址栏里看到所有有关的请求参数值，安全性相对稍高
+
+  示例：
+
+  ![POST请求方式](..\imgs\POST请求方式.png)
 
 ##### `input`元素
 
@@ -1412,13 +1580,126 @@ HTML的语言骨架格式：
   * `checked`：指定该单选框或者复选框是否处于选中状态，属性值支持`boolean`值，当其值为`true`时，表示其初始为选中状态
 * `size`：值为一个正整数，指定控件的显示宽度
 * `maxlength`：值为一个正整数，指定文本框所允许输入的最大字符数
-* `disabled`：指定首次加载该控件元素时是否禁用该元素，属性值支持`boolean`值
+* `disabled`：指定首次加载该控件元素时是否禁用该元素，属性值支持`boolean`值，当`disabled=disabled`即该控件设置了`disabled`属性时，则该表单控件不再生成请求参数
 * `name`：用户自定义，控件的名称
 * `value`：用户自定义，控件中默认文本值
 
 ```html
-
+<form action="表单提交.html" method="POST">
+  <!-- 单行文本框 -->
+  姓名：<input type="text" name="name"><br>
+  <!-- 隐藏域 -->
+  <input type="hidden" name="age" value="28">
+  <!-- 单选框 -->
+  性别：
+  <input type="radio" name="sex" id="male" value="male">男
+  <input type="radio" name="sex" id="female" value="female">女
+  <br>
+  <!-- 复选框 -->
+  兴趣爱好：
+  <input type="checkbox" name="hobbies" id="movie" value="movie">看电影
+  <input type="checkbox" name="hobbies" id="music" value="music">听音乐
+  <input type="checkbox" name="hobbies" id="book" value="book">读书
+  <input type="checkbox" name="hobbies" id="sports" value="sports">运动
+  <input type="checkbox" name="hobbies" id="games" value="games">玩游戏
+  <br>
+  <!-- 文件上传域 -->
+  个人照片：<input type="file" name="avatar" id="avatar">
+  <br>
+  <!-- 图像域 -->
+  <input type="image" src="../imgs/pexels-coffee.jpeg" alt="" width="120">
+  <br>
+  <!-- 按钮 -->
+  <input type="submit" value="提交">
+  <input type="reset" value="重置">
+  <input type="button" value="按钮">
+</form>
 ```
+
+![input标签](..\imgs\input标签.png)
+
+##### `label`标签
+
+* 作用：用于在表单元素中表单项定义描述文字
+
+* 用法：其有两种让标签和表单控件关联的方式：
+
+  * 显式关联：用`<label>`标签将普通文本、表单控件一起包裹起来，放在其内部此处需注意标签内部不能出现`for`属性
+
+    ```html
+    <label>
+      <input type="radio" name="sex" id="male" value="male">男
+    </label>
+    ```
+
+  * 隐式关联：使用`for`属性，将`<label>`标签的`for`属性值设置为需要关联的表单控件的`id`属性值
+
+    ```html
+    <input type="radio" name="sex" id="female" value="female">
+    <label for="female">女</label>
+    ```
+
+  * 不能为`<label>`标签元素指定`value`属性值
+
+* 效果：点击`<label>`标签元素所包含的文本所关联的表单控件元素会获得聚焦
+
+##### `select`元素
+
+* 作用：用于创建一个下拉列表
+
+* 用法：
+
+  该元素中只能包含两种元素：
+
+  * `<option>`：用于定义下拉列表框的选项，其中只能包含文本内容
+  * `<optgroup>`：用于定义列表项，其中只能包含`<option>`元素
+
+* 属性：
+
+  * `multiple`：设置该下拉列表是否是多选
+  * `size`：指定该列表框内可同时显示的列表项数量
+
+* 示例：
+
+  * 单选
+
+    ```html
+    <!-- 下拉列表 -->
+    <!-- 单选 -->
+    居住地：<br>
+    <select name="residence" id="residence" size='4'>
+      <optgroup label='省内'>
+        <option value="kunming">昆明</option>
+        <option value="dali">大理</option>
+        <option value="lijiang">丽江</option>
+        <option value="banna">西双版纳</option>
+      </optgroup>
+      <optgroup label="省外">
+        <option value="beijing">北京</option>
+        <option value="shanghai">上海</option>
+        <option value="guangdong">广东</option>
+        <option value="chengdu">成都</option>
+        <option value="xiamen">厦门</option>
+      </optgroup>
+    </select>
+    ```
+
+  * 多选
+
+    ```html
+    <!-- 多选 -->
+    喜欢的颜色：<br>
+    <select name="color" id="color" multiple>
+      <option value="red">红色</option>
+      <option value="yellow">黄色</option>
+      <option value="green">绿色</option>
+      <option value="blue">蓝色</option>
+      <option value="white">白色</option>
+      <option value="black">黑色</option>
+    </select>
+    ```
+
+    
 
 
 

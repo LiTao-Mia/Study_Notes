@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-12 15:50:12
- * @LastEditTime: 2021-02-12 23:08:21
+ * @LastEditTime: 2021-02-15 22:21:38
  * @LastEditors: Please set LastEditors
  * @Description: 表单
  * @FilePath: \Study_Notes\HTML\表单.html
@@ -15,15 +15,21 @@
   <title>表单</title>
 </head>
 <body>
-  <form action="" method="POST">
+  <form action="表单提交.html" method="POST">
     <!-- 单行文本框 -->
     姓名：<input type="text" name="name"><br>
     <!-- 隐藏域 -->
     <input type="hidden" name="age" value="28">
     <!-- 单选框 -->
     性别：
-    <input type="radio" name="sex" id="male" value="male">男
-    <input type="radio" name="sex" id="female" value="female">女
+    <label>
+      <input type="radio" name="sex" id="male" value="male">男
+    </label>
+    <input type="radio" name="sex" id="female" value="female">
+    <label for="female">女</label>
+    
+    <!-- <input type="radio" name="sex" id="male" value="male">男 -->
+    <!-- <input type="radio" name="sex" id="female" value="female">女 -->
     <br>
     <!-- 复选框 -->
     兴趣爱好：
@@ -33,6 +39,35 @@
     <input type="checkbox" name="hobbies" id="sports" value="sports">运动
     <input type="checkbox" name="hobbies" id="games" value="games">玩游戏
     <br>
+    <!-- 下拉列表 -->
+    <!-- 单选 -->
+    居住地：<br>
+    <select name="residence" id="residence" size='4'>
+      <optgroup label='省内'>
+        <option value="kunming">昆明</option>
+        <option value="dali">大理</option>
+        <option value="lijiang">丽江</option>
+        <option value="banna">西双版纳</option>
+      </optgroup>
+      <optgroup label="省外">
+        <option value="beijing">北京</option>
+        <option value="shanghai">上海</option>
+        <option value="guangdong">广东</option>
+        <option value="chengdu">成都</option>
+        <option value="xiamen">厦门</option>
+      </optgroup>
+    </select>
+    <br>
+    <!-- 多选 -->
+    喜欢的颜色：<br>
+    <select name="color" id="color" multiple>
+      <option value="red">红色</option>
+      <option value="yellow">黄色</option>
+      <option value="green">绿色</option>
+      <option value="blue">蓝色</option>
+      <option value="white">白色</option>
+      <option value="black">黑色</option>
+    </select>
     <!-- 文件上传域 -->
     个人照片：<input type="file" name="avatar" id="avatar">
     <br>

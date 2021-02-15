@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-09 21:48:54
- * @LastEditTime: 2021-02-14 21:31:03
+ * @LastEditTime: 2021-02-15 17:17:34
  * @LastEditors: Please set LastEditors
  * @Description: 常用标签
  * @FilePath: \Study_Notes\HTML\常用标签.html
@@ -146,39 +146,93 @@
   </p> -->
 
   <!-- 表格元素 -->
+  <!-- 单元格合并 -->
+  <div>
+    <table border="2" align="center" cellspacing='0' cellpadding="10">
+      <caption><h3>合并单元格</h3></caption>
+      <tr>
+        <td>普通单元格1</td>
+        <td>普通单元格2</td>
+      </tr>
+      <tr>
+        <td colspan="2">普通单元格3</td>
+        <!-- <td>普通单元格4</td> -->
+      </tr>
+      <tr>
+        <td rowspan="2">普通单元格5</td>
+        <td>普通单元格6</td>
+      </tr>
+      <tr>
+        <!-- <td>普通单元格7</td> -->
+        <td>普通单元格8</td>
+      </tr>
+    </table>
+  </div>
+  <!-- <div>
+    <table border="2" align="center" cellspacing='0' cellpadding="10">
+      <caption><h3>colgroup</h3></caption>
+      <colgroup style="background-color: lightseagreen;">
+        <col style="width: 200px;">
+        <col style="width: 100px;">
+      </colgroup>
+      <tr>
+        <td>普通单元格1</td>
+        <td>普通单元格2</td>
+      </tr>
+      <tr>
+        <td>普通单元格3</td>
+        <td>普通单元格4</td>
+      </tr>
+      <tr>
+        <td>普通单元格5</td>
+        <td>普通单元格6</td>
+      </tr>
+      <tr>
+        <td>普通单元格7</td>
+        <td>普通单元格8</td>
+      </tr>
+    </table>
+  </div> -->
+
   <div>
     <table border="2" cellpadding="10" cellspacing="0" align="center">
       <caption><h3>购书图书名目</h3></caption>
-      <tr>
-        <th>书名</th>
-        <th>作者</th>
-        <th>价格</th>
-        <th>数量</th>
-        <th>总量</th>
-      </tr>
-      <tr>
-        <td>JavaScript高级程序设计（第4版）</td>
-        <td>[美]马特·弗里斯比（Matt Frisbie）</td>
-        <td>￥129.00</td>
-        <td>2</td>
-        <td rowspan="3">4</td>
-      </tr>
-      <tr>
-        <td>你不知道的JavaScript（共3册）</td>
-        <td>Kyle Simpson</td>
-        <td>￥207.00</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>CSS权威指南（第4版）</td>
-        <td>[美] Eric A.Meyer</td>
-        <td>￥148.5</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td colspan="3">合计</td>
-        <td colspan="2">613.5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>书名</th>
+          <th>作者</th>
+          <th>价格</th>
+          <th>数量</th>
+          <th>总量</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3">合计</td>
+          <td colspan="2">613.5</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr text-align="center">
+          <td>JavaScript高级程序设计（第4版）</td>
+          <td>[美]马特·弗里斯比（Matt Frisbie）</td>
+          <td>￥129.00</td>
+          <td>2</td>
+          <td rowspan="3">4</td>
+        </tr>
+        <tr>
+          <td>你不知道的JavaScript（共3册）</td>
+          <td>Kyle Simpson</td>
+          <td>￥207.00</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>CSS权威指南（第4版）</td>
+          <td>[美] Eric A.Meyer</td>
+          <td>￥148.5</td>
+          <td>1</td>
+        </tr>        
+      </tbody>
     </table>
   </div>
 
