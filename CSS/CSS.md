@@ -743,7 +743,7 @@ Selector{font：font-style font-weight font-size font-family}
 
 ## 盒子模型
 
-盒子模型(box model)，页面中每个元素相当于页面中的一个矩形盒子，也就是说一个页面中的所有元素都可以被当做一个个的矩形盒子
+盒子模型(box model)，页面中每个元素相当于页面中的一个矩形盒子，也就是说一个页面中的所有元素都可以被当做一个个的矩形盒子(盒模型)
 
 此时，一个网页页面的布局就相当于放置盒子，将各个盒子放置到合适的位置就可以完美的完成页面的布局
 
@@ -773,6 +773,669 @@ Selector{font：font-style font-weight font-size font-family}
 
 ### 内填充区
 
+指的是元素内容区与边框以内的空间，颜色透明
+
+默认情况下，`width`和`height`不包含`padding`的大小
+
+使用`padding`属性来设置元素的内边距，还有其他具体的属性：
+
+* `padding-top`：上内边距
+* `padding-bottom`：下内边距
+* `padding-right`：右内边距
+* `padding-left`：左内边距
+
+语法格式：
+
+```css
+padding:3px 5px 10px 15px;
+```
+
+但属性值可以设置的数值个数不同，所达到的设置效果也就不同：
+
+| 数值个数 |                          所设置效果                          |
+| :------: | :----------------------------------------------------------: |
+| 1个数值  |             该数值将设置上下左右四个方向的内边距             |
+| 2个数值  | 其中第一个数值会被设置为上下两个内边距，第二个数值会被设置为左右两个内边距 |
+| 3个数值  | 第一个数值会被设置为上内边距，第二个数值会被设置为左右两个内边距，第三个数值会被设置为下内边距 |
+| 4个数值  | 第一个数值会被设置为上内边距，第二个数值会被设置为右内边距，第三个数值会被设置为下内边距，第四个数值会被设置为左内边距 |
+
+示例：
+
+```css
+padding:15px;   /* 上下左右都是15px */
+padding:15px 10px;   /* 上下都是15px,而左右都是10px */
+padding:15px 10px 12px;   /* 上是15px,左右都是10px,下是12px*/
+padding:15px 10px 12px 8px;   /* 上是15px,右是10px,下是12px,左是8px*/
+```
+
+记忆：顺时针方向赋值
+
 ### 边框区
 
+#### 边框
+
+边框的相关属性：
+
+|      属性      |      作用      |
+| :------------: | :------------: |
+| `border-color` | 设置边框的颜色 |
+| `border-style` | 设置边框的线型 |
+| `border-width` | 设置边框的线宽 |
+
+以上的属性值：
+
+* 设置4个值时，表示按照上、右、下、左的顺序来设置属性值
+* 设置3个值时，表示第一个值用于设置上边框的属性，第二个值用于设置左右边框的属性，第三个值用于设置下边框的属性值
+* 设置2个值时，表示第一个值用于设置上下两个边框的属性值，而第二个值用于设置左右两个边框的属性值
+* 设置1个值时，表示设置上下左右四个边框属性值
+
+可使用属性`border`来设置盒子的边框，，该属性是个复合属性，语法格式：
+
+```css
+border: border-width  border-style  border-color
+```
+
+可以顺序指定边框的宽度、样式和颜色
+
+示例：
+
+```css
+border: 8px groove lightcyan;
+```
+
+边框样式`border-style`可以设置边框的风格，属性值：
+
+|  属性值  |   样式   |
+| :------: | :------: |
+|  `none`  | 没有边框 |
+| `solid`  |   实线   |
+| `dotted` |   点线   |
+| `dashed` |   虚线   |
+| `double` |   双线   |
+| `groove` |   槽线   |
+| `ridge`  |   脊线   |
+| `inset`  |   凹边   |
+| `outset` |   凸边   |
+
+还可以指定四个方向上的边框，其也为复合属性，可同时设置某一特定方向上边框的宽度、线型和颜色
+
+* `border-top`
+* `border-left`
+* `border-right`
+* `border-bottom`
+
+也可以具体的设置某个方向上单一属性值，例如`border-top`
+
+|        属性        |         说明         |
+| :----------------: | :------------------: |
+| `border-top-color` | 用于设置上边框的颜色 |
+| `border-top-style` | 用于设置上边框的线性 |
+| `border-top-width` | 用于设置上边框的线宽 |
+
+示例：
+
+```css
+border: 100px solid lightseagreen;
+width: 160px;
+border-color: lightseagreen pink lightskyblue lightgreen;
+```
+
+![border](..\imgs\border.png)
+
+可以借助于边框的设置来实现特殊图形的实现：
+
+示例：
+
+```css
+border: 100px solid transparent;
+border-bottom: 180px solid lightsalmon;
+width: 160px;
+```
+
+![border_example](..\imgs\border_example.png)
+
+[图形例子](https://css-tricks.com/the-shapes-of-css/)
+
+#### 圆角边框
+
+CSS3支持圆角边框，设置圆角以后，会将该圆的四分之一设置作为该边框的圆角
+
+提供以下属性设置圆角半径：
+
+|            属性名            |           说明           |
+| :--------------------------: | :----------------------: |
+|   `border-top-left-radius`   | 用来设置左上角的圆角半径 |
+|  `border-top-right-radius`   | 用来设置右上角的圆角半径 |
+| `border-bottom-left-radius`  | 用来设置左下角的圆角半径 |
+| `border-bottom-right-radius` | 用来设置右下角的圆角半径 |
+
+复合属性：`border-radius`可以同时设置多个位置的圆角，属性值可以为1个、2个、3个、4个属性值
+
+示例：
+
+```css
+border: 16px solid lightsalmon;
+border-top-left-radius: 50%;
+border-top-right-radius: 20px;
+border-bottom-left-radius: 60px;
+```
+
+![border-radius](..\imgs\border-radius.png)
+
+
+
 ### 外边距区
+
+外边距是指元素边框与周围元素相距的空间
+
+使用`margin`属性来设置外边距，有四个方向：
+
+|      属性       |         说明         |
+| :-------------: | :------------------: |
+|  `margin-top`   | 设置上边的外边距距离 |
+| `margin-bottom` | 设置下边的外边距距离 |
+|  `margin-left`  | 设置左边的外边距距离 |
+| `margin-right`  | 设置右边的外边距距离 |
+
+而`margin`是一个复合属性，属性值类似于`padding`可设置1个值、2个值、3个值和4个值
+
+示例：
+
+```css
+width:140px;
+height:140px;
+border: 8px dashed lightseagreen;
+margin: 40px;
+```
+
+![margin](..\imgs\margin.png)
+
+### 盒模型
+
+盒模型的类型可分为两种：
+
+* `block`类型：块级元素
+  * 特点：
+    * 该种盒类型的元素默认会占据一行；
+    * 允许通过CSS设置宽度、高度；
+    * 可以容纳其他块级元素和内联元素
+  * 常用于网页布局和网页结构
+  * 示例：`<div>`、`<p>`
+* `inline`类型：行内元素（内联元素）
+  * 特点：
+    * 该种盒类型的元素并不会占据一行，会和相邻的行内元素在一行上；
+    * 通过CSS并不能设置宽度、高度，水平方向上可以设置`padding`和`margin`，但垂直方向上设置无效；
+    * 行内元素只能容纳文本或其他的行内元素
+    * `<a>`元素比较特殊
+  * 常用于控制页面中文本样式
+  * 示例：`<span>`、`<a>`
+
+示例：
+
+```css
+p{
+  border: 2px solid yellowgreen;
+}
+div{
+  width: 100px;
+  height: 100px;
+  border:2px solid yellowgreen;
+}
+span{
+  width: 100px;
+  height: 100px;
+  border: 2px solid yellowgreen;
+}
+```
+
+![盒类型](..\imgs\盒类型.png)
+
+#### `display`
+
+为了方便使用CSS来设置行内元素的`width`、`height`，可以通过`display`属性来改变元素默认的盒模型类型
+
+属性值：
+
+* `none`
+* `inline`
+* `block`
+* `inline-block`
+
+##### `none`
+
+当`display`的属性值设置为`none`时，会将设置目标对象隐藏，同时释放其所占用的页面空间
+
+需要特殊说明，与该属性值相似的是`visibility`属性，其属性值：
+
+* `hidden`：控制目标对象隐藏
+* `visible`：控制目标对象显示
+
+隐藏和显示的效果看似是一样的，但是两者确实有很大的区别的：**是否占位**
+
+示例：
+
+```html
+<body>
+  <p>p元素</p>
+  <div>div元素1</div>
+  <div style="display: none;">div元素2</div>
+  <span>span元素1</span>
+  <span style="visibility:hidden;">span元素2</span>
+  <span>span元素3</span>
+  <span>span元素4</span>
+</body>
+```
+
+![display_none](..\imgs\display_none.png)
+
+##### `inline-block`
+
+该种类型是`inline`类型和`block`类型两者的综合体，特点：
+
+* 不会占据一行；
+* 支持CSS指定宽度和高度
+
+### `opacity`
+
+CSS3提供了一个新的属性`opacity`，用来设置整个HTML元素的透明度
+
+属性值：从0到1，0代表完全透明，1代表完全不透明
+
+示例：
+
+```css
+opacity: .8;
+```
+
+![opacity](..\imgs\opacity.png)
+
+该属性的设置会影响到整个HTML元素，其中包括背景（`background`）、边框（`border`）以及其中文本等
+
+## 背景
+
+用于设置背景的颜色或者背景图片，以及对背景图片进行设置，默认情况下，背景一直是从内容区延伸到边框的外边界
+
+常用属性值：
+
+|         属性名          |         作用         |
+| :---------------------: | :------------------: |
+|   `background-color`    |       背景颜色       |
+|   `background-image`    |       背景图片       |
+|   `background-repeat`   |   背景图片是否平铺   |
+|  `background-position`  |     背景图片位置     |
+| `background-attachment` | 背景图片内容是否固定 |
+
+需要注意：
+
+* 如果同时设置了背景色和背景图片，则背景图片会覆盖背景颜色
+* 设置背景图片时，需要使用到`url()`函数，函数指定图片地址，其即可以是相对地址也可以是绝对地址，`url()`中不用添加引号
+* `background-repeat`的属性值可以设置：
+  * `no-repeat`：不平铺
+  * `repeat`：平铺
+  * `repeat-x`：水平方向上平铺
+  * `repeat-y`：垂直方向上平铺
+* `background-position`属性值既可以是实际的长度值，也可以是百分比，也可以设置为`bottom`、`center`等
+
+### `background-color`
+
+设置背景颜色，属性值为颜色表示，初始值`transparent`
+
+语法格式：
+
+```css
+background-color:颜色表达式
+```
+
+示例：
+
+```css
+background-color: lightseagreen;
+```
+
+![background-color](..\imgs\background-color.png)
+
+### `background-image`
+
+使用该属性设置一个指定的图片作为背景
+
+语法格式：
+
+```css
+background-imge: none | url(URL)
+```
+
+参数：
+
+* `none`：表示无背景图，该为默认值
+* `url`：设置背景图片时，需要使用到`url()`函数，函数指定图片地址，其即可以是相对地址也可以是绝对地址，`url()`中不用添加引号
+
+示例：
+
+```css
+background-image:url(../imgs/pexels-coffee-374757.jpeg)
+```
+
+![background-image](..\imgs\background-image.png)
+
+### `background-repeat`
+
+设置背景图片是否平铺，在指定该属性时，必须先指定`background-image`属性
+
+`background-repeat`的属性值可以设置：
+
+* `no-repeat`：不平铺
+* `repeat`：平铺
+* `repeat-x`：水平方向上平铺
+* `repeat-y`：垂直方向上平铺
+
+示例：
+
+```css
+background-image: url(../imgs/pic.png);
+background-repeat: repeat;
+```
+
+![background-repeat](..\imgs\background-repeat.png)
+
+```css
+background-image: url(../imgs/pic.png);
+background-repeat: repeat-x;
+```
+
+![repeat-x](..\imgs\repeat-x.png)
+
+```css
+background-image: url(../imgs/pic.png);
+background-repeat: repeat-y;
+```
+
+![repeat-y](..\imgs\repeat-y.png)
+
+```css
+background-image: url(../imgs/pic.png);
+background-repeat: no-repeat;
+```
+
+![no-repeat](..\imgs\no-repeat.png)
+
+### `background-position`
+
+用于设置背景图片位置，属性值：
+
+* 实际长度值、百分比；
+* `bottom`、`center`、`right`、`left`
+
+示例：
+
+```html
+<!-- background-position -->
+<span>background-position</span>
+<div style="background-image: url(../imgs/pic.png); background-repeat:no-repeat; background-position: 30px 80px;"></div>
+<div style="background-image: url(../imgs/pic.png); background-repeat:no-repeat; background-position: center bottom;"></div>
+```
+
+![background-position](..\imgs\background-position.png)
+
+### `background-attachment`
+
+设置背景图片是否随着页面内容的滚动还是固定
+
+属性值：
+
+* `scroll`：
+
+  该为默认值，该背景图片会随着内容的滚动而滚动
+
+* `fixed`：
+
+  背景图片固定，不会随着内容的滚动而滚动
+
+示例：
+
+```css
+background-attachment: fixed;
+```
+
+### `background`
+
+该属性是一个符合属性，可以同时设置背景色、背景图片、背景重复样式等属性
+
+示例：
+
+```css
+background: transparent url(image.jpg) repeat-y  scroll 50% 0 ;
+```
+
+### CSS3新增
+
+#### `background-clip`
+
+在CSS2中，HTML元素的背景默认只会覆盖内填充区（`padding`）和内容区(`content`)；而在CSS3中则可以指定背景需要覆盖哪个范围
+
+属性值：
+
+* `border-box`：
+
+  指定背景覆盖盒子模型的边框区、内填充区、内容区
+
+  ```css
+  background-clip: border-box;
+  ```
+
+  ![background-clip_border-box](..\imgs\background-clip_border-box.png)
+
+* `padding-box`：
+
+  指定背景覆盖盒子模型的内填充区、内容区
+
+  ```css
+  background-clip: padding-box;
+  ```
+
+  ![background-clip_padding-box](..\imgs\background-clip_padding-box.png)
+
+* `content-box`：
+
+  指定背景覆盖盒子模型的内容区
+
+  ```css
+  background-clip: content-box;
+  ```
+
+  ![background-clip_content-box](..\imgs\background-clip_content-box.png)
+
+* `no-clip`：
+
+  指定背景覆盖盒子模型的边框区、内填充区、内容区
+
+  ```css
+  background-clip: no-clip;
+  ```
+
+  ![background-clip_no-clip](..\imgs\background-clip_no-clip.png)
+
+#### `background-orgin`
+
+该属性用于指定背景从哪里覆盖
+
+属性值：
+
+* `border-box`：
+
+  指定背景图片从边框区开始覆盖
+
+  ```css
+  background-origin: border-box;
+  ```
+
+  ![background-origin_border-box](..\imgs\background-origin_border-box.png)
+
+* `padding-box`：
+
+  指定背景图片从内填充区开始覆盖
+
+  ```css
+  background-origin: padding-box;
+  ```
+
+  ![background-origin_padding-box](..\imgs\background-origin_padding-box.png)
+
+* `content-box`：
+
+  ```css
+  background-origin: content-box;
+  ```
+
+  ![background-orgin_content-box](..\imgs\background-orgin_content-box.png)
+
+#### `background-size`
+
+该属性用于设置背景图片的大小
+
+属性值：
+
+* 数值：`60px`
+* 百分比：`100%`
+* `auto`
+
+```css
+background-size:100% 100%;
+```
+
+![background-size](..\imgs\background-size.png)
+
+#### 渐变背景
+
+渐变是指从一个颜色到另一个颜色的平滑过渡
+
+##### `linear-gradient`
+
+可使用`linear-gradient`函数设置线性渐变
+
+语法格式：
+
+```css
+linear-gradient([方向],颜色列表)
+```
+
+方向参数：
+
+|     方向参数      |       效果       |
+| :---------------: | :--------------: |
+|     `to top`      |     从下到上     |
+|    `to bottom`    | 默认值，从上到下 |
+|     `to left`     |     从右到左     |
+|    `to right`     |     从左到右     |
+|   `to left top`   | 从右下角到左上角 |
+|  `to right top`   | 从左下角到右上角 |
+| `to left bottom`  | 从右上角到左下角 |
+| `to right bottom` | 从左上角到右下角 |
+|      `Ndeg`       |    指定角度值    |
+
+需要注意的是：`0deg`代表12点钟方向，该角度值代表顺时针转过的角度
+
+示例：
+
+```css
+background: linear-gradient(to top,grey,pink);
+```
+
+![background_linear-gradient](..\imgs\background_linear-gradient.png)
+
+```css
+background: linear-gradient(30deg,grey,pink);
+```
+
+![background_linear-gradient_Ndeg](..\imgs\background_linear-gradient_Ndeg.png)
+
+颜色列表的语法格式：
+
+```css
+颜色1 位置1, 颜色2 位置2, ...
+```
+
+可发现实际上是可以设置多个颜色，并且可以为颜色设置位置，而位置既可以用百分比表示，也可以用长度值表示
+
+示例：
+
+```css
+background: linear-gradient(45deg,lightseagreen 20%,lightblue 40%,pink 70%);
+```
+
+![background_linear-gradient_colors](..\imgs\background_linear-gradient_colors.png)
+
+##### `repeating-linear-gradient`
+
+用来设置循环线性渐变模式
+
+示例：
+
+```css
+background: repeating-linear-gradient(90deg,lightseagreen 20%,grey 40%,pink 70%);
+```
+
+![background_repeating-linear-gradient](..\imgs\background_repeating-linear-gradient.png)
+
+##### `radial-gradient`
+
+该函数用来设置径向渐变
+
+示例：
+
+```css
+background: radial-gradient(lightseagreen ,pink);
+```
+
+![background_radial-gradient](..\imgs\background_radial-gradient.png)
+
+语法格式：
+
+```css
+radial-gradient([形状] [大小] at x坐标 y坐标, 颜色列表)
+```
+
+参数说明：
+
+* 形状
+
+  * `circle`：圆形
+  * `ellipse`：椭圆
+
+* 大小
+
+  指定径向渐变大小，如果不设置会由浏览器来决定
+
+* 圆心
+
+  必须由`at`关键字开头，后面紧跟着x坐标和y坐标，默认为HTML元素的中心
+
+* 坐标
+
+  * `left`：代表x坐标的最左边
+  * `center`：代表x坐标和y坐标的中间
+  * `right`：代表x坐标的最右边
+  * `top`：代表y坐标的最顶部
+  * `bottom`：代表y坐标的最底部
+  * 数值：该数值支持长度值和百分比
+
+示例：
+
+```css
+background: radial-gradient(ellipse at right bottom, lightseagreen ,pink);
+```
+
+![radial-gradient_ellipse](..\imgs\radial-gradient_ellipse.png)
+
+##### `repeating-radial-gradient`
+
+该函数用来设置循环径向渐变，这种渐变会循环给出所指定的渐变颜色
+
+示例：
+
+```css
+background: repeating-radial-gradient(at 40px 80px,lightseagreen,pink 30px, grey 50px);
+```
+
+![background_repeating-radial-gradient](..\imgs\background_repeating-radial-gradient.png)
+
+## 

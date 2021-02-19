@@ -1,0 +1,52 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-02-19 13:42:14
+ * @LastEditTime: 2021-02-19 17:08:51
+ * @LastEditors: Please set LastEditors
+ * @Description: 边框
+ * @FilePath: \Study_Notes\CSS\边框.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>边框</title>
+  <style>
+    #dv1{
+      border: 100px solid transparent;
+      /* border-top-width: 0px; */
+      border-bottom: 200px solid lightsalmon;
+      width: 160px;
+      /* border-color: lightseagreen pink lightskyblue lightgreen; */
+    }
+    #dv2{
+      text-align: center;
+      vertical-align: center;
+      width: 160px;
+      height: 160px;
+      border: 16px solid lightsalmon;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 60px;
+
+      /* border-top-colors: #833 #366 #499 #169 #292; */
+    }
+    #dv3{
+      border-image-source: url(../imgs/pic.png);
+      width: 180px;
+      height: 180px;
+      border-image-width: 12px;
+
+    }
+  </style>
+</head>
+<body>
+  <div id="dv1"></div><br>
+  <!-- 圆角边框 -->
+  <div id="dv2">测试文本</div><br>
+  <!-- 图片边框 -->
+  <div id="dv3">图片边框</div>
+</body>
+</html>
