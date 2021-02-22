@@ -441,12 +441,116 @@ div+p{
 
 伪类选择器只针对伪元素起作用，即对文档中不一定真实存在的结构起作用，或者为某些元素的特定状态指定样式
 
+##### 伪元素选择器
+
+在CSS中可以通过伪元素向页面中插入虚构的元素
+
+|          伪元素          |            说明            |
+| :----------------------: | :------------------------: |
+| `Selector::first-letter` | 选择指定对象内的第一个字符 |
+|  `Selector::first-line`  | 选择指定对象内的第一行内容 |
+|    `Selector:before`     |   选择指定对象内部的前端   |
+|     `Selector:after`     |   选择指定对象内部的尾端   |
+
+需要注意的是：
+
+* `::first-letter`和`::first-line`仅仅只针对块元素起作用，但是当其元素属性设置`position：absolute`或者`display:block`或者设置浮动`float`都会使其起作用
+* `:after`和`:before`两者都需要与内容相关的属性搭配使用
+
+示例：
+
+```css
+span::first-letter{
+  font-size: 60px;
+  color:lightcoral;
+  font-weight: bold;
+}
+span::first-line{
+  color:lightgreen
+}
+p::first-letter{
+  font-size: 60px;
+  color:lightseagreen;
+  font-weight: bold;
+}
+p::first-line{
+  color: lightgreen;
+}
+div::before{
+  content: 'D';
+  font-size: 60px;
+  color: lightseagreen;
+  font-weight: bold;
+}
+div::after,span::after{
+  content:'V';
+  font-size: 60px;
+  color:lightsalmon;
+  font-weight: bold;
+}
+```
+
+![伪元素选择器](..\imgs\伪元素选择器.png)
+
+###### 内容相关属性
+
+* `content`：
+
+  该属性值可以是文字字符串、`url(url)`、`attr(alt)`、
+
+* ``
+
 ##### 结构性伪类选择器
 
-* `Selector:root`
-* `Selector:only-child`
-* `Selector:only-of-type`
-* `Selector:`
+这是CSS3新增的伪类选择器
+
+|       伪类选择器       |                  说明                  |
+| :--------------------: | :------------------------------------: |
+|        `:root`         | 选择文档的根元素，根元素只能是`<html>` |
+|        `:empty`        |       选择没有任何子元素的空元素       |
+|     `:only-child`      |            选择唯一的子元素            |
+|    `:only-of-type`     |          选择同类型唯一子元素          |
+|     `:first-child`     |            选择第一个子元素            |
+|     `:last-child`      |           选择最后一个子元素           |
+|    `:first-of-type`    |        选择第一次出现的某种元素        |
+|    `:last-of-type`     |       选择最后一个出现的某种元素       |
+|    `:nth-child(n)`     |           选择第`n`个子元素            |
+|  `:nth-last-child(n)`  |         选择倒数第`n`个子元素          |
+|   `:nth-of-type(n)`    |          选择第`n`个某种元素           |
+| `:nth-last-of-type(n)` |        选择倒数第`n`个某种元素         |
+
+##### 状态伪类选择器
+
+###### 超链接
+
+|     伪类选择器     |                   说明                   |
+| :----------------: | :--------------------------------------: |
+|  `Selector:link`   |  选择`Selector`选择器且未被访问前的元素  |
+| `Selector:visited` | 选择`Selector`选择器且已经被访问过的元素 |
+
+示例：
+
+###### 用户操作
+
+|     伪操作类      |                            说明                            |
+| :---------------: | :--------------------------------------------------------: |
+| `Selector:hover`  |        选择`Selector`选择器且处于鼠标悬停状态的元素        |
+| `Selector:focus`  |           选择`Selector`选择器且已获得焦点的元素           |
+| `Selector:active` | 选择`Selector`选择器且处于被用户激活（鼠标点击）状态的元素 |
+
+示例：
+
+
+
+###### 表单
+
+| 表单伪类 | 说明 |
+| :------: | :--: |
+|          |      |
+|          |      |
+|          |      |
+
+
 
 ## 字体与文本相关属性
 
@@ -761,16 +865,6 @@ Selector{font：font-style font-weight font-size font-family}
 * 可见部分：内容区和边框区
 * 不可见部分：内填充区和外边距区
 
-### 内容区
-
-内容区指的是盒子中放置内容的区域，也就是元素中的文本内容，且子元素也都是存在于内容区中的
-
-特点：
-
-* 如果没有为元素设置内填充区和边框，则内容区的大小默认和盒子的大小是一致的
-* 通过`width`和`height`两个属性可以设置内容区的大小
-* `width`和`height`属性只适合于块元素
-
 ### 内填充区
 
 指的是元素内容区与边框以内的空间，颜色透明
@@ -950,6 +1044,104 @@ margin: 40px;
 
 ![margin](..\imgs\margin.png)
 
+外边距可以设置成负数或`auto`，赋值为负数时表示
+
+### 内容区
+
+内容区指的是盒子中放置内容的区域，也就是元素中的文本内容，且子元素也都是存在于内容区中的
+
+特点：
+
+* 如果没有为元素设置内填充区和边框，则内容区的大小默认和盒子的大小是一致的
+* 通过`width`和`height`两个属性可以设置内容区的大小
+* `width`和`height`属性只适合于块元素
+
+#### 尺寸等式
+
+盒子模型中总宽度和总高度的计算等式：
+
+```
+盒子元素的总高度 = content height + padding-top + padding-bottom + border-top + border-bottom + margin-top + margin-bottom
+```
+
+```
+盒子元素的总宽度 = content width + padding-right + padding-left + border-right + border-left + margin-right + margin-left
+```
+
+示例：
+
+```css
+width: 100px;
+height: 100px;
+border:2px solid yellowgreen;
+padding: 20px;
+margin: 20px;
+background-color: lightcoral;
+```
+
+![盒子大小](..\imgs\盒子大小.png)
+
+注意：
+
+* 计算时需要考虑垂直方向上的外边距合并的情况
+* `width`宽度和`heigh`高度对于行内元素是没有作用的
+* 水平方向上，如果出现不满足以上的等式的情况，且所有的值都不是`auto`时，则会调整右外边距来满足等式；其他不满足等式的情况时，默认情况会自动调整设置为`auto`
+* 当两个块级元素嵌套时，指定了父级元素宽高后，子级元素会默认撑满父级元素
+
+#### 盒子居中
+
+##### 水平方向
+
+* 使用外边距实现水平居中，需要满足以下的条件：
+  * 必须是块级元素
+  * 盒子元素必须指定了宽度`width`
+
+使用：
+
+```css
+margin: 0 auto;
+```
+
+```html
+<!-- 盒子水平居中 -->
+<div style="width: 160px; height: 160px; border:2px solid black;background-color: white;">
+  <div style="width: 60px; height: 60px; background-color:lightsalmon;margin: 0 auto;">盒子水平居中</div>
+</div>
+```
+
+![盒子水平居中margin](..\imgs\盒子水平居中margin.png)
+
+### `box-sizing`
+
+CSS3提供了一个新属性`box-sizing`，用来设置`width`和`height`两个属性控制哪一些区域的宽度、高度，因为在默认情况下，`width`和`height`两属性只用来指定content内容区域的宽度和高度
+
+属性值：
+
+* `content-box`：设置`width`和`height`两属性只用来控制内容区content的宽度和高度
+* `border-box`：设置`width`和`height`两属性只用来控制内容区、内填充区和边框区的宽度和高度
+* `inherit`：指从父元素继承`box-sizing`属性的值
+
+示例：
+
+```html
+<!-- 默认情况 -->
+<div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px;">默认情况</div>
+```
+
+![box-sizing默认情况](..\imgs\box-sizing默认情况.png)
+
+```html
+<div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px; box-sizing: content-box;">box-sizing: content-box</div>
+```
+
+![box-sizing_content-box](..\imgs\box-sizing_content-box.png)
+
+```html
+<div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px; box-sizing: border-box;"></div>
+```
+
+![box-sizing_border-box](..\imgs\box-sizing_border-box.png)
+
 ### 盒模型
 
 盒模型的类型可分为两种：
@@ -959,12 +1151,14 @@ margin: 40px;
     * 该种盒类型的元素默认会占据一行；
     * 允许通过CSS设置宽度、高度；
     * 可以容纳其他块级元素和内联元素
+    * 默认高度是由所包含的内容撑开，而宽度是独占一行
   * 常用于网页布局和网页结构
   * 示例：`<div>`、`<p>`
 * `inline`类型：行内元素（内联元素）
   * 特点：
     * 该种盒类型的元素并不会占据一行，会和相邻的行内元素在一行上；
     * 通过CSS并不能设置宽度、高度，水平方向上可以设置`padding`和`margin`，但垂直方向上设置无效；
+    * 默认宽高都是由元素内部所包含的内容撑开
     * 行内元素只能容纳文本或其他的行内元素
     * `<a>`元素比较特殊
   * 常用于控制页面中文本样式
@@ -1033,7 +1227,96 @@ span{
 该种类型是`inline`类型和`block`类型两者的综合体，特点：
 
 * 不会占据一行；
-* 支持CSS指定宽度和高度
+* 支持CSS指定宽度和高度；
+* 默认情况下宽度和高度都是由元素所包含的内容撑开
+
+示例：
+
+```html
+<span style="display:inline-block">inline-block:span元素1</span>
+```
+
+![inline-block](..\imgs\inline-block.png)
+
+在默认情况中，多个`inline-block`类型盒模型的元素将会采用底端对齐的方式，也就是说它们的底端将会处于同一条线上，例如：
+
+```html
+<span style="display:inline-block">inline-block:span元素2</span>
+<span style="display:inline-block">inline-block:span元素3</span>
+<span style="display:inline-block;width: 100px; height:auto;">inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4</span>
+<span style="display:inline-block;">inline-block:span元素5</span>
+```
+
+![inline-block默认对齐方式](..\imgs\inline-block默认对齐方式.png)
+
+为了让多个`inline-block`盒模型元素在顶端对齐，可以使用`vertical-align:top`
+
+```html
+<span style="display:inline-block">inline-block:span元素2</span>
+<span style="display:inline-block">inline-block:span元素3</span>
+<span style="display:inline-block;width: 100px; height:auto;vertical-align: top;">inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4</span>
+<span style="display:inline-block;">inline-block:span元素5</span>
+```
+
+![inline-block_vertical-align_top](..\imgs\inline-block_vertical-align_top.png)
+
+##### `block`
+
+`block`盒模型为块级元素，此处需要特别说明：
+
+###### **相邻块元素垂直外边距的合并**
+
+当两个紧靠的元素之间都设置了`margin`时，垂直方向上会出现：
+
+```html
+<span>block:margin</span>
+<div style="margin: 40px;">div元素1</div>
+<div style="margin: 40px;">div元素2</div>
+```
+
+![block块级元素margin](..\imgs\block块级元素margin.png)
+
+垂直方向上相邻元素的外边距会有合并现象，也被称为外边距塌陷，即垂直方向上相邻元素的间距并不是两个元素的`margin-bottom`和`margin-top`之和：
+
+* 两个边距`margin`值都为正时，取最大值
+* 两个边距`margin`为一正一负时，取其求和
+* 两个边距`margin`值都为负数时，取其绝对值最大
+
+![垂直元素外边距合并](..\imgs\垂直元素外边距合并.png)
+
+解决：
+
+一次性给其中一个元素指定所需相距的距离值即可
+
+###### **嵌套块元素垂直外边距的合并**
+
+嵌套元素中两个块级元素垂直外边距的合并是指如果父级元素没有上内边距以及边框，则父元素的上边外边距会与子元素的上外边距发生合并，合并后的外边距取两者之中的较大者
+
+示例：
+
+```html
+<div class="box1" style="margin-top: 40px;">
+  <!-- div元素:父元素 -->
+  <div class="box2" style="margin-top: 80px; background-color: lightcyan;width: 50px;">div元素:子元素</div>
+```
+
+![嵌套元素margin-top合并](..\imgs\嵌套元素margin-top合并.png)
+
+解决方法:
+
+* 借用父元素的`before`伪元素，例如：
+
+  ```css
+  .box1::before{
+    content: '';
+    display: table;
+  }
+  ```
+
+* 可以为父元素定义1px的上边框或者上内边距
+* 可以为父元素添加属性`overflow:hidden`
+
+![嵌套元素上外边距合并](..\imgs\嵌套元素上外边距合并.png)
 
 ### `opacity`
 
@@ -1050,6 +1333,46 @@ opacity: .8;
 ![opacity](..\imgs\opacity.png)
 
 该属性的设置会影响到整个HTML元素，其中包括背景（`background`）、边框（`border`）以及其中文本等
+
+### `overflow`
+
+设置如何处理溢出盒子的内容
+
+![元素内容溢出](..\imgs\元素内容溢出.png)
+
+属性值：
+
+* `hidden`:
+
+  溢出的内容会被剪裁，不会再被显示
+
+  ```css
+  overflow: hidden;
+  ```
+
+  ![overflow_hidden](..\imgs\overflow_hidden.png)
+
+* `scroll`：
+
+  ```css
+  overflow: scroll;
+  ```
+
+  ![overflow_scroll](..\imgs\overflow_scroll.png)
+
+  需要注意的是：当内容并没有多到溢出时也仍然会显示滚动条
+
+* `auto`：
+
+  当内容没有溢出时并不显示滚动条；当内容出现溢出后会自动显示滚动条，也就可以完整的显示内容
+
+  ```css
+  overflow: scroll;
+  ```
+
+* `visible`：
+
+  其为默认值，不处理溢出的内容部分，使其在盒子外部显示
 
 ## 背景
 
@@ -1438,4 +1761,223 @@ background: repeating-radial-gradient(at 40px 80px,lightseagreen,pink 30px, grey
 
 ![background_repeating-radial-gradient](..\imgs\background_repeating-radial-gradient.png)
 
-## 
+## 轮廓
+
+可以通过CSS来为元素设置轮廓线（`outline`）,轮廓通常位于边框的外侧
+
+特点：
+
+* 轮廓不占用空间
+* 轮廓可以不是矩形
+* 使用：通常在元素被选中时才会显示轮廓
+
+可使用`outline`这个复合属性，可同时设置对象轮廓的颜色、线型、线宽三个属性
+
+|       属性       |                             说明                             |
+| :--------------: | :----------------------------------------------------------: |
+| `outline-color`  |                       用于设置轮廓颜色                       |
+| `outline-style`  | 用于设置轮廓线型，支持的属性值：`none`、`dotted`、`dashed`、`solid`、`double`、`groove`、`ridge`、`inset`、`outset` |
+| `outline-width`  |                       用于设置轮廓宽度                       |
+| `outline-offset` |        用于设置轮廓偏移距，也就是轮廓与边框之间的距离        |
+
+显示效果基本和边框类似，轮廓和边框的主要区别就是：轮廓并不会影响页面的布局
+
+示例：
+
+```css
+outline: lightcoral solid 2px;
+```
+
+## 阴影
+
+CSS3增加了`box-shadow`属性为盒子添加阴影，其为以个复合属性
+
+属性值
+
+|   属性值   |                       说明                       |
+| :--------: | :----------------------------------------------: |
+|  hOffset   | 该属性值控制阴影在水平方向偏移，必须，可以为负值 |
+|  vOffset   | 该属性值控制阴影在垂直方向偏移，必须，可以为负值 |
+| blurLength |         该属性值控制阴影的模糊程度，可选         |
+|   spread   |   该属性值控制阴影的缩放程度，可选，可以为负值   |
+|   color    |           该属性值控制阴影的颜色，可选           |
+|   inset    |     该属性值用于将外部阴影改为内部阴影，可选     |
+
+语法格式：
+
+```css
+box-shadow: hOffset vOffset blurLength spread color inset;
+```
+
+示例：
+
+```css
+box-shadow: 10px 8px 20px 15px grey;
+```
+
+还需要说明的是：也可以对表格及单元格添加阴影：
+
+示例：
+
+```css
+table{
+  margin: 60px;
+  width: 500px;
+  border-spacing: 10px;
+  box-shadow: 10px 10px 6px #444;
+}
+td{
+  box-shadow: 6px 6px 4px #444;
+  padding: 6px;
+}
+```
+
+![table-shadow](..\imgs\table-shadow.png)
+
+CSS位置定位的机制有：
+
+* 普通流（标准流）
+* 浮动
+* 定位
+
+### 文档流
+
+`normal flow`，普通流、文档流
+
+普通流实际上就是指一个网页内标签元素正常从上到下、从左到右排列顺序
+
+示例：
+
+```html
+<div style="width: 320px;height: 320px;background-color: pink; margin: 50px;">
+  <div></div>
+  <div></div>
+</div>
+```
+
+![普通流](..\imgs\普通流.png)
+
+特点：
+
+* 块元素在文档流中的特点：
+  * 在页面中自上向下排列
+  * 默认高度是被内容撑开的
+  * 默认宽度就是父级元素的全部
+* 行内元素在文档流中的特点：
+  * 默认宽度和高度都是由内容撑开的
+  * 在页面中自左到右排列，一行占满后会自动转向下一行继续从左到右排列
+
+### 浮动
+
+设置了浮动属性`float`的元素会脱离标准普通流的控制，后将其移动到指定的位置
+
+#### `float`
+
+语法格式：
+
+```css
+Selector{float:value;}
+```
+
+设置了`float`属性的元素后，该元素就会被当作`inline-block`类型的盒模型处理，也就是相当于将该元素设置`display:inline-block`，此时元素的特点：
+
+* 默认宽度被内容撑开
+* 默认高度被内容撑开
+* 该元素并不会独占一行
+* 元素不会在文档流中占据位置
+
+浮动元素会紧紧跟随着它的前一个元素，可设置的属性值：
+
+| 属性值  |        说明        |
+| :-----: | :----------------: |
+| `left`  |    元素向左浮动    |
+| `right` |    元素向右浮动    |
+| `none`  | 默认值，元素不浮动 |
+
+```html
+<!-- 浮动 -->
+<div style="width: 460px;height: 460px;background-color: pink; margin: 50px;">
+  <div style="float: left;"></div>
+  <div style="background-color: lightskyblue; float: left;"></div>
+  <div style="background-color: gold; width: 120px; height: 120px;"></div>
+  <div style="background-color: gold; width: 120px; height: 120px;"></div>
+  <div style="background-color: lemonchiffon; float: right"></div>
+  <div style="background-color: turquoise; float: right"></div>
+  <div style="background-color: mediumspringgreen;"></div>
+  <div style="background-color: lightsteelblue; float: left;"></div>
+</div>
+```
+
+![float浮动](..\imgs\float浮动.png)
+
+以上可知：
+
+浮动可理解为脱离文档流而“漂浮”在其上，属性值是告诉其“漂浮”的方向
+
+还需注意：
+
+![float浮动规则](..\imgs\float浮动规则.jpg)
+
+使用场景：导航栏菜单、多栏布局等等
+
+#### `clear`
+
+浮动元素会脱离标准流，也就会影响后面的盒子占位与布局也就影响整个页面的布局，此时就需要消除浮动所带来的影响：
+
+![float浮动元素影响](..\imgs\float浮动元素影响.png)
+
+```html
+<div style="width: 460px;height: 240px;background-color: pink; margin: 50px;">
+  <div style="float: left;border: 2px solid black;"></div>
+  <div style="float: left;border: 2px solid black;"></div>
+  <div style="width: 100%; height: 140px; background-color: lightskyblue;"></div>
+</div>
+```
+
+![clear](..\imgs\clear.png)
+
+```html
+<!-- 消除浮动 -->
+<div style="width: 460px;height: 240px;background-color: pink; margin: 50px;">
+  <div style="float: left;border: 2px solid black;"></div>
+  <div style="float: left;border: 2px solid black;"></div>
+  <div style="width: 100%; height: 140px; background-color: lightskyblue; clear: both;"></div>
+</div>
+```
+
+语法格式：
+
+```css
+Selector{clear:value;}
+```
+
+属性值：
+
+| 属性值  |                    说明                    |
+| :-----: | :----------------------------------------: |
+| `left`  | 不允许左侧有浮动元素（清除左侧浮动的影响） |
+| `right` | 不允许右侧有浮动元素（清除右侧浮动的影响） |
+| `none`  |             默认值，不清除影响             |
+| `both`  |         同时清除左右两侧浮动的影响         |
+
+#### 使用`after`伪元素清除浮动
+
+较为常见的用法
+
+![百度清除浮动after伪元素](..\imgs\百度清除浮动after伪元素.png)
+
+![网易清除浮动](..\imgs\网易清除浮动.png)
+
+方法：
+
+```css
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {*zoom: 1;}   /* IE6、7 专有 */
+```
+

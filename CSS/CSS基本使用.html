@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-17 10:09:38
- * @LastEditTime: 2021-02-17 18:32:10
+ * @LastEditTime: 2021-02-21 22:01:54
  * @LastEditors: Please set LastEditors
  * @Description: CSS的基本使用
  * @FilePath: \Study_Notes\CSS\CSS基本使用.html
@@ -77,8 +77,62 @@
       font-style: italic;
     } */
 
+    /* 伪元素选择器 */
+    /* span::first-letter{
+      font-size: 60px;
+      color:lightcoral;
+      font-weight: bold;
+    }
+    span::first-line{
+      color:lightgreen
+    }
+    p::first-letter{
+      font-size: 60px;
+      color:lightseagreen;
+      font-weight: bold;
+    }
+    p::first-line{
+      color: lightgreen;
+    }
+    div::before{
+      content: 'D';
+      font-size: 60px;
+      color: lightseagreen;
+      font-weight: bold;
+    }
+    div::after,span::after{
+      content:'V';
+      font-size: 60px;
+      color:lightsalmon;
+      font-weight: bold;
+    } */
+
+    /* 结构性伪类选择器 */
+    /* :root{
+      background-color: lightskyblue;
+    }
+    body{
+      background-color: lightpink;
+    }
+    div:first-child{
+      color: lightseagreen;
+    } */
+    
+    /* 状态伪类选择器 */
+    a {
+      /* 指定某些属性的默认值，允许他们使用：visited状态进行样式设置 */
+      background-color: white;
+      border: 1px solid white; 
+    }
+
+    a:visited {
+      background-color: yellow;
+      border-color: hotpink;
+      color: hotpink;
+    }
+
     /* 字体样式设置：font-style  */
-    #italic{
+    /* #italic{
       font-style: italic;
     }
     #oblique{
@@ -86,7 +140,9 @@
     }
     #normal{
       font-style: normal;
-    }
+    } */
+
+    
 
   </style>
 </head>
@@ -113,8 +169,45 @@
   <p>杰瑞</p>
   <div>莎拉</div> -->
 
-  <div id="italic">史努比</div>
+  <!-- <div id="italic">史努比</div>
   <div id="normal">史努比</div>
-  <div id="oblique">史努比</div>
+  <div id="oblique">史努比</div> -->
+
+  <!-- 伪元素 -->
+  <!-- <span>span使用伪元素：first-letter</span><br>
+  <span style="float: right;">span浮动使用伪元素：first-letter</span>
+  <span style="float: right;">span浮动使用伪元素：first-line</span>
+
+  <p>p使用伪元素：first-letter</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit doloribus eum harum tempore fugit. Provident necessitatibus vel voluptas maiores! Beatae exercitationem aliquid reiciendis corrupti ducimus. Voluptatem neque adipisci natus incidunt.</p>
+-->
+  <!-- before和after -->
+  <!-- <div>div的before和after</div> -->
+
+  <!-- 结构性伪类选择器 -->
+  <!-- <div>
+    div1
+    <p>div1>p1</p>
+    <p>
+      div1>p2
+      <span>div1>p2>span</span>
+    </p>
+  </div>
+  <span>span1</span>
+  <div>div2</div>
+  <div>div3</div>
+  <div>div3</div>
+  <span>span2</span>
+-->
+
+<!-- 状态伪类选择器 -->
+<div>
+  <a href="#">超链接1</a>
+  <a href="#">超链接2</a>
+  <a href="#">超链接3</a>
+  <a href="#">超链接4</a>
+</div>
+
+  
 </body>
 </html>

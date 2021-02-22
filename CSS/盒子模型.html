@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-18 10:26:14
- * @LastEditTime: 2021-02-19 22:13:33
+ * @LastEditTime: 2021-02-21 15:42:17
  * @LastEditors: Please set LastEditors
  * @Description: 盒子模型
  * @FilePath: \Study_Notes\CSS\盒子模型.html
@@ -31,30 +31,147 @@
     div{
       width: 100px;
       height: 100px;
-      border:2px solid yellowgreen;
-      padding: 20px;
-      margin: 20px;
-
+      /* border:2px solid yellowgreen; */
+      /* border: 2px solid black; */
+      /* padding: 20px; */
+      margin: 60px;
+      background-color: lightcoral;
+      /* float: left; */
+      /* display: inline-block; */
+      /* display: inline; */
     }
     span{
       width: 100px;
       height: 100px;
       border: 2px solid yellowgreen;
       padding: 20px;
-      margin: 20px;
+      margin: 40px;
 
+    }
+    .box1::before{
+      content: '';
+      display: table;
+    }
+    table{
+      margin: 60px;
+      width: 500px;
+      border-spacing: 10px;
+      box-shadow: 10px 10px 6px #444;
+    }
+    td{
+      box-shadow: 6px 6px 4px #444;
+      padding: 6px;
+    }
+    li{
+      list-style: none;
+      float:left;
+      margin:14px;
+      outline: lightcoral solid 2px;
     }
   </style>
 </head>
 <body>
   <!-- <div id="box"></div> -->
   <!-- 盒类型 -->
-  <p>p元素</p>
+  <!-- <p>p元素</p>
   <div>div元素1</div>
   <div style="display: none;">div元素2</div>
   <span>span元素1</span>
   <span style="visibility:hidden;">span元素2</span>
   <span>span元素3</span>
   <span>span元素4</span>
+  <span style="display:inline-block">inline-block:span元素1</span>
+  <span style="display:inline-block">inline-block:span元素2</span>
+  <span style="display:inline-block">inline-block:span元素3</span> -->
+  <!-- <span style="display:inline-block; width:80px; height:80px">inline-block:span元素4</span>
+  <span style="display:inline-block; width:80px; height:80px">inline-block:span元素5</span> -->
+  <!-- <span style="display:inline-block;width: 100px; height:auto;vertical-align: top;">inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4inline-block:span元素4</span>
+  <span style="display:inline-block;">inline-block:span元素5</span> -->
+  <!-- block:margin -->
+  <!-- <span>block:margin</span> -->
+  <!-- <div style="margin: -20px;">div元素1</div>
+  <div style="margin: -10px;">div元素2</div>
+  -->
+  <!-- 嵌套元素中的margin-top -->
+  <!-- <div class="box1" style="">
+    <div class="box2" style="margin-top: 80px; background-color: lightcyan;width: 50px;">div元素:子元素</div>
+  </div> -->
+
+  <!-- <div></div>
+  <br>
+  <div>
+    <div id='son' style="width: 180px; height: 180px; background-color: lightseagreen"></div>
+  </div> -->
+
+  <!-- box-sizing -->
+  <!-- 默认情况 -->
+  <!-- <div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px;">默认情况</div><br>
+  <div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px; box-sizing: content-box;">box-sizing: content-box</div><br>
+  <div style="width: 100px; height: 100px; border: 4px solid black; background-color: orange;padding: 40px; box-sizing: border-box;"></div><br> -->
+  
+  <!-- 盒子水平居中 -->
+  <!-- <div style="width: 160px; height: 160px; border:2px solid black;background-color: white;">
+    <div style="width: 60px; height: 60px; background-color:lightsalmon;margin: 0 auto;">盒子水平居中</div>
+  </div> -->
+
+  <!-- overflow -->
+  <!-- <div style="width: 140px; height: 140px; margin: 30px; border: 2px solid black; overflow: visible;">
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+    div元素div元素div元素div元素div元素div元素div元素div元素div元素
+  </div> -->
+
+  <!-- 元素位置 -->
+  <!-- 普通流 -->
+  <!-- <div style="width: 320px;height: 320px;background-color: pink; margin: 50px;">
+    <div></div>
+    <div></div>
+  </div> -->
+
+  <!-- 浮动 -->
+  <!-- <div style="width: 460px;height: 460px;background-color: pink; margin: 50px;">
+    <div style="float: left;"></div>
+    <div style="background-color: lightskyblue; float: left;"></div>
+    <div style="background-color: gold; width: 120px; height: 120px;"></div>
+    <div style="background-color: gold; width: 120px; height: 120px;"></div>
+    <div style="background-color: lemonchiffon; float: right"></div>
+    <div style="background-color: turquoise; float: right"></div>
+    <div style="background-color: mediumspringgreen;"></div>
+    <div style="background-color: lightsteelblue; float: left;"></div>
+  </div> -->
+
+  <!-- 消除浮动 -->
+  <!-- <div style="width: 460px;height: 240px;background-color: pink; margin: 50px;">
+    <div style="float: left;border: 2px solid black;"></div>
+    <div style="float: left;border: 2px solid black;"></div>
+    <div style="width: 100%; height: 140px; background-color: lightskyblue; clear: both;"></div>
+  </div> -->
+
+  <!-- 盒子阴影 -->
+  <!-- <div style="box-shadow: 10px 8px 20px -15px grey;"></div> -->
+  <!-- 表格阴影 -->
+  <!-- <table>
+    <tr>
+      <td>单元格1</td>
+      <td>单元格2</td>
+    </tr>
+    <tr>
+      <td>单元格3</td>
+      <td>单元格4</td>
+    </tr>
+  </table> -->
+
+  <!-- 轮廓 -->
+  <ul>
+    <li><a href="#" tabindex="3">家电</a></li>
+    <li><a href="#" tabindex="2">超市</a></li>
+    <li><a href="#" tabindex="1">生鲜</a></li>
+  </ul>
+  
+
 </body>
 </html>
