@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-18 10:26:14
- * @LastEditTime: 2021-02-21 15:42:17
+ * @LastEditTime: 2021-02-23 19:31:28
  * @LastEditors: Please set LastEditors
  * @Description: 盒子模型
  * @FilePath: \Study_Notes\CSS\盒子模型.html
@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>盒子模型</title>
   <style>
-    #box{
+    /* #box{
       width:140px;
       height:140px;
       /* background-color: teal; */
@@ -22,20 +22,20 @@
       padding: 0px;
       margin: 40px;
       
-    }
+    } */
     p{
-      border: 2px solid yellowgreen;
+      /* border: 2px solid yellowgreen;
       padding: 20px;
-      margin: 20px;
+      margin: 20px; */
     }
     div{
-      width: 100px;
-      height: 100px;
+      /* width: 100px;
+      height: 100px; */
       /* border:2px solid yellowgreen; */
       /* border: 2px solid black; */
       /* padding: 20px; */
-      margin: 60px;
-      background-color: lightcoral;
+      /* margin: 60px;
+      background-color: lightcoral; */
       /* float: left; */
       /* display: inline-block; */
       /* display: inline; */
@@ -151,6 +151,28 @@
     <div style="width: 100%; height: 140px; background-color: lightskyblue; clear: both;"></div>
   </div> -->
 
+  <!-- 图片文字环绕的效果 -->
+  <!-- <div style="width: 120px;height: 120px; float: left; background-color: lightseagreen;"></div>
+  <p style="width: 540px;">
+    ”鲁迅《野草·好的故事》：“大红花和斑红花，都在水里面浮动。” 
+    茅盾 《路》二：“天空是浮动的轻云。”
+    李二和《那一碧麦田一直牵扯我的记忆》：“这时正是五月，惊风乱飐麦浪，竟有些撩人，浓郁又散乱的麦香时起时伏。我半是哀怜、半是满足地望着在风中浮动的那一碧碧涟漪，竟诡秘地笑了。”
+    浮动是css布局非常强大的布局功能，也是理解CSS布局的关键问题所在，在CSSW中，包括div在内的任何元素都可以浮动的方式显示。
+    浮动是一种非常有用的布局方式。它能够改变页面中对象的前后流动顺序。这样做的好处是，使得内容的排版变的简单，具有良好的伸缩性。
+    举个例子，左右分栏的布局，左栏宽度为300px。
+    如果使用一种相对的布局方式，我们可以使右栏显示在距左边300px的位置，这样可以使右栏贴着左栏进行显示。
+    一旦涉及被改变，例如left的宽度由300px变为100px,就意味着right的定位需要重新设定，而使用浮动式布局方式后，当我们指定左栏的浮动为left，意味着其右方的内容将流入左栏的右边，而且能够根据左栏的宽度自动流入并贴进左栏，贴进的程度则靠左栏的右边距或者右栏的左边距来控制，二不依赖于对象本身的宽度值。
+    浮动式布局使页面的大部分内容都可以由游览器自动调节，使我们能够专注于样式设计而非其相互之间的浮动关系，我们只需要简单地设置浮动方向，即可完成对象的布局分布。
+  </p>
+  -->
+
+  <!-- clear的本质 -->
+  <div style="border: 2px solid black;">
+    <div class="dv1" style="width: 120px; height: 120px; float: left; background-color: lightgreen;"></div>
+    <div class="dv2" style="width: 180px; height: 180px; float:right; background-color: lightblue;"></div>
+    <div class="dv3" style="width: 100px; height:140px; background-color: lightsalmon; clear:both;"></div>
+  </div>
+
   <!-- 盒子阴影 -->
   <!-- <div style="box-shadow: 10px 8px 20px -15px grey;"></div> -->
   <!-- 表格阴影 -->
@@ -166,11 +188,11 @@
   </table> -->
 
   <!-- 轮廓 -->
-  <ul>
+  <!-- <ul>
     <li><a href="#" tabindex="3">家电</a></li>
     <li><a href="#" tabindex="2">超市</a></li>
     <li><a href="#" tabindex="1">生鲜</a></li>
-  </ul>
+  </ul> -->
   
 
 </body>
