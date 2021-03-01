@@ -586,6 +586,38 @@ div.box{
 }
 ```
 
+##### 字体的分类
+
+字体可以分为：
+
+* 衬线字体`serif`：
+
+  字体宽度各异，有衬线
+
+  例如：`Times`、`Georgia`、宋体
+
+* 无衬线字体`sans-serif`
+
+  字体宽度各异，无衬线
+
+  例如：微软雅黑、`Arial`、`Verdana`、`Helvetica`
+
+* 等宽字体`monospace`：
+
+  字体宽度一样，一般用于代码或表格
+
+  例如：`Courier New`、`Consolas`
+
+* 草书字体`cursive`：
+
+  仿照手写字体
+
+  例如：`indie Flower`、`Edwardian Script ITC`、`Comic Sans`
+
+* 装饰字体`fantasy`：
+
+  不属于以上类别的字体
+
 ##### CSS Unicode字体
 
 在CSS中设置字体时，可以直接写中文，但在编码不匹配时会产生乱码的错误，即系统不支持中文设置，解决方法：
@@ -599,6 +631,23 @@ div.box{
   `font-family:"\5FAE\8F6F\96C5\9ED1"`等效于``font-family:"微软雅黑"`
 
 建议：考虑到字体的支持问题，应尽量使用微软雅黑、宋体来设置字体
+
+##### `@font-face`
+
+通过`@font-face`可以使浏览器自动应用服务器上的字体文件
+
+示例：
+
+```css
+@font-face {
+    font-family:myFont;
+    src:url("./ZCOOLXiaoWei-Regular.ttf");
+}
+```
+
+![font-face](..\imgs\font-face.png)
+
+并不推荐使用
 
 #### `font-style`
 
@@ -792,6 +841,70 @@ Selector{font：font-style font-weight font-size font-family}
 #### `line-height`
 
 该属性用于设置字体的行高，行间距，也就是行与行之间的距离
+
+#### 字体图标
+
+看起来像是图片，也可以做出图片一样的事情，改变透明度、旋转度等，但究其本质却是文字，可以随意的改变颜色、产生阴影、透明效果等
+
+##### 字体图标使用
+
+步骤如图所示：
+
+![fontt](..\imgs\fontt.png)
+
+##### 设计字体图标
+
+是由UI设计人员完成，有些图标是公司特有的就需要单独设计，之后保存成为`svg`格式
+
+但如果图标是大众的，网上本来就会有，此时直接进入第三步即可
+
+##### 上传生成字体文件包
+
+设计字体图标工作结束后可以得到`svg`格式文件，此时我们需要将其转换成为能够使用的字体文件，同时需要考虑各个浏览器的兼容性
+
+网上有较多的字体文件包资源：
+
+* **阿里icon font字库**
+
+  https://www.iconfont.cn/
+
+* **Font Awesome**
+
+  https://fontawesome.com/
+
+* **icomoon字库**
+
+  http://icomoon.io
+
+* 
+
+##### 下载字体文件包
+
+上传完毕以后，网站会将我们提供的`svg`图片转换为所需要的字体格式，此时直接下载使用即可
+
+也可以找网上现有资源进行使用
+
+示例：**阿里icon font字库**
+
+![Iconfont-example](..\imgs\Iconfont-example.png)
+
+查找需要的图标资源，添加：
+
+![iconfont_add](..\imgs\iconfont_add.png)
+
+添加完全部所需的图标后，下载：
+
+![iconfont_download](..\imgs\iconfont_download.png)
+
+
+
+##### 字体引入到网页
+
+下载资源后会得到一个压缩包
+
+
+
+##### 字体引入到网页
 
 ### 文本样式属性
 
@@ -2117,3 +2230,5 @@ position:r elative;
 | `right`  | 元素与其原定位位置的右侧距离 |
 
 一般只需要使用两个值就可以确定一个元素的位置
+
+##### `absolute`

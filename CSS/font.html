@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-02-17 18:06:12
- * @LastEditTime: 2021-02-17 21:33:00
+ * @LastEditTime: 2021-02-25 22:20:35
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Study_Notes\CSS\font.html
@@ -14,6 +14,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>字体文本相关属性</title>
   <style>
+
+    @font-face {
+      font-family: 'test';
+      src: url('../fonts/ZCOOLXiaoWei-Regular.ttf');
+    }
+
     /* div{
       color: #649892;
       color: rgb(0, 255, 0);
@@ -21,6 +27,7 @@
       color: rgba(64, 98, 92, 0.5);
       color:hsl(45, 100%, 50%)
     } */
+
   </style>
 </head>
 <body>
@@ -66,8 +73,18 @@
   </div> -->
 
   <!-- vertical-align属性 -->
-  <div style="width:240px; height: 240px; background-color: coral; vertical-align: bottom;">
+  <!-- <div style="width:240px; height: 240px; background-color: coral; vertical-align: bottom;">
     测试字体
+  </div> -->
+  
+  <!-- @font-face -->
+  <div style="font-family: test;">
+    字体设置
+  </div>
+
+  <!-- 文字图标 -->
+  <div>
+    
   </div>
 
 </body>
