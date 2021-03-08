@@ -775,9 +775,7 @@ div{
 Selector{font：font-style font-weight font-size font-family}
 ```
 
-使用`font`时必须按照以上的顺序进行设置，不能更换顺序，每个属性以空格隔开
-
-其中不需要设置的属性可以省略，但必须保留`font-size`和`font-family`
+使用`font`时可以按照以上的顺序进行设置，每个属性以空格隔开，其中不需要设置的属性可以省略，但必须保留`font-size`和`font-family`，并且顺序两者的顺序必须是`font-size  font-family`，其余的属性顺序可以随意 
 
 ```css
 #box{
@@ -807,40 +805,18 @@ Selector{font：font-style font-weight font-size font-family}
 
 ![font样式](..\imgs\font样式.png)
 
-#### `text-decoration`
-
-设置文字是否有修饰线，属性值：
-
-* `none`：无修饰
-* `underline`：下划线
-* `line-through`：中划线
-* `overline`：上划线
-
-示例：
-
-```html
-<div style="text-decoration: underline;">测试字体</div>
-<br>
-<div style="text-decoration: line-through;">测试字体</div>
-<br>
-<div style="text-decoration: overline;">测试字体</div>
-```
-
-![text-decoration属性](..\imgs\text-decoration属性.png)
-
-常用：`<a>`标签默认会有下划线的样式，可以将其设置取消
-
-```html
-<!-- text-decoration -->
-<a href="#">百度一下</a>
-<a href="#" style="text-decoration: none;">百度一下</a>
-```
-
-![a标签_text-decoration属性](..\imgs\a标签_text-decoration属性.png)
-
 #### `line-height`
 
-该属性用于设置字体的行高，行间距，也就是行与行之间的距离
+文本在网页中显示时，CSS会为每一个文本行都设置一个文本框，以容纳这些文字
+
+该属性用于设置字体的行高，行间距，也就是行与行之间的距离，即字符的垂直间距，也就是行高，特点：
+
+* CSS中会为每一行文本生成一个行盒子
+* 行盒子的内容区用来显示文本，内容区高度是由`font-size`来决定的
+* 文字会排列在内容区底部的水平线上，这条线被称作基线
+* 
+
+
 
 #### 字体图标
 
@@ -906,17 +882,81 @@ Selector{font：font-style font-weight font-size font-family}
 
 ##### 字体引入到网页
 
+首先引入下载到本地的文件：
+
+```html
+<link rel="stylesheet" href="../src/iconfont/download/font_2388581_sffsha545e/iconfont.css">
+```
+
+之后，可以有两种不同的引入方式：
+
+```html
+<!-- 通过实体 -->
+<span class="iconfont" style="font-size:200px">&#xe712;</span>
+<span class="iconfont" style="font-size: 200px;">&#xe728;</span>
+<span class="iconfont" style="font-size: 200px;">&#xe721;</span>
+```
+
+![图标字体_实体引用](..\imgs\图标字体_实体引用.png)
+
+```html
+<!-- 通过类 -->
+<span class="iconfont icon-tq_11xiaoyu" style="font-size:200px"></span>
+<span class="iconfont icon-tq_07zhenyu" style="font-size:200px"></span>
+<span class="iconfont icon-tq_19dabaoyu" style="font-size:200px"></span>
+```
+
+![图标字体](..\imgs\图标字体.png)
+
 ### 文本样式属性
+
+#### `text-decoration`
+
+设置文字是否有修饰线，属性值：
+
+* `none`：无修饰
+* `underline`：下划线
+* `line-through`：中划线
+* `overline`：上划线
+
+示例：
+
+```html
+<div style="text-decoration: underline;">测试字体</div>
+<br>
+<div style="text-decoration: line-through;">测试字体</div>
+<br>
+<div style="text-decoration: overline;">测试字体</div>
+```
+
+![text-decoration属性](..\imgs\text-decoration属性.png)
+
+常用：`<a>`标签默认会有下划线的样式，可以将其设置取消
+
+```html
+<!-- text-decoration -->
+<a href="#">百度一下</a>
+<a href="#" style="text-decoration: none;">百度一下</a>
+```
+
+![a标签_text-decoration属性](..\imgs\a标签_text-decoration属性.png)
+
+对于修饰线的样式也是可以进行指定的：
+
+```html
+<div style="text-decoration: underline wavy green;">测试字体</div>
+```
+
+![修饰线样式设置](..\imgs\修饰线样式设置.png)
 
 #### `text-align`
 
 用于设置文本的水平对齐方式，默认值为`left`，属性值：
 
-* `left`：左对齐
+* `left`：左对齐，默认值
 * `right`：右对齐
 * `center`：居中对齐
-* `start`
-* `end`
+* `justify`：两端对齐
 
 理解：是设置元素中的文本内容水平对齐方式，而不是设置元素水平对齐方式
 
@@ -928,11 +968,96 @@ Selector{font：font-style font-weight font-size font-family}
 
 ![text-align属性](..\imgs\text-align属性.png)
 
+```html
+<p style="text-align: left;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet assumenda vel numquam quae nisi voluptates quia repudiandae, praesentium cupiditate mollitia eos ullam quod, non odit commodi obcaecati laudantium! Eaque, culpa!</p>
+<p style="text-align: right;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae atque culpa neque, magni facilis assumenda omnis, et temporibus sint ex repudiandae asperiores non minima laudantium. Sit earum atque amet iure.</p>
+<p style="text-align: center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic culpa soluta aut! Voluptates at, nam numquam placeat nisi ipsum saepe consequatur, voluptatem vero sint quas non perspiciatis nesciunt atque molestias.</p>
+<p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet assumenda vel numquam quae nisi voluptates quia repudiandae, praesentium cupiditate mollitia eos ullam quod, non odit commodi obcaecati laudantium! Eaque, culpa!</p>
+```
+
+![text-align_属性显示](..\imgs\text-align_属性显示.png)
+
 #### `vertical-align`
 
 用来设置目标元素中内容的垂直对齐方式，属性值：
 
-* ``
+* `baseline`：根据基线垂直对齐，默认
+
+  ```html
+  <div style="font-size:140px">How <span style="font-size: 40px;">are</span> you</div>
+  <hr>
+  <div style="font-size:140px">How <span style="font-size: 40px; vertical-align: baseline;">are</span> you</div>
+  ```
+
+  ![vertical-align_baseline](..\imgs\vertical-align_baseline.png)
+
+* `top`：与父元素的顶部垂直对齐
+
+  ```html
+  <div style="font-size:140px">How <span style="font-size: 40px; vertical-align: top;">are</span> you</div>
+  ```
+
+  ![vertical-align_top](..\imgs\vertical-align_top.png)
+
+* `middle`：居中垂直对齐
+
+  ```html
+  <div style="font-size:140px">How <span style="font-size: 40px; vertical-align: middle;">are</span> you</div>
+  ```
+
+  ![vertical-align_middle](..\imgs\vertical-align_middle.png)
+
+* `bottom`：与父元素的底部垂直对齐
+
+  ```html
+  <div style="font-size:140px">How <span style="font-size: 40px; vertical-align: bottom;">are</span> you</div>
+  ```
+
+  ![vertical-align_bottom](..\imgs\vertical-align_bottom.png)
+
+* `sub`：下标
+
+  ```html
+  <div style="font-size:140px">How <span style="font-size: 40px; vertical-align: sub;">are</span> you</div>
+  ```
+
+  ![vertical-align_sub](..\imgs\vertical-align_sub.png)
+
+* `supper`：上标
+
+  ![vertical-align_supper](..\imgs\vertical-align_supper.png)
+
+还有一个用法需要说明：
+
+```html
+<div style="border: 1px solid red; background-color:aquamarine;">
+  <img src="../imgs/pexels-coffee-374885.jpeg" alt="">
+</div>
+```
+
+![图片缝隙](..\imgs\图片缝隙.png)
+
+解决方法：
+
+```html
+<div style="border: 1px solid red; background-color:aquamarine; font-size: 0;">
+  <img src="../imgs/pexels-coffee-374885.jpeg" alt="">
+  文字
+</div>
+```
+
+![图片缝隙解决](..\imgs\图片缝隙解决.png)
+
+最好的解决方式：
+
+```html
+<div style="border: 1px solid red; background-color:aquamarine;">
+  <img src="../imgs/pexels-coffee-374885.jpeg" alt="" style=" vertical-align: bottom;">
+  文字
+</div>
+```
+
+![图片缝隙解决_vertical-align](..\imgs\图片缝隙解决_vertical-align.png)
 
 #### `text-indent`
 
@@ -957,6 +1082,75 @@ Selector{font：font-style font-weight font-size font-family}
 ```
 
 ![text-indent_br](..\imgs\text-indent_br.png)
+
+也可以设置为负数，就会向左缩进：
+
+```html
+<div style="text-indent: -320px;">hahahahhahahahahahahahhahahahahhahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
+```
+
+![text-indent负数](..\imgs\text-indent负数.png)
+
+应用场景：页面`logo`：
+
+示例：
+
+```html
+<h1 class="logo">
+  <a href="#" style="float:left; text-indent:-9999px;">网易云音乐</a>
+</h1>
+```
+
+#### `white-space`
+
+用于设置元素内文本中空白的处理方式
+
+属性值：
+
+* `normal`：默认值，自动换行
+
+* `nowrap`：不换行
+
+* `pre`：保留文本的格式
+
+  ```html
+  <!-- white-space -->
+  <div style="white-space: normal;">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perferendis mollitia facere repellendus magni quam dolores dolore,
+      natus illum earum exercitationem animi aspernatur cum esse id tempore optio? Excepturi, iste?
+  </div>
+  <hr>
+  <div style="white-space: pre;">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perferendis mollitia facere repellendus magni quam dolores dolore,
+      natus illum earum exercitationem animi aspernatur cum esse id tempore optio? Excepturi, iste?
+  </div>
+  <hr>
+  <div style="white-space: nowrap;">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perferendis mollitia facere repellendus magni quam dolores dolore,
+      natus illum earum exercitationem animi aspernatur cum esse id tempore optio? Excepturi, iste?
+  </div>
+  ```
+
+  ![white-space](..\imgs\white-space.png)
+
+#### `text-overflow`
+
+用于设置如何处理溢出的文本
+
+示例：
+
+![京东text-overflow](..\imgs\京东text-overflow.png)
+
+属性值：
+
+* `ellipsis`：使用省略号来表示溢出的内容
+
+```html
+<!-- text-overflow -->
+<p style="text-overflow: ellipsis; width: 180px; white-space: nowrap; overflow: hidden;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ad suscipit aut inventore dicta. Modi porro illo laudantium repellat, molestias aliquid ad autem! Quisquam at dolor enim natus, nesciunt ut.</p>
+```
+
+![text-overflow_ellipse](..\imgs\text-overflow_ellipse.png)
 
 ## 盒子模型
 
@@ -1641,6 +1835,10 @@ background-attachment: fixed;
 ```css
 background: transparent url(image.jpg) repeat-y  scroll 50% 0 ;
 ```
+
+### 精灵技术
+
+
 
 ### CSS3新增
 

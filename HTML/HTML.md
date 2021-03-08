@@ -285,8 +285,20 @@ HTML的语言骨架格式：
     ```html
     <!DOCTYPE html>
     ```
-
-
+    
+  * xhtml1.0：
+  
+    ```html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "
+    http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+    
+    ```
 
 需要注意：
 
@@ -1379,11 +1391,17 @@ HTML文档结构主要由若干标签构成
   <audio src="../src/audio.mp3" controls autoplay loop></audio>
   ```
 
-
-
 ##### `<video>`标签
 
+* 
 
+* 示例：
+
+  ```html
+  <video src="../src/flower.mp4" controls autoplay loop></video>
+  ```
+
+  
 
 #### 超链接
 
@@ -1563,8 +1581,8 @@ HTML文档结构主要由若干标签构成
     <li><a href="#">美国</a></li>
   </ol>
   ```
-```
-  
+
+
   ![ol标签新属性](..\imgs\ol标签新属性.png)
 
 ##### 自定义列表`<dl>`标签
@@ -1601,9 +1619,9 @@ HTML文档结构主要由若干标签构成
       <dd>大家电</dd>
       <dd>联系客服</dd>
     </dl>
-```
+    ```
 
-    ![dl标签运用](..\imgs\dl标签.png)
+![dl标签运用](..\imgs\dl标签.png)
 
 #### 表格元素
 
