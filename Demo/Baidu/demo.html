@@ -1,0 +1,301 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-29 13:24:13
+ * @LastEditTime: 2021-04-29 18:22:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Study_Notes\Demo\Baidu\demo.html
+-->
+<!--
+ * @Author: your name
+ * @Date: 2021-04-26 11:38:01
+ * @LastEditTime: 2021-04-29 12:36:29
+ * @LastEditors: Please set LastEditors
+ * @Description: 百度首页的仿写
+ * @FilePath: \Study_Notes\Demo\baidu.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>百度一下，你就知道</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    ul{
+      list-style: none;
+    }
+    a{
+      text-decoration: none;
+    }
+    body{
+      font-family: "PingFang SC",Arial,"Microsoft YaHei",sans-serif;
+      text-align: center;
+    }
+    .fr{
+      float: right;
+    }
+    .fl{
+      float: left;
+    }
+    .clearfix::before,
+    .clearfix::after{
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .top-nav{
+      width: 100%;
+      background-color: skyblue;
+      height: 60px;
+      line-height: 60px;
+    }
+    /* 头部导航部分左边部分 */
+    .top-left-links{
+      padding-left: 24px;
+    }
+    .top-left-links>li{
+      float: left;
+      margin-right: 30px;
+    }
+    .top-left-links>li a{
+      font-size: 13px;
+      color: #222;
+    }
+    .top-left-links li a:hover{
+      color: #315efb;
+    }
+    .more{
+      position: relative;
+    }
+    .top-left-links .morebox{
+      width: 304px;
+      height: 233px;
+      border-radius: 15px;
+      /* background-color: lightpink; */
+      background-color: #fff;
+      position: absolute;
+      top: 48px;
+      right: -15px;
+      display: none;
+      overflow: hidden;
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,.15);
+    }
+    .top-left-links li.more a:hover~.morebox{
+      display: block;
+    }
+    .top-left-links .morelist>li{
+      float: left;
+      width: 76px;
+      height: 70px;
+      margin-top: 19px;
+
+    }
+    .top-left-links .morebox li>a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      line-height: 24px;
+      font-size: 13px;
+      color: rgb(34, 34, 34);
+      /* background-color: skyblue; */
+      background-color: #fff;
+    }
+    .top-left-links .morebox li>a img{
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 0, 0, .03);
+      border-radius: 12px;
+      margin: 0 16px;
+    }
+    .top-left-links .morebox li>a:hover,
+    .top-left-links .morebox .moreproducts>a:hover{
+      color: #315efb;
+    }
+    .top-left-links .morebox .moreproducts>a{
+      color:rgb(145, 149, 163);
+    }
+    /* 头部导航右边部分 */
+    .top-right{
+      margin-right: 24px;
+      font-size: 13px;
+
+    }
+    .top-right-login a{
+      display: inline-block;
+      margin-left: 32px;
+      color: #fff;
+      width: 48px;
+      height: 24px;
+      border-radius: 4px;
+      line-height: 24px;
+      background-color: #315efb;
+    }
+    .top-right-setting{
+      vertical-align: bottom;
+      position: relative;
+    }
+    .top-right-setting:hover{
+      color:#315efb;
+      cursor: pointer;
+    }
+    .top-right-setting ul{
+      padding: 16px;
+      width: 53px;
+      /* border: 1px solid pink; */
+      background-color: #fff;
+      box-shadow: 0 2px 10px 0 rgba(0,0,0,.15);
+      border-radius: 6px;
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+    .top-right-setting:hover ul{
+      display: block;
+    }
+    .top-right-setting ul li{
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 13px;
+      color: #333;
+      font-size: 13px;
+
+    }
+    .top-right-setting ul a{
+      color: #333;
+    }
+    .top-right-setting ul a:hover{
+      color:#315efb;
+    }
+    /* 页面主要部分 */
+    .main{
+      width: 654px;
+      margin: 0 auto;
+      background-color: coral;
+      position: relative;
+    }
+    .main img{
+      width: 270px;
+      height: 129px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .searchwordbox{
+      
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部链接导航部分 开始 -->
+  <div class="top-nav">
+    <!-- 顶部左侧 链接导航部分 开始 -->
+    <ul class="top-left-links clearfix fl">
+      <li><a href="#">新闻</a></li>
+      <li><a href="#">hao123</a></li>
+      <li><a href="#">地图</a></li>
+      <li><a href="#">直播</a></li>
+      <li><a href="#">视频</a></li>
+      <li><a href="#">贴吧</a></li>
+      <li><a href="#">学术</a></li>
+      <li class="more">
+        <a href="#">
+          更多
+        </a>
+        <div class="morebox">
+          <ul class="morelist clearfix">
+            <li>
+              <a href="#">
+                <img src="image/baiduyun2x-e0be79e69e.png" alt="">
+                网盘
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/zhidao2x-e9b427ecc4.png" alt="">
+                知道
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/baike2x-1fe3db7fa6.png" alt="">
+                百科
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/tupian2x-482fc011fc.png" alt="">
+                图片
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/baobaozhidao2x-af409f9dbe.png" alt="">
+                宝宝知道
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/wenku2x-f3aba893c1.png" alt="">
+                文库
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/jingyan2x-e53eac48cb.png" alt="">
+                经验
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="image/yinyue2x-c18adacacb.png" alt="">
+                音乐
+              </a>
+            </li>
+          </ul>  
+          <div class="moreproducts"><a href="#">查看全部百度产品&nbsp;&gt;</a></div>
+        </div>
+      </li>
+    </ul> 
+    <!-- 顶部左侧 链接导航部分 结束 -->
+    <!-- 顶部右侧 部分 开始-->
+    <div class="top-right fr">
+      <div class="top-right-login fr"><a href="#">登录</a></div>
+      <div class="top-right-setting fr">
+        设置
+        <ul class="setting-box">
+          <li><a href="#">搜索设置</a></li>
+          <li><a href="#">高级搜索</a></li>
+          <li><a href="#">关闭预测</a></li>
+          <li><a href="#">隐私设置</a></li>
+          <li><a href="#">关闭热搜</a></li>
+        </ul>
+      </div>  
+    </div>
+    <!-- 顶部右侧 部分 结束-->
+  </div>
+  <!-- 顶部链接导航部分 结束 -->
+  <!-- 中间部分 开始 -->
+  <div class="main">
+    <!-- 中间图片部分 -->
+    <img src="image/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="">
+    <form action="" method="get">
+      <div class="serchwordbox">
+        <input type="text" name="" id="">
+
+      </div>
+    </form>
+
+    
+  </div>
+
+  <!-- 中间部分 结束 -->
+</body>
+</html>
