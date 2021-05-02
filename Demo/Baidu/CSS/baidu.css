@@ -116,6 +116,7 @@ body{
 }
 .top-right .top-right-setting{
   position: relative;
+  padding-bottom: 30px;
 }
 .top-right .top-right-setting:hover{
   color: #315efb;
